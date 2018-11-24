@@ -86,7 +86,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.5.0',
-    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数f(n)=\sum_{d|n}g(d)假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢 g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换 关于莫比乌斯函数 若 $d=1$，则">
+  <meta name="description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数f(n)=\sum_{d|n}g(d)假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢 g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
 <meta name="keywords" content="数论,算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="莫比乌斯反演学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数f(n)=\sum_{d|n}g(d)假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢 g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换 关于莫比乌斯函数 若 $d=1$，则">
+<meta property="og:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数f(n)=\sum_{d|n}g(d)假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢 g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-23T14:07:35.370Z">
+<meta property="og:updated_time" content="2018-11-24T12:50:06.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="莫比乌斯反演学习笔记">
-<meta name="twitter:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数f(n)=\sum_{d|n}g(d)假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢 g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换 关于莫比乌斯函数 若 $d=1$，则">
+<meta name="twitter:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数f(n)=\sum_{d|n}g(d)假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢 g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
 
 
 
@@ -408,12 +408,24 @@
                 
               
 
-              <time title="Created: 2018-11-23 19:17:05 / Modified: 22:07:35" itemprop="dateCreated datePublished" datetime="2018-11-23T19:17:05+08:00">2018-11-23</time>
+              <time title="Created: 2018-11-23 19:17:05" itemprop="dateCreated datePublished" datetime="2018-11-23T19:17:05+08:00">2018-11-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-11-24 20:50:06" itemprop="dateModified" datetime="2018-11-24T20:50:06+08:00">2018-11-24</time>
               
             
           </span>
@@ -460,6 +472,13 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             Views:  
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
 
           
 
@@ -480,7 +499,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。</p>
 <h1 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h1><p>比如说我们现在有一个函数<script type="math/tex">f(n)=\sum_{d|n}g(d)</script><br>假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢</p>
-<script type="math/tex; mode=display">g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)</script><p>然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换</p>
+<script type="math/tex; mode=display">g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)</script><p>然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换<br><a id="more"></a></p>
 <h2 id="关于莫比乌斯函数"><a href="#关于莫比乌斯函数" class="headerlink" title="关于莫比乌斯函数"></a>关于莫比乌斯函数</h2><ol>
 <li>若 $d=1$，则 $\mu(d)=1$</li>
 <li>若 $d=p_1*p_2*p_3*p_4*..*p_n$ (注意不是笔者偷懒，而是p的次数都是1，且都是互异的质数) 那么$\mu(d)=(-1)^{k}$</li>
@@ -567,7 +586,9 @@
 
           </div>
           
-
+  
+    <div id="gitalk-container"></div>
+    
   
 
 
@@ -724,6 +745,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -761,6 +789,24 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="Total Visitors">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="Total Views">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -773,11 +819,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -883,6 +924,22 @@
 
 
 
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '67529f21f02a35b0d76b',
+          clientSecret: 'd9ad62c9d06e1389fe743e7e3a1b2ff987139a2c',
+          repo: 'lnabhaw.github.io',
+          owner: 'lnabhaw',
+          admin: ['lnabhaw'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+
   
 
 
@@ -894,6 +951,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 
