@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="前言本篇前半部分讲线性筛质数，也叫欧拉筛，后半篇讲解线性求欧拉函数。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-25T01:49:56.409Z">
+<meta property="og:updated_time" content="2018-11-25T01:55:22.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性筛质数，线性求欧拉">
 <meta name="twitter:description" content="前言本篇前半部分讲线性筛质数，也叫欧拉筛，后半篇讲解线性求欧拉函数。">
@@ -408,7 +408,7 @@
                 
               
 
-              <time title="Created: 2018-11-25 09:40:15 / Modified: 09:49:56" itemprop="dateCreated datePublished" datetime="2018-11-25T09:40:15+08:00">2018-11-25</time>
+              <time title="Created: 2018-11-25 09:40:15 / Modified: 09:55:22" itemprop="dateCreated datePublished" datetime="2018-11-25T09:40:15+08:00">2018-11-25</time>
             
 
             
@@ -497,7 +497,8 @@
 <p>所有变量名都是字面意思。<br>若i%prime[j]==0，那么i*prime[j+1]也一定是prime[j]的倍数，一定被prime[j]筛过了，所以就可break了，这样就保证了每个合数只被自己的最小质因子筛一次。</p>
 <h1 id="线性筛欧拉"><a href="#线性筛欧拉" class="headerlink" title="线性筛欧拉"></a>线性筛欧拉</h1><p>不知道欧拉函数计算公式的同学可以先看我上一篇博客，里面有详细的推导和证明。<br>还有两个前置知识</p>
 <ol>
-<li>φ(p*x)=p*φ(x) 当 x mod p==0<br>我看了很多博客这里的证明都是略，所以我这里给出证明<br>φ(p*x)=p*x*(1-$\frac{1}{a_1}$)*(1-$\frac{1}{a_2}$)*……*(1-$\frac{1}{a_n}$)<br>其中$a_1$…$a_n$均为p*x的质因子<br>然后可以发现因为x是p的倍数，p是质数，所以x的质因子和p<em>x的质因子构成相同，所以结论就是对的了<br>2：φ(x\</em>p)=(p-1)*φ(x) 当 x mod p!=0<br>因为p是一个质数，而x不是p的倍数，所以x和p互质<br>根据φ是一个积性函数，φ(x*p)=φ(p)*φ(x)<br>又因为p是质数，所以φ(p)=p-1，结论得证。<br>那么我们在线性筛的时候稍微改一下就可以了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">memset(isprime,1,sizeof(isprime));</span><br><span class="line">isprime[1]=0;</span><br><span class="line">for (int i=2;i&lt;=10000;i++)&#123;</span><br><span class="line">	if (isprime[i]) prime[++primesize]=i,phi[i]=i-1;</span><br><span class="line">	for (int j=1;j&lt;=primesize&amp;&amp;i*prime[j]&lt;=10000;j++)&#123;</span><br><span class="line">		isprime[i*prime[j]]=0;</span><br><span class="line">		if (i%prime[j]==0)&#123;</span><br><span class="line">			phi[i*prime[j]]=prime[j]*phi[i];</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else phi[i*prime[j]=(prime[j]-1)*phi[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>φ(p*x)=p*φ(x) 当 x mod p==0<br>我看了很多博客这里的证明都是略，所以我这里给出证明<br>φ(p*x)=p*x*(1-$\frac{1}{a_1}$)*(1-$\frac{1}{a_2}$)*……*(1-$\frac{1}{a_n}$)<br>其中$a_1$…$a_n$均为p*x的质因子<br>然后可以发现因为x是p的倍数，p是质数，所以x的质因子和p*x的质因子构成相同，所以结论就是对的了</li>
+<li>φ(x*p)=(p-1)*φ(x) 当 x mod p!=0<br>因为p是一个质数，而x不是p的倍数，所以x和p互质<br>根据φ是一个积性函数，φ(x*p)=φ(p)*φ(x)<br>又因为p是质数，所以φ(p)=p-1，结论得证。<br>那么我们在线性筛的时候稍微改一下就可以了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">memset(isprime,1,sizeof(isprime));</span><br><span class="line">isprime[1]=0;</span><br><span class="line">for (int i=2;i&lt;=10000;i++)&#123;</span><br><span class="line">	if (isprime[i]) prime[++primesize]=i,phi[i]=i-1;</span><br><span class="line">	for (int j=1;j&lt;=primesize&amp;&amp;i*prime[j]&lt;=10000;j++)&#123;</span><br><span class="line">		isprime[i*prime[j]]=0;</span><br><span class="line">		if (i%prime[j]==0)&#123;</span><br><span class="line">			phi[i*prime[j]]=prime[j]*phi[i];</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		else phi[i*prime[j]=(prime[j]-1)*phi[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>还是保证了每个合数只会被算一次phi，复杂度就是对的了。<br>以上就是我个人对线性筛质数和线性求欧拉函数的理解，欢迎大家在评论里指正我的错误或提出意见，感激不尽。</p>
