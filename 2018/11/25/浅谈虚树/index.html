@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
-<meta name="keywords" content="算法,数论">
+  <meta name="description" content="前言先贴一道模板题https://www.luogu.org/problemnew/show/P2495题意，给你一棵n个点的有边权树，有m次询问，每次询问k个点，要删除一些边使得这k个点均不与1号点联通。数据范围：$2\le n\le250000,m\ge1,\sum k_i\le500000,1\le ki\le n-1$；">
+<meta name="keywords" content="算法,dp,虚树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="莫比乌斯反演学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/index.html">
+<meta property="og:title" content="浅谈虚树">
+<meta property="og:url" content="http://yoursite.com/2018/11/25/浅谈虚树/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
+<meta property="og:description" content="前言先贴一道模板题https://www.luogu.org/problemnew/show/P2495题意，给你一棵n个点的有边权树，有m次询问，每次询问k个点，要删除一些边使得这k个点均不与1号点联通。数据范围：$2\le n\le250000,m\ge1,\sum k_i\le500000,1\le ki\le n-1$；">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-26T05:13:55.140Z">
+<meta property="og:updated_time" content="2018-11-26T05:05:19.598Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="莫比乌斯反演学习笔记">
-<meta name="twitter:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
+<meta name="twitter:title" content="浅谈虚树">
+<meta name="twitter:description" content="前言先贴一道模板题https://www.luogu.org/problemnew/show/P2495题意，给你一棵n个点的有边权树，有m次询问，每次询问k个点，要删除一些边使得这k个点均不与1号点联通。数据范围：$2\le n\le250000,m\ge1,\sum k_i\le500000,1\le ki\le n-1$；">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/25/浅谈虚树/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>莫比乌斯反演学习笔记 | LNRBHAW</title>
+  <title>浅谈虚树 | LNRBHAW</title>
   
 
 
@@ -366,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/浅谈虚树/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LNRBHAW">
@@ -383,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">莫比乌斯反演学习笔记
+          <h1 class="post-title" itemprop="name headline">浅谈虚树
               
             
           </h1>
@@ -408,7 +408,7 @@
                 
               
 
-              <time title="Created: 2018-11-23 19:17:05" itemprop="dateCreated datePublished" datetime="2018-11-23T19:17:05+08:00">2018-11-23</time>
+              <time title="Created: 2018-11-25 10:07:10" itemprop="dateCreated datePublished" datetime="2018-11-25T10:07:10+08:00">2018-11-25</time>
             
 
             
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-26 13:13:55" itemprop="dateModified" datetime="2018-11-26T13:13:55+08:00">2018-11-26</time>
+                <time title="Modified: 2018-11-26 13:05:19" itemprop="dateModified" datetime="2018-11-26T13:05:19+08:00">2018-11-26</time>
               
             
           </span>
@@ -449,14 +449,21 @@
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数论/" itemprop="url" rel="index"><span itemprop="name">数论</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/dp/" itemprop="url" rel="index"><span itemprop="name">dp</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数论/莫比乌斯反演/" itemprop="url" rel="index"><span itemprop="name">莫比乌斯反演</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/dp/树形/" itemprop="url" rel="index"><span itemprop="name">树形</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/虚树/" itemprop="url" rel="index"><span itemprop="name">虚树</span></a></span>
 
                 
                 
@@ -497,27 +504,18 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。</p>
-<h1 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h1><p>比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$<br>假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢<br>$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$<br>然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换<br><a id="more"></a></p>
-<h2 id="关于莫比乌斯函数"><a href="#关于莫比乌斯函数" class="headerlink" title="关于莫比乌斯函数"></a>关于莫比乌斯函数</h2><ol>
-<li>若 $d=1$，则 $\mu(d)=1$</li>
-<li>若 $d=p_1*p_2*p_3*p_4*..*p_n$ (注意不是笔者偷懒，而是p的次数都是1，且都是互异的质数) 那么$\mu(d)=(-1)^{k}$</li>
-<li>other wise $\mu(d)=0$<h2 id="莫比乌斯函数的性质"><a href="#莫比乌斯函数的性质" class="headerlink" title="莫比乌斯函数的性质"></a>莫比乌斯函数的性质</h2></li>
-</ol>
-<h3 id="性质1"><a href="#性质1" class="headerlink" title="性质1"></a>性质1</h3><p> 对于正整数n，有$\sum_{d|n}\mu(d)=[n=1]$<br>中括号在这里表达bool表达式，如果满足中括号内的条件则为1，否则为0<br>证明：</p>
-<ol>
-<li>n=1，根据定义，显然成立</li>
-<li>n&gt;1，设$n=p_1^{x_1}*p_2^{x_2}*p_3^{x_3}*…*p_k^{x_k}$，也就是把n质因数分解<br>那么d一定能表示为$p_1^{y_1}*p_2^{y_2}*p_3^{y_3}*…*p_k^{y_k}$，其中($0\le y_i\le x_i$)，那么根据定义，只要有一个y大于二，那么$\mu(d)=0$，没有贡献，所以我们只要考虑所有y均为0,1时的情况。<br>我们假设这k个中有r个y=1，那么出现这种情况的方案数为$C_{k}^{r}$，总贡献为<br>$C_{k}^{r}*(-1)^{r}$<br>我们再把每个d的贡献加起来$\sum_{r=0}^{k}*C_{k}^{r}*(-1)^{r}$<br>是不是觉得有点眼熟呢，没错，这就是我们的二项式定理，所以上式就等于$(1+(-1))^k=0$<br>结论得证。</li>
-</ol>
-<h3 id="性质2"><a href="#性质2" class="headerlink" title="性质2"></a>性质2</h3><p>莫比乌斯函数为积性函数<br>证明：<br>若有两个互质的数a,b<br>我们把它们分别分解质因数<br>$a=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}$<br>$b=q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$<br>由于a,b互质，$a*b=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}*q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$<br>如果$\mu(a)==0或\mu(b)==0$为0，那么说明一定有一个x或y&gt;=2，那么$\mu(a*b)$也一定为0.<br>若$\mu(a)$与$\mu(b)$均为1，说明k与t均为偶数，那么k+t也为偶数，所以$\mu(a*b)$也为1<br>若$\mu(a)$与$\mu(b)$均为-1，说明k与t均为奇数，那么k+t为偶数，所以$\mu(a*b)$为1<br>若$\mu(a)为1，\mu(b)$为-1，说明k为偶数，t为奇数，那么k+t为奇数，所以$\mu(a*b)$为-1，<br>$\mu(b)为1，\mu(a)$为-1与上一条同理。<br>综上所述，莫比乌斯函数为积性函数。</p>
-<h2 id="莫比乌斯函数的求法"><a href="#莫比乌斯函数的求法" class="headerlink" title="莫比乌斯函数的求法"></a>莫比乌斯函数的求法</h2><p>这里介绍一下如何使用线性筛筛出莫比乌斯函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(isprime,<span class="number">1</span>,<span class="keyword">sizeof</span>(isprime));</span><br><span class="line">isprime[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="number">100000</span>;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (isprime[i])&#123;prime[++pri]=i;mu[i]=<span class="number">-1</span>;&#125;<span class="comment">//质数的mu显然是-1</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=pri&amp;&amp;i*prime[j]&lt;=<span class="number">100000</span>;j++)&#123;</span><br><span class="line">		<span class="keyword">int</span> tt=i*prime[j];</span><br><span class="line">		isprime[tt]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (i%prime[j]==<span class="number">0</span>)&#123;<span class="comment">//说明prime[j]这个质因子次数大于1，所以mu为0</span></span><br><span class="line">			mu[tt]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			mu[tt]=-mu[i];<span class="comment">//说明新出现了一个质数，所以要再*=-1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其复杂度就是线性筛的复杂度，和筛质数，筛phi都是一样的。</p>
-<h2 id="莫比乌斯反演-1"><a href="#莫比乌斯反演-1" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h2><p>我们现在已经知道了莫比乌斯函数和他的一些性质，那么我们试着证明一下莫比乌斯反演的正确性。</p>
-<p>$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$<br>再把$f$展开</p>
-<script type="math/tex; mode=display">g(n)=\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)</script><p>然后我们把g的sigma换到前面去</p>
-<script type="math/tex; mode=display">g(n)=\sum_{i|n}g(i)\sum_{d|\frac{n}{i}}\mu(d)</script><p>我们考虑后面这个sigma的值<br>1.当i=n时，$\sum_{d|\frac{n}{i}}\mu(d)=1，g(i)\sum_{d|\frac{n}{i}}\mu(d)=g(n)$<br>2.当i为小于n且是n的因数时，根据$\sum_{d|n}\mu(d)=[n=1]$<br>那么$\sum_{d|\frac{n}{i}}\mu(d)=0$，<br>乘上一个g(i)仍然为0，那么上下两种情况加起来就是$\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)$<br>所以就是g(n)，证毕</p>
-<h2 id="莫比乌斯反演的变形"><a href="#莫比乌斯反演的变形" class="headerlink" title="莫比乌斯反演的变形"></a>莫比乌斯反演的变形</h2><p>变形一：$f(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}g(d*i)—-&gt;g(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)$<br>证明：<br>我们把上面二式的f展开<br>$\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}\mu(d)<br>\sum_{d1=1}^{\lfloor{\frac{n}{d*i}}\rfloor}g(d1*d*i)$<br>我们令d1*d=T<br>那么原式=$\sum_{T=1}^{\lfloor{\frac{n}{i}}\rfloor}g(T*i)<br>\sum_{d|T}\mu(d)$<br>仔细想一下i,d,T的关系应该不难理解<br>当(1)T=1时，$\sum_{d|T}\mu(d)=1，g(T*i)<br>\sum_{d|T}\mu(d)=g(i)$<br>(2)T&gt;1时，$\sum_{d|T}\mu(d)=0，g(T*i)<br>\sum_{d|T}\mu(d)=0$<br>综上所述，结论正确<br>变形二：$f(i)=\sum_{i|d}g(d)—-&gt;g(i)=\sum_{i|d}f(d)*\mu(\frac{d}{i})$<br>证明：<br>另$\frac{d}{i}=k$<br>那么$\sum_{i|d}f(d)*\mu(\frac{d}{i})=\sum_{k=1}^{\infty}\mu(k)*f(k*i)=\sum_{k=1}^{\infty}\mu(k)*\sum_{k*i|t}g(t)=\sum_{i|t}*g(t)*\sum_{k|\frac{t}{i}}\mu(k)$<br>又是熟悉的套路，就是把$\mu$换成前缀和，就有非常好的性质了，那么最后得到的这个式子，只有在t=i时，后面的这个$\mu$的sigma才会变成1，所以加起来就是f(i)。</p>
-<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>以上就是笔者对莫比乌斯反演的一些理解与介绍，<del>军训每天逃机房花了5天终于码完了，</del>希望能给大家带来帮助</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>先贴一道模板题<a href="https://www.luogu.org/problemnew/show/P2495" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/P2495</a><br>题意，给你一棵n个点的有边权树，有m次询问，每次询问k个点，要删除一些边使得这k个点均不与1号点联通。<br>数据范围：$2\le n\le250000,m\ge1,\sum k_i\le500000,1\le ki\le n-1$；<br><a id="more"></a><br>考虑树形dp<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LL <span class="title">get_ans</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span> leaf=<span class="number">1</span>;</span><br><span class="line">	LL ret=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> p=head[u];p;p=nxt[p])&#123;</span><br><span class="line">		ret+=get_ans(a[p]);</span><br><span class="line">		leaf=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	head[u]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span> (del[u])&#123;</span><br><span class="line">		del[u]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">return</span> ff[u];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> min(ret,<span class="number">1l</span>l*ff[u]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ff表示我连向我父亲的边的边权。<br>我是直接暴力dfs一遍，如果我这个点要删除，那么一定是删我的ff边最优。<br>否则选择删我ff边或者一个一个删我的子节点</p>
+<p>这样dp一遍是O(n)的，但是m次询问就T了，但是注意到$\sum k$并不大，于是虚树闪亮登场了</p>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>虚树就是把原树中少量的有效节点和他们两两的lca拿出来，这样就可以去除一些无效节点，从而降低复杂度。<br>如果有效节点是k个，那么虚树中节点的个数是2*k个，为什么，请看下文。</p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>先讲讲如何建虚树，在本题中，虚树上的边权就是原先这条路径上边权的min，因为你要删肯定是删最小边最优。<br>先dfs一遍，求出基本信息。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	dfn[u]=++tim;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> p=head[u];p;p=nxt[p])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=a[p];</span><br><span class="line">		<span class="keyword">if</span> (v!=f[u][<span class="number">0</span>])&#123;</span><br><span class="line">			f[v][<span class="number">0</span>]=u;</span><br><span class="line">			minn[v][<span class="number">0</span>]=b[p];</span><br><span class="line">			dep[v]=dep[u]+<span class="number">1</span>;</span><br><span class="line">			dfs(v); </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>先倍增求lca预处理好，倍增的时候最小值也处理好<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">20</span>;j++)&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) f[i][j]=f[f[i][j<span class="number">-1</span>]][j<span class="number">-1</span>],</span><br><span class="line">	minn[i][j]=min(minn[i][j<span class="number">-1</span>],minn[f[i][j<span class="number">-1</span>]][j<span class="number">-1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (dep[x]&lt;dep[y]) swap(x,y);</span><br><span class="line">	<span class="keyword">int</span> tmp=dep[x]-dep[y];</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">20</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (tmp&amp;(<span class="number">1</span>&lt;&lt;i)) x=f[x][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (x==y) <span class="keyword">return</span> x;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">20</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> (f[x][i]!=f[y][i]) x=f[x][i],y=f[y][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> f[x][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dist</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (dep[x]&lt;dep[y]) swap(x,y);</span><br><span class="line">	<span class="keyword">int</span> tmp=dep[x]-dep[y],ret=<span class="number">1e9</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">20</span>;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span> (tmp&amp;(<span class="number">1</span>&lt;&lt;i)) ret=min(ret,minn[x][i]),x=f[x][i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后把所有有效点按照dfn值排序，每次新加入一个节点，他最多会和前面的一个节点产生一个lca。<br>简单证明一下，<br>设当前加入的节点x，与y节点产生了一个新的lca,lca1。<br>假设x还与z产生了一个新的lca,lca2，不妨假设dep[lca2]&gt;dep<a href="不然交换y,z即可）
+那么z,y的lca必定为lca1，所以假设不成立
+这样我们就证明了虚树中节点个数是min(n,2*k">lca1</a>个的。</p>
+<h2 id="构建虚树"><a href="#构建虚树" class="headerlink" title="构建虚树"></a>构建虚树</h2><p>维护一个栈，表示从根到栈顶元素的这条链<br>我们新加入一个节点记为x，链的末端，即栈顶，为p，lca为lca(x,p)，<br>有两种情况:<br>　　1.p和x分立在lca的两棵子树下.<br>　　2.lca是p.<br>　　为什么lca不能是x?<br>　　 因为如果lca是x,说明dfn[lca]=dfn[x]$ &lt; $dfn[p],而我们是按照dfs序号遍历的,于是dfn[p]$ &lt;$dfn[x],矛盾.)<br> 对于第二种情况,直接在栈中插入节点x即可,不要连接任何边(后面会说为什么).<br>对于第一种情况,要仔细分析.<br>我们是按照dfn遍历的(因为很重要所以多说几遍……),有dfn[x]&gt;dfn[p]&gt;dfn[lca].<br>这说明什么呢? 说明一件很重要的事:我们已经把lca所引领的子树中,p所在的子树全部遍历完了!<br>简略的证明:如果没有遍历完,那么肯定有一个未加入的点h,满足dfn[h]$ &lt;$dfn[x],<br>我们按照dfs序号递增顺序遍历的话,应该把h加进来了才能考虑x.<br>这样,我们就直接构建lca引领的,p所在的那个子树. 我们在退栈的时候构建子树.<br>p所在的子树如果还有其它部分,它一定在之前就构建好了(所有退栈的点都已经被正确地连入树中了),就剩那条链.<br>如何正确地把p到lca那部分连进去呢?<br>设栈顶的节点为p,栈顶第二个节点为q.<br>重复以下操作:<br>　　如果dfn[q]&gt;dfn[lca],可以直接连边$q\to p$,然后退一次栈.<br>　　如果dfn[q]=dfn[lca],说明q=lca,直接连边$lca\to p$,此时子树已经构建完毕.<br>　　如果dfn[q]&lt;dfn[lca],说明lca被p与q夹在中间,此时连边$lca\to p$,退一次栈,再把lca压入栈.此时子树构建完毕<br>最后,为了维护dfs链,要把x压入栈. 整个过程就是这样</p>
+<p>上面这个讨论的过程来自chenhuan001的博客，把一些有小错误的地方改正了，我就是看着这个学会的，讲的非常清楚。<br>还不明白的可以结合代码<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (!top)&#123;</span><br><span class="line">		st[++top]=x;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ll=lca(st[top],x);</span><br><span class="line">	<span class="keyword">while</span> (dep[st[top<span class="number">-1</span>]]&gt;dep[ll]&amp;&amp;top&gt;<span class="number">1</span>)&#123;</span><br><span class="line">		add(st[top<span class="number">-1</span>],st[top],dist(st[top<span class="number">-1</span>],st[top]));</span><br><span class="line">		top--;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (dep[ll]&lt;dep[st[top]])&#123;</span><br><span class="line">		add(ll,st[top],dist(ll,st[top]));</span><br><span class="line">		top--; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!top||dep[st[top]]&lt;dep[ll]) st[++top]=ll;</span><br><span class="line">	st[++top]=x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那我们把虚树建出来后，用最前面讲的dp跑一边就好了。<br>好了,以上就是我个人对虚树的一些理解，希望可以帮助大家学习，如果还有疑问可以给我留言，或者到我好友的博客看更详细的代码和建树过程的描述。<br><a href="https://blog.csdn.net/zhouyuheng2003/article/details/79110326" target="_blank" rel="noopener">https://blog.csdn.net/zhouyuheng2003/article/details/79110326</a><br>谢谢。</p>
 
       
     </div>
@@ -543,7 +541,9 @@
           
             <a href="/tags/算法/" rel="tag"># 算法</a>
           
-            <a href="/tags/数论/" rel="tag"># 数论</a>
+            <a href="/tags/dp/" rel="tag"># dp</a>
+          
+            <a href="/tags/虚树/" rel="tag"># 虚树</a>
           
         </div>
       
@@ -556,8 +556,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/22/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/11/25/浅谈矩阵乘法的应用/" rel="next" title="浅谈矩阵乘法的应用">
+                <i class="fa fa-chevron-left"></i> 浅谈矩阵乘法的应用
               </a>
             
           </div>
@@ -565,10 +565,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/25/浅谈矩阵乘法的应用/" rel="prev" title="浅谈矩阵乘法的应用">
-                浅谈矩阵乘法的应用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -756,7 +752,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#莫比乌斯反演"><span class="nav-number">2.</span> <span class="nav-text">莫比乌斯反演</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于莫比乌斯函数"><span class="nav-number">2.1.</span> <span class="nav-text">关于莫比乌斯函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯函数的性质"><span class="nav-number">2.2.</span> <span class="nav-text">莫比乌斯函数的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质1"><span class="nav-number">2.2.1.</span> <span class="nav-text">性质1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质2"><span class="nav-number">2.2.2.</span> <span class="nav-text">性质2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯函数的求法"><span class="nav-number">2.3.</span> <span class="nav-text">莫比乌斯函数的求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演-1"><span class="nav-number">2.4.</span> <span class="nav-text">莫比乌斯反演</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演的变形"><span class="nav-number">2.5.</span> <span class="nav-text">莫比乌斯反演的变形</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#尾声"><span class="nav-number">3.</span> <span class="nav-text">尾声</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#构建虚树"><span class="nav-number">3.1.</span> <span class="nav-text">构建虚树</span></a></li></ol></li></ol></div>
             
 
           </div>
