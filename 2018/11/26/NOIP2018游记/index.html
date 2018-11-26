@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
-<meta name="keywords" content="算法,数学,数论">
+  <meta name="description" content="NOIP2018游记前言今天说要写游记，机房的大佬们问我为什么现在才写，估计是因为以前也没写过不知道怎么写，而且今天正式才成绩出来，算是尘埃落定了吧。">
+<meta name="keywords" content="杂文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="莫比乌斯反演学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/index.html">
+<meta property="og:title" content="NOIP2018游记">
+<meta property="og:url" content="http://yoursite.com/2018/11/26/NOIP2018游记/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
+<meta property="og:description" content="NOIP2018游记前言今天说要写游记，机房的大佬们问我为什么现在才写，估计是因为以前也没写过不知道怎么写，而且今天正式才成绩出来，算是尘埃落定了吧。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-26T07:31:44.849Z">
+<meta property="og:updated_time" content="2018-11-26T07:43:11.869Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="莫比乌斯反演学习笔记">
-<meta name="twitter:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
+<meta name="twitter:title" content="NOIP2018游记">
+<meta name="twitter:description" content="NOIP2018游记前言今天说要写游记，机房的大佬们问我为什么现在才写，估计是因为以前也没写过不知道怎么写，而且今天正式才成绩出来，算是尘埃落定了吧。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/26/NOIP2018游记/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>莫比乌斯反演学习笔记 | LNRBHAW</title>
+  <title>NOIP2018游记 | LNRBHAW</title>
   
 
 
@@ -366,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/26/NOIP2018游记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LNRBHAW">
@@ -383,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">莫比乌斯反演学习笔记
+          <h1 class="post-title" itemprop="name headline">NOIP2018游记
               
             
           </h1>
@@ -408,24 +408,12 @@
                 
               
 
-              <time title="Created: 2018-11-23 19:17:05" itemprop="dateCreated datePublished" datetime="2018-11-23T19:17:05+08:00">2018-11-23</time>
+              <time title="Created: 2018-11-26 15:37:35 / Modified: 15:43:11" itemprop="dateCreated datePublished" datetime="2018-11-26T15:37:35+08:00">2018-11-26</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-11-26 15:31:44" itemprop="dateModified" datetime="2018-11-26T15:31:44+08:00">2018-11-26</time>
               
             
           </span>
@@ -442,28 +430,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/数学/" itemprop="url" rel="index"><span itemprop="name">数学</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/数学/数论/" itemprop="url" rel="index"><span itemprop="name">数论</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/数学/数论/莫比乌斯反演/" itemprop="url" rel="index"><span itemprop="name">莫比乌斯反演</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/杂文/" itemprop="url" rel="index"><span itemprop="name">杂文</span></a></span>
 
                 
                 
@@ -504,27 +471,14 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。</p>
-<h1 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h1><p>比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$<br>假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢<br>$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$<br>然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换<br><a id="more"></a></p>
-<h2 id="关于莫比乌斯函数"><a href="#关于莫比乌斯函数" class="headerlink" title="关于莫比乌斯函数"></a>关于莫比乌斯函数</h2><ol>
-<li>若 $d=1$，则 $\mu(d)=1$</li>
-<li>若 $d=p_1*p_2*p_3*p_4*..*p_n$ (注意不是笔者偷懒，而是p的次数都是1，且都是互异的质数) 那么$\mu(d)=(-1)^{k}$</li>
-<li>other wise $\mu(d)=0$<h2 id="莫比乌斯函数的性质"><a href="#莫比乌斯函数的性质" class="headerlink" title="莫比乌斯函数的性质"></a>莫比乌斯函数的性质</h2></li>
-</ol>
-<h3 id="性质1"><a href="#性质1" class="headerlink" title="性质1"></a>性质1</h3><p> 对于正整数n，有$\sum_{d|n}\mu(d)=[n=1]$<br>中括号在这里表达bool表达式，如果满足中括号内的条件则为1，否则为0<br>证明：</p>
-<ol>
-<li>n=1，根据定义，显然成立</li>
-<li>n&gt;1，设$n=p_1^{x_1}*p_2^{x_2}*p_3^{x_3}*…*p_k^{x_k}$，也就是把n质因数分解<br>那么d一定能表示为$p_1^{y_1}*p_2^{y_2}*p_3^{y_3}*…*p_k^{y_k}$，其中($0\le y_i\le x_i$)，那么根据定义，只要有一个y大于二，那么$\mu(d)=0$，没有贡献，所以我们只要考虑所有y均为0,1时的情况。<br>我们假设这k个中有r个y=1，那么出现这种情况的方案数为$C_{k}^{r}$，总贡献为<br>$C_{k}^{r}*(-1)^{r}$<br>我们再把每个d的贡献加起来$\sum_{r=0}^{k}*C_{k}^{r}*(-1)^{r}$<br>是不是觉得有点眼熟呢，没错，这就是我们的二项式定理，所以上式就等于$(1+(-1))^k=0$<br>结论得证。</li>
-</ol>
-<h3 id="性质2"><a href="#性质2" class="headerlink" title="性质2"></a>性质2</h3><p>莫比乌斯函数为积性函数<br>证明：<br>若有两个互质的数a,b<br>我们把它们分别分解质因数<br>$a=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}$<br>$b=q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$<br>由于a,b互质，$a*b=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}*q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$<br>如果$\mu(a)==0或\mu(b)==0$为0，那么说明一定有一个x或y&gt;=2，那么$\mu(a*b)$也一定为0.<br>若$\mu(a)$与$\mu(b)$均为1，说明k与t均为偶数，那么k+t也为偶数，所以$\mu(a*b)$也为1<br>若$\mu(a)$与$\mu(b)$均为-1，说明k与t均为奇数，那么k+t为偶数，所以$\mu(a*b)$为1<br>若$\mu(a)为1，\mu(b)$为-1，说明k为偶数，t为奇数，那么k+t为奇数，所以$\mu(a*b)$为-1，<br>$\mu(b)为1，\mu(a)$为-1与上一条同理。<br>综上所述，莫比乌斯函数为积性函数。</p>
-<h2 id="莫比乌斯函数的求法"><a href="#莫比乌斯函数的求法" class="headerlink" title="莫比乌斯函数的求法"></a>莫比乌斯函数的求法</h2><p>这里介绍一下如何使用线性筛筛出莫比乌斯函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(isprime,<span class="number">1</span>,<span class="keyword">sizeof</span>(isprime));</span><br><span class="line">isprime[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="number">100000</span>;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (isprime[i])&#123;prime[++pri]=i;mu[i]=<span class="number">-1</span>;&#125;<span class="comment">//质数的mu显然是-1</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=pri&amp;&amp;i*prime[j]&lt;=<span class="number">100000</span>;j++)&#123;</span><br><span class="line">		<span class="keyword">int</span> tt=i*prime[j];</span><br><span class="line">		isprime[tt]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (i%prime[j]==<span class="number">0</span>)&#123;<span class="comment">//说明prime[j]这个质因子次数大于1，所以mu为0</span></span><br><span class="line">			mu[tt]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			mu[tt]=-mu[i];<span class="comment">//说明新出现了一个质数，所以要再*=-1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其复杂度就是线性筛的复杂度，和筛质数，筛phi都是一样的。</p>
-<h2 id="莫比乌斯反演-1"><a href="#莫比乌斯反演-1" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h2><p>我们现在已经知道了莫比乌斯函数和他的一些性质，那么我们试着证明一下莫比乌斯反演的正确性。</p>
-<p>$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$<br>再把$f$展开</p>
-<script type="math/tex; mode=display">g(n)=\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)</script><p>然后我们把g的sigma换到前面去</p>
-<script type="math/tex; mode=display">g(n)=\sum_{i|n}g(i)\sum_{d|\frac{n}{i}}\mu(d)</script><p>我们考虑后面这个sigma的值<br>1.当i=n时，$\sum_{d|\frac{n}{i}}\mu(d)=1，g(i)\sum_{d|\frac{n}{i}}\mu(d)=g(n)$<br>2.当i为小于n且是n的因数时，根据$\sum_{d|n}\mu(d)=[n=1]$<br>那么$\sum_{d|\frac{n}{i}}\mu(d)=0$，<br>乘上一个g(i)仍然为0，那么上下两种情况加起来就是$\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)$<br>所以就是g(n)，证毕</p>
-<h2 id="莫比乌斯反演的变形"><a href="#莫比乌斯反演的变形" class="headerlink" title="莫比乌斯反演的变形"></a>莫比乌斯反演的变形</h2><p>变形一：$f(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}g(d*i)—-&gt;g(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)$<br>证明：<br>我们把上面二式的f展开<br>$\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}\mu(d)<br>\sum_{d1=1}^{\lfloor{\frac{n}{d*i}}\rfloor}g(d1*d*i)$<br>我们令d1*d=T<br>那么原式=$\sum_{T=1}^{\lfloor{\frac{n}{i}}\rfloor}g(T*i)<br>\sum_{d|T}\mu(d)$<br>仔细想一下i,d,T的关系应该不难理解<br>当(1)T=1时，$\sum_{d|T}\mu(d)=1，g(T*i)<br>\sum_{d|T}\mu(d)=g(i)$<br>(2)T&gt;1时，$\sum_{d|T}\mu(d)=0，g(T*i)<br>\sum_{d|T}\mu(d)=0$<br>综上所述，结论正确<br>变形二：$f(i)=\sum_{i|d}g(d)—-&gt;g(i)=\sum_{i|d}f(d)*\mu(\frac{d}{i})$<br>证明：<br>另$\frac{d}{i}=k$<br>那么$\sum_{i|d}f(d)*\mu(\frac{d}{i})=\sum_{k=1}^{\infty}\mu(k)*f(k*i)=\sum_{k=1}^{\infty}\mu(k)*\sum_{k*i|t}g(t)=\sum_{i|t}*g(t)*\sum_{k|\frac{t}{i}}\mu(k)$<br>又是熟悉的套路，就是把$\mu$换成前缀和，就有非常好的性质了，那么最后得到的这个式子，只有在t=i时，后面的这个$\mu$的sigma才会变成1，所以加起来就是f(i)。</p>
-<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>以上就是笔者对莫比乌斯反演的一些理解与介绍，<del>军训每天逃机房花了5天终于码完了，</del>希望能给大家带来帮助</p>
+        <h1 id="NOIP2018游记"><a href="#NOIP2018游记" class="headerlink" title="NOIP2018游记"></a>NOIP2018游记</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天说要写游记，机房的大佬们问我为什么现在才写，估计是因为以前也没写过不知道怎么写，而且今天正式才成绩出来，算是尘埃落定了吧。<br><a id="more"></a></p>
+<h2 id="day-1"><a href="#day-1" class="headerlink" title="day-1"></a>day-1</h2><p>以前所有的open day都不幸的被关在家里，这次这么好的机会当然要好好利用啦，结果不知是喝了咖啡还是自己过于兴奋，实在是睡不着，凌晨四点才好不容易落入了梦乡，没想到六点钟准时被生物钟叫起，只睡了两个小时，好困啊。。。。</p>
+<h2 id="day0"><a href="#day0" class="headerlink" title="day0"></a>day0</h2><p>起床了当然是去机房颓颓颓啦，和同学LOL五黑还是非常开心，狼人杀玩的也是非常的舒服啊。<br>晚上回家吃了晚饭就开始重新敲模板，敲到八点钟感觉会考的基本都敲过了，刚好前一天实在是睡不够就赶紧睡了。</p>
+<h2 id="day1"><a href="#day1" class="headerlink" title="day1"></a>day1</h2><p>呀，我怎么又醒了，有了前一天的阴影，突然醒过来的我很是慌张，一看手表，呼，吓死了，6点了，顺便就起床了。<br>果然前一天晚上睡得足精神就是好啊，再复习了一遍快读就和zx大佬一起参观学军紫金港的校园。<br>学紫的校园确实是很漂亮啊，给人一种非常大气的感觉，只是操场是300米的有点小遗憾了。<br>进了考场，先开始写快读，第一遍还写挂了。<br>开题，这个T1好熟悉啊，感觉做过，碰巧前几天做了一道非常像的题，那道题的正解是单调栈，而我是用rmq+分治做的，仔细一想分治确实可以做，就开始写，写了一会儿觉得D1T1不至于这么难吧，肯定有更简单的做法，冷静了一下发现和前面一个比一下就好了，5min写完过了大样例，（出了考场经过交流得知，被我bibi过那题的yx大佬真的去写了rmq，当然yx大佬是不可能写挂的啦）。<br>看了一眼T2没什么思路，先看T3吧，反正为时尚早。<br>一看T3，诶，这不是裸的树形dp吗，（果然睡得好脑子就清醒）一算复杂度两个log而且应该很不满，赶紧写啊，大概20min写完了也过了大样例。<br>再回过头看T2，好像结论还是蛮明显的，模型转化后就是一个完全背包诶，15min写完，这个时候大概是10点的样子，有了上次JSOI终场前5min打扫雷被教练婊的经历，想想还是多检查检查吧，毕竟联赛可是一道做对不得分，做错直接不及格的题啊。<br>T1和T2的结论一遍一遍的想，觉得应该是没问题了。<br>T3看了几遍，突然发现有一种特殊情况没有判到，真的是吓死了，赶紧改过来，经过这么一搞我更加不敢松懈了，又一遍一遍的开始检查，好在没有再吓自己一次。<br>检查到11点半觉得应该没啥问题了，检查读写，再跑一遍样例，都没问题，那就这样了吧。<br>胡思乱想到考试结束，出了考场和大家一起吃饭，果然大佬们都ak了，而且都比我早。。。<br>下午回到了家和妈汇报了一下情况，她也很开心，我说到检查出错误的时候她也给我吓了一跳。<br>等到洛谷自测数据出来，默了一下代码，确实是ak了，这口气算是松下来了。<br>正想早点睡觉，结果水UOJ群的时候看到头文件不包cstdio会ce，在洛谷在线IDE上试了一下好像确实是会ce的，而本机没问题。我突然开始慌了，day1爆0那真的凉了，9点上的床，自己吓自己吓到11点才睡着，后来发现其实考场上的电脑不包的话过不来编译，完全是自己吓自己。</p>
+<h2 id="day2"><a href="#day2" class="headerlink" title="day2"></a>day2</h2><p>前一天过于紧张为今天的爆炸埋下了伏笔。<br>看了一眼T1，树的60分很简单，后面40分环套树，估计又是分类讨论，平常被神仙题虐太多了，根本没注意到数据范围是给n^2的，只要枚举哪条边不走就行了，我尝试着写了一下线性发现非常难写，没事先搁着，如果后面有更好拿的分不如先去拿到，事后证明这时候的决策确实是非常明智的。<br>一看后面两题，根本没有思路，T2刚了大约有两个小时，后来发现是错的，好在这其中还是发现了不少性质，拿到了50分的暴力分，T3的44分树形dp非常裸，很快的写完，这时大概是11点20左右，我发现T1还是想不清楚，无奈之下写了个12分的暴力然后开始尝试多拿T2，T3的暴力分，无奈T1的12分写的有点久，生怕自己犯低级错误，放弃了多拿8分的机会，选择检查（现在想想有点佩服自己当时的决策，机房某大佬T2就忘了打读写。。。），确认没有犯低级错误后11点55分了。<br>走出考场，发现大家都想到T1的n方做法了，哎，还是自己太菜 ，和大家分享了自己的考试经历后，被大佬称赞心态真好，能这么冷静的分析。<br>车上发现好多大佬也是被神仙题虐多了，T1都写了线性的，但我仍然觉得自己的决策是正确的（结果他们居然都不同程度的fst了。。。有的还不如我这个72分）</p>
+<h2 id="day3"><a href="#day3" class="headerlink" title="day3"></a>day3</h2><p>程序发下来，day1的cstdio惊魂确实是自己吓自己，但没有发现D2T2的数据范围是小于等于的，而我看成了等于，所有n=1的点都没有判，收到了5-15分不等的损失，而且在机房大佬把全省成绩测出来之后发现100+100+100+72+50(-5~15)+44这个分一等奖大概是有的，但是能不能上pkuwc还不好说，算了，反正考完了，晚上吃了顿大餐，调整好心态，回归文化课学习。</p>
+<h2 id="day-n"><a href="#day-n" class="headerlink" title="day n"></a>day n</h2><p>出成绩了，ccf是在是太给面子了，n=1的点一个都没有放，成功得到466，虽然算不上很高，但比起我初三时算是很大的进步了，而且听教练说这分应该能上pkuwc，那我就不慌了，接下来继续好好努力争取冬令营考出好成绩吧。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在自己傻逼不会做D2T1的情况下，这个分数算是很理想了，而且是机房中为数不多得到期望分数的生，还是得益于自己的策略吧，希望以后的每次考试都能冷静的制定得分最大化的策略，不要留有遗憾。<br>仅以此篇游记纪念NOIP2018之行，再接再厉。</p>
 
       
     </div>
@@ -548,11 +502,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
-          
-            <a href="/tags/数学/" rel="tag"># 数学</a>
-          
-            <a href="/tags/数论/" rel="tag"># 数论</a>
+            <a href="/tags/杂文/" rel="tag"># 杂文</a>
           
         </div>
       
@@ -565,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/22/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/11/26/浅谈线性基/" rel="next" title="浅谈线性基">
+                <i class="fa fa-chevron-left"></i> 浅谈线性基
               </a>
             
           </div>
@@ -574,10 +524,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/25/浅谈矩阵乘法的应用/" rel="prev" title="浅谈矩阵乘法的应用">
-                浅谈矩阵乘法的应用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -783,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#莫比乌斯反演"><span class="nav-number">2.</span> <span class="nav-text">莫比乌斯反演</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于莫比乌斯函数"><span class="nav-number">2.1.</span> <span class="nav-text">关于莫比乌斯函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯函数的性质"><span class="nav-number">2.2.</span> <span class="nav-text">莫比乌斯函数的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质1"><span class="nav-number">2.2.1.</span> <span class="nav-text">性质1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质2"><span class="nav-number">2.2.2.</span> <span class="nav-text">性质2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯函数的求法"><span class="nav-number">2.3.</span> <span class="nav-text">莫比乌斯函数的求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演-1"><span class="nav-number">2.4.</span> <span class="nav-text">莫比乌斯反演</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演的变形"><span class="nav-number">2.5.</span> <span class="nav-text">莫比乌斯反演的变形</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#尾声"><span class="nav-number">3.</span> <span class="nav-text">尾声</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NOIP2018游记"><span class="nav-number">1.</span> <span class="nav-text">NOIP2018游记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day-1"><span class="nav-number">1.2.</span> <span class="nav-text">day-1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day0"><span class="nav-number">1.3.</span> <span class="nav-text">day0</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day1"><span class="nav-number">1.4.</span> <span class="nav-text">day1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day2"><span class="nav-number">1.5.</span> <span class="nav-text">day2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day3"><span class="nav-number">1.6.</span> <span class="nav-text">day3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#day-n"><span class="nav-number">1.7.</span> <span class="nav-text">day n</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结语"><span class="nav-number">1.8.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
-<meta name="keywords" content="算法,数学,数论">
+  <meta name="description" content="前言首先讲一下线性基是什么东西，线性基是一个集合，你在原集合中找到一个子集，子集中的数xor起来一定能在线性基中找一个对应子集的xor和与其相等。比如说，{x,y}和{x,x^y} 就满足这么样一个关系。">
+<meta name="keywords" content="算法,数学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="莫比乌斯反演学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/index.html">
+<meta property="og:title" content="浅谈线性基">
+<meta property="og:url" content="http://yoursite.com/2018/11/26/浅谈线性基/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
+<meta property="og:description" content="前言首先讲一下线性基是什么东西，线性基是一个集合，你在原集合中找到一个子集，子集中的数xor起来一定能在线性基中找一个对应子集的xor和与其相等。比如说，{x,y}和{x,x^y} 就满足这么样一个关系。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-26T07:31:44.849Z">
+<meta property="og:updated_time" content="2018-11-26T07:32:51.537Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="莫比乌斯反演学习笔记">
-<meta name="twitter:description" content="前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换">
+<meta name="twitter:title" content="浅谈线性基">
+<meta name="twitter:description" content="前言首先讲一下线性基是什么东西，线性基是一个集合，你在原集合中找到一个子集，子集中的数xor起来一定能在线性基中找一个对应子集的xor和与其相等。比如说，{x,y}和{x,x^y} 就满足这么样一个关系。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/26/浅谈线性基/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>莫比乌斯反演学习笔记 | LNRBHAW</title>
+  <title>浅谈线性基 | LNRBHAW</title>
   
 
 
@@ -366,7 +366,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/莫比乌斯反演学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/26/浅谈线性基/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LNRBHAW">
@@ -383,7 +383,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">莫比乌斯反演学习笔记
+          <h1 class="post-title" itemprop="name headline">浅谈线性基
               
             
           </h1>
@@ -408,24 +408,12 @@
                 
               
 
-              <time title="Created: 2018-11-23 19:17:05" itemprop="dateCreated datePublished" datetime="2018-11-23T19:17:05+08:00">2018-11-23</time>
+              <time title="Created: 2018-11-26 15:29:53 / Modified: 15:32:51" itemprop="dateCreated datePublished" datetime="2018-11-26T15:29:53+08:00">2018-11-26</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-11-26 15:31:44" itemprop="dateModified" datetime="2018-11-26T15:31:44+08:00">2018-11-26</time>
               
             
           </span>
@@ -450,20 +438,6 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/数学/" itemprop="url" rel="index"><span itemprop="name">数学</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/数学/数论/" itemprop="url" rel="index"><span itemprop="name">数论</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/算法/数学/数论/莫比乌斯反演/" itemprop="url" rel="index"><span itemprop="name">莫比乌斯反演</span></a></span>
 
                 
                 
@@ -504,27 +478,22 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。</p>
-<h1 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h1><p>比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$<br>假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢<br>$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$<br>然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换<br><a id="more"></a></p>
-<h2 id="关于莫比乌斯函数"><a href="#关于莫比乌斯函数" class="headerlink" title="关于莫比乌斯函数"></a>关于莫比乌斯函数</h2><ol>
-<li>若 $d=1$，则 $\mu(d)=1$</li>
-<li>若 $d=p_1*p_2*p_3*p_4*..*p_n$ (注意不是笔者偷懒，而是p的次数都是1，且都是互异的质数) 那么$\mu(d)=(-1)^{k}$</li>
-<li>other wise $\mu(d)=0$<h2 id="莫比乌斯函数的性质"><a href="#莫比乌斯函数的性质" class="headerlink" title="莫比乌斯函数的性质"></a>莫比乌斯函数的性质</h2></li>
-</ol>
-<h3 id="性质1"><a href="#性质1" class="headerlink" title="性质1"></a>性质1</h3><p> 对于正整数n，有$\sum_{d|n}\mu(d)=[n=1]$<br>中括号在这里表达bool表达式，如果满足中括号内的条件则为1，否则为0<br>证明：</p>
-<ol>
-<li>n=1，根据定义，显然成立</li>
-<li>n&gt;1，设$n=p_1^{x_1}*p_2^{x_2}*p_3^{x_3}*…*p_k^{x_k}$，也就是把n质因数分解<br>那么d一定能表示为$p_1^{y_1}*p_2^{y_2}*p_3^{y_3}*…*p_k^{y_k}$，其中($0\le y_i\le x_i$)，那么根据定义，只要有一个y大于二，那么$\mu(d)=0$，没有贡献，所以我们只要考虑所有y均为0,1时的情况。<br>我们假设这k个中有r个y=1，那么出现这种情况的方案数为$C_{k}^{r}$，总贡献为<br>$C_{k}^{r}*(-1)^{r}$<br>我们再把每个d的贡献加起来$\sum_{r=0}^{k}*C_{k}^{r}*(-1)^{r}$<br>是不是觉得有点眼熟呢，没错，这就是我们的二项式定理，所以上式就等于$(1+(-1))^k=0$<br>结论得证。</li>
-</ol>
-<h3 id="性质2"><a href="#性质2" class="headerlink" title="性质2"></a>性质2</h3><p>莫比乌斯函数为积性函数<br>证明：<br>若有两个互质的数a,b<br>我们把它们分别分解质因数<br>$a=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}$<br>$b=q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$<br>由于a,b互质，$a*b=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}*q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$<br>如果$\mu(a)==0或\mu(b)==0$为0，那么说明一定有一个x或y&gt;=2，那么$\mu(a*b)$也一定为0.<br>若$\mu(a)$与$\mu(b)$均为1，说明k与t均为偶数，那么k+t也为偶数，所以$\mu(a*b)$也为1<br>若$\mu(a)$与$\mu(b)$均为-1，说明k与t均为奇数，那么k+t为偶数，所以$\mu(a*b)$为1<br>若$\mu(a)为1，\mu(b)$为-1，说明k为偶数，t为奇数，那么k+t为奇数，所以$\mu(a*b)$为-1，<br>$\mu(b)为1，\mu(a)$为-1与上一条同理。<br>综上所述，莫比乌斯函数为积性函数。</p>
-<h2 id="莫比乌斯函数的求法"><a href="#莫比乌斯函数的求法" class="headerlink" title="莫比乌斯函数的求法"></a>莫比乌斯函数的求法</h2><p>这里介绍一下如何使用线性筛筛出莫比乌斯函数<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">memset</span>(isprime,<span class="number">1</span>,<span class="keyword">sizeof</span>(isprime));</span><br><span class="line">isprime[<span class="number">1</span>]=<span class="number">0</span>;</span><br><span class="line">mu[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=<span class="number">100000</span>;i++)&#123;</span><br><span class="line">	<span class="keyword">if</span> (isprime[i])&#123;prime[++pri]=i;mu[i]=<span class="number">-1</span>;&#125;<span class="comment">//质数的mu显然是-1</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=pri&amp;&amp;i*prime[j]&lt;=<span class="number">100000</span>;j++)&#123;</span><br><span class="line">		<span class="keyword">int</span> tt=i*prime[j];</span><br><span class="line">		isprime[tt]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span> (i%prime[j]==<span class="number">0</span>)&#123;<span class="comment">//说明prime[j]这个质因子次数大于1，所以mu为0</span></span><br><span class="line">			mu[tt]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			mu[tt]=-mu[i];<span class="comment">//说明新出现了一个质数，所以要再*=-1</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>其复杂度就是线性筛的复杂度，和筛质数，筛phi都是一样的。</p>
-<h2 id="莫比乌斯反演-1"><a href="#莫比乌斯反演-1" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h2><p>我们现在已经知道了莫比乌斯函数和他的一些性质，那么我们试着证明一下莫比乌斯反演的正确性。</p>
-<p>$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$<br>再把$f$展开</p>
-<script type="math/tex; mode=display">g(n)=\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)</script><p>然后我们把g的sigma换到前面去</p>
-<script type="math/tex; mode=display">g(n)=\sum_{i|n}g(i)\sum_{d|\frac{n}{i}}\mu(d)</script><p>我们考虑后面这个sigma的值<br>1.当i=n时，$\sum_{d|\frac{n}{i}}\mu(d)=1，g(i)\sum_{d|\frac{n}{i}}\mu(d)=g(n)$<br>2.当i为小于n且是n的因数时，根据$\sum_{d|n}\mu(d)=[n=1]$<br>那么$\sum_{d|\frac{n}{i}}\mu(d)=0$，<br>乘上一个g(i)仍然为0，那么上下两种情况加起来就是$\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)$<br>所以就是g(n)，证毕</p>
-<h2 id="莫比乌斯反演的变形"><a href="#莫比乌斯反演的变形" class="headerlink" title="莫比乌斯反演的变形"></a>莫比乌斯反演的变形</h2><p>变形一：$f(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}g(d*i)—-&gt;g(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)$<br>证明：<br>我们把上面二式的f展开<br>$\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}\mu(d)<br>\sum_{d1=1}^{\lfloor{\frac{n}{d*i}}\rfloor}g(d1*d*i)$<br>我们令d1*d=T<br>那么原式=$\sum_{T=1}^{\lfloor{\frac{n}{i}}\rfloor}g(T*i)<br>\sum_{d|T}\mu(d)$<br>仔细想一下i,d,T的关系应该不难理解<br>当(1)T=1时，$\sum_{d|T}\mu(d)=1，g(T*i)<br>\sum_{d|T}\mu(d)=g(i)$<br>(2)T&gt;1时，$\sum_{d|T}\mu(d)=0，g(T*i)<br>\sum_{d|T}\mu(d)=0$<br>综上所述，结论正确<br>变形二：$f(i)=\sum_{i|d}g(d)—-&gt;g(i)=\sum_{i|d}f(d)*\mu(\frac{d}{i})$<br>证明：<br>另$\frac{d}{i}=k$<br>那么$\sum_{i|d}f(d)*\mu(\frac{d}{i})=\sum_{k=1}^{\infty}\mu(k)*f(k*i)=\sum_{k=1}^{\infty}\mu(k)*\sum_{k*i|t}g(t)=\sum_{i|t}*g(t)*\sum_{k|\frac{t}{i}}\mu(k)$<br>又是熟悉的套路，就是把$\mu$换成前缀和，就有非常好的性质了，那么最后得到的这个式子，只有在t=i时，后面的这个$\mu$的sigma才会变成1，所以加起来就是f(i)。</p>
-<h1 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h1><p>以上就是笔者对莫比乌斯反演的一些理解与介绍，<del>军训每天逃机房花了5天终于码完了，</del>希望能给大家带来帮助</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先讲一下线性基是什么东西，线性基是一个集合，你在原集合中找到一个子集，子集中的数xor起来一定能在线性基中找一个对应子集的xor和与其相等。<br>比如说，{x,y}和{x,x^y} 就满足这么样一个关系。<br><a id="more"></a></p>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>我们把这个扩展一下，比如说我们现在有一个集合A，我新加进来一个数a，那么a与A中的数xor一下肯定是没有问题的。</p>
+<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>定义一个数的M值为他二进制上第一个1出现的位置。</p>
+<p>我们每往线性基中插入一个数，我们要让这个数的M值与之前线性基中的每一个数的M值都不同。</p>
+<h1 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h1><p>那么如何实现呢？<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(LL c)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">51</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">		<span class="keyword">if</span> (c&amp;bit[i])&#123;</span><br><span class="line">			<span class="keyword">if</span> (!xxj[i])&#123;</span><br><span class="line">				xxj[i]=c;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			c=c^xxj[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在这里，xxj[i]表示目前线性基中M值为i的这个数是多少。<br>那么当我们新插入一个数C<br>我们从大到小枚举C的每一个二进制位，如果当前位置上为1，如果对应的xxj[i]没有数，那么这个数就变成xxj[i]，否则xor上xxj[i]，通过我们前面的原理，这样正确性是对的，而且这样我们再扫后面的位置时，保证出现的1就是第一个出现的<br>例：<br>xxj[3]=101<br>xxj[2]=0<br>插入110<br>110—&gt;11<br>所以插入xxj[2]的时候M值已经为2了（这个应该比较好想）</p>
+<p>那么我们就完成了线性基的插入，基于二进制位，所以插入的复杂度是log的，而且通过这种插入方式，我们线性基的大小就是基于二进制的位数了，log个。</p>
+<h1 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h1><p>合并两个线性基只需要把一个线性基暴力插入另一个即可，复杂度：线性基大小*插入复杂度，log方</p>
+<h1 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h1><p>这种不加特技的线性基不支持删除操作</p>
+<h1 id="取最大值"><a href="#取最大值" class="headerlink" title="取最大值"></a>取最大值</h1><p>我们从最高位倒着扫下来，扫到第i位，如果当前的答案ans这一位上为1，那么我们xor上xxj[i]一定只会变小，而且这个影响无法消除，因为xxj[i+1..n]都不可能在那ans第i位上变为1，（根据xxj[i]的性质），同理，如果ans这一位上位0，那么xor上ans[i]一定会让答案变大。<br>当然如果xxj[i]==0,那就没有影响<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LL query_max()&#123;</span><br><span class="line">	LL ret=0;</span><br><span class="line">	for (int i=51;i&gt;=0;i--)&#123;</span><br><span class="line">		if ((xxj[i]^ret)&gt;ret) ret=ret^xxj[i];</span><br><span class="line">	&#125;</span><br><span class="line">	return ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="取xor-d的最大值"><a href="#取xor-d的最大值" class="headerlink" title="取xor d的最大值"></a>取xor d的最大值</h1><p>那么只需要把ret的初值赋为d就行了，原理也和上面的相同</p>
+<h1 id="取最小值"><a href="#取最小值" class="headerlink" title="取最小值"></a>取最小值</h1><p>只需要找到最小的i，且xxj[i]不等于0就行了</p>
+<h1 id="取k小值"><a href="#取k小值" class="headerlink" title="取k小值"></a>取k小值</h1><p>乍一看，一般的线性基好像不可做，<br>问题在哪儿？<br>1000001<br>0000001<br>同时选1和2比只选1要差，所以我们无法做</p>
+<p>但是如果线性基长成这样<br>1000000<br>0100000<br>0010000<br>0001000<br>0000100<br>那么就好做了，因为选取1和2一定比只选1要优。</p>
+<p>所以我么需要对原来的线性基rebuild一下，使得它变成上面那样的形式，当然<br>1000010<br>0100001<br>0000101<br>这种形式也是可以的，xxj[最后一位]上没有数，所以同时选2和3也比只选2优，尽管最后一位上的1被消掉了<br>所以我们要使得若xxj[i]!=0，那么线性基里其他的数第i位上都为0，所以我们只需要拿xxj[i]去xor一下那些数就好了。<br>rebuild之后的线性基怎么做：把k转成二进制，若k的第i位为1，那么将ans xor 上rebuild后第i大的xxj就行了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rebuild</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">60</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i<span class="number">-1</span>;j&gt;=<span class="number">0</span>;j--)</span><br><span class="line">            <span class="keyword">if</span> (d[i]&amp;(<span class="number">1L</span>L&lt;&lt;j))</span><br><span class="line">                d[i]^=d[j];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">60</span>;i++)</span><br><span class="line">        <span class="keyword">if</span> (d[i])</span><br><span class="line">            p[cnt++]=d[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">kthquery</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (k&gt;=(<span class="number">1L</span>L&lt;&lt;cnt))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">60</span>;i&gt;=<span class="number">0</span>;i--)</span><br><span class="line">        <span class="keyword">if</span> (k&amp;(<span class="number">1L</span>L&lt;&lt;i))</span><br><span class="line">            ret^=p[i];</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上就是我对线性基的一些个人理解，希望能帮助大家学习，谢谢<br>同时在此感谢Yveh的博客给了很大帮助。<br>也感谢同学给予的帮助zhouyuheng2003</p>
 
       
     </div>
@@ -552,8 +521,6 @@
           
             <a href="/tags/数学/" rel="tag"># 数学</a>
           
-            <a href="/tags/数论/" rel="tag"># 数论</a>
-          
         </div>
       
 
@@ -565,8 +532,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/22/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2018/11/26/笛卡尔树的妙用/" rel="next" title="笛卡尔树的妙用">
+                <i class="fa fa-chevron-left"></i> 笛卡尔树的妙用
               </a>
             
           </div>
@@ -575,8 +542,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/25/浅谈矩阵乘法的应用/" rel="prev" title="浅谈矩阵乘法的应用">
-                浅谈矩阵乘法的应用 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/26/NOIP2018游记/" rel="prev" title="NOIP2018游记">
+                NOIP2018游记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -783,7 +750,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#莫比乌斯反演"><span class="nav-number">2.</span> <span class="nav-text">莫比乌斯反演</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于莫比乌斯函数"><span class="nav-number">2.1.</span> <span class="nav-text">关于莫比乌斯函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯函数的性质"><span class="nav-number">2.2.</span> <span class="nav-text">莫比乌斯函数的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#性质1"><span class="nav-number">2.2.1.</span> <span class="nav-text">性质1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性质2"><span class="nav-number">2.2.2.</span> <span class="nav-text">性质2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯函数的求法"><span class="nav-number">2.3.</span> <span class="nav-text">莫比乌斯函数的求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演-1"><span class="nav-number">2.4.</span> <span class="nav-text">莫比乌斯反演</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演的变形"><span class="nav-number">2.5.</span> <span class="nav-text">莫比乌斯反演的变形</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#尾声"><span class="nav-number">3.</span> <span class="nav-text">尾声</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理"><span class="nav-number">2.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质"><span class="nav-number">3.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#插入"><span class="nav-number">4.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合并"><span class="nav-number">5.</span> <span class="nav-text">合并</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除"><span class="nav-number">6.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取最大值"><span class="nav-number">7.</span> <span class="nav-text">取最大值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取xor-d的最大值"><span class="nav-number">8.</span> <span class="nav-text">取xor d的最大值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取最小值"><span class="nav-number">9.</span> <span class="nav-text">取最小值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#取k小值"><span class="nav-number">10.</span> <span class="nav-text">取k小值</span></a></li></ol></div>
             
 
           </div>
