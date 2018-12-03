@@ -116,12 +116,12 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="前言CRT，中国剩余定理，用于求解同余方程。据说古代有个著名问题叫韩信点兵，数学化一下就是x ≡ 2(mod 3)x ≡ 3(mod 5)x ≡ 2(mod 7)">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181129105111297.jpg">
-<meta property="og:updated_time" content="2018-11-29T02:58:36.584Z">
+<meta property="og:image" content="http://yoursite.com/images/详解CRT/图1.png">
+<meta property="og:updated_time" content="2018-12-03T08:00:39.908Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解CRT">
 <meta name="twitter:description" content="前言CRT，中国剩余定理，用于求解同余方程。据说古代有个著名问题叫韩信点兵，数学化一下就是x ≡ 2(mod 3)x ≡ 3(mod 5)x ≡ 2(mod 7)">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181129105111297.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/详解CRT/图1.png">
 
 
 
@@ -410,12 +410,24 @@
                 
               
 
-              <time title="Created: 2018-11-29 10:45:48 / Modified: 10:58:36" itemprop="dateCreated datePublished" datetime="2018-11-29T10:45:48+08:00">2018-11-29</time>
+              <time title="Created: 2018-11-29 10:45:48" itemprop="dateCreated datePublished" datetime="2018-11-29T10:45:48+08:00">2018-11-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-03 16:00:39" itemprop="dateModified" datetime="2018-12-03T16:00:39+08:00">2018-12-03</time>
               
             
           </span>
@@ -495,7 +507,7 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>CRT，中国剩余定理，用于求解同余方程。<br>据说古代有个著名问题叫韩信点兵，数学化一下就是<br>x ≡ 2(mod 3)<br>x ≡ 3(mod 5)<br>x ≡ 2(mod 7)<br><a id="more"></a></p>
-<h1 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h1><p>我们三个等式分开求解，最后加起来，那么如果x1是5和7的公倍数，后面加的时候就不会产生影响。<br>由第一个等式我们得到，x1是5和7的公倍数，且%3==2。<br>转化一下得到<br>若a是5和7的公倍数，且%3==1，那么2a就是一个合法的x，余数的可乘性。<br>那么要保证是5和7的公倍数，就$*35$，又要保证%3==1，那么再乘以35在%3意义下的逆元就行了，最后乘以2，所以x1=35$*({35}^{-1})*2$<br>同理求出x2,x3,然后x1+x2+x3就是一个合法解，最小解的话模一下最小公倍数就可以了<br>这其实就是中国剩余定理<br>对于一组同余方程<br><img src="https://img-blog.csdnimg.cn/20181129105111297.jpg" alt="在这里插入图片描述"><br>如果保证$m_1,m_2…m_k$ 两两互质, 且令P为$m_1,m_2…m_k$之积<br>则有结论 x ≡ ($a_1*M_1*M_1^{-1}+a_2*M_2*M_2^{-1}+…+a_k*M_k*M_k^{-1}$)(mod P)<br>其中$M_i$为$\frac{P}{m_i}$,$M_i^{-1}$即$M_i$在模$m_i$意义下的逆元($M_i*M_i^{-1}$≡1(mod $m_i$))<br>原理就和前面举的例子一样，只不过扩展了一下。<br>如果想看更加数学化的证明，www.cnblogs.com/DreamlessDreams/p/8710539.html<br>希望能对学习有帮助，谢谢。</p>
+<h1 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h1><p>我们三个等式分开求解，最后加起来，那么如果x1是5和7的公倍数，后面加的时候就不会产生影响。<br>由第一个等式我们得到，x1是5和7的公倍数，且%3==2。<br>转化一下得到<br>若a是5和7的公倍数，且%3==1，那么2a就是一个合法的x，余数的可乘性。<br>那么要保证是5和7的公倍数，就$*35$，又要保证%3==1，那么再乘以35在%3意义下的逆元就行了，最后乘以2，所以x1=35$*({35}^{-1})*2$<br>同理求出x2,x3,然后x1+x2+x3就是一个合法解，最小解的话模一下最小公倍数就可以了<br>这其实就是中国剩余定理<br>对于一组同余方程<br><img src="\images\详解CRT\图1.png" alt="图1"><br>如果保证$m_1,m_2…m_k$ 两两互质, 且令P为$m_1,m_2…m_k$之积<br>则有结论 x ≡ ($a_1*M_1*M_1^{-1}+a_2*M_2*M_2^{-1}+…+a_k*M_k*M_k^{-1}$)(mod P)<br>其中$M_i$为$\frac{P}{m_i}$,$M_i^{-1}$即$M_i$在模$m_i$意义下的逆元($M_i*M_i^{-1}$≡1(mod $m_i$))<br>原理就和前面举的例子一样，只不过扩展了一下。<br>如果想看更加数学化的证明，www.cnblogs.com/DreamlessDreams/p/8710539.html<br>希望能对学习有帮助，谢谢。</p>
 
       
     </div>
