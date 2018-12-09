@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="Miller_Rabin质数判断我们朴素的质数判断算法是枚举小于等于$\sqrt{n}$的数，判断是否都不能整除n，这样的复杂度是$\sqrt{n}$，那么当n的数量级达到$10^{18}$的时候就不够优越了。这时候我们的Millar_Rabin算法就闪亮登场了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-29T02:59:03.379Z">
+<meta property="og:updated_time" content="2018-12-09T13:19:43.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Miller_Rabin&amp;Pollared_Rho">
 <meta name="twitter:description" content="Miller_Rabin质数判断我们朴素的质数判断算法是枚举小于等于$\sqrt{n}$的数，判断是否都不能整除n，这样的复杂度是$\sqrt{n}$，那么当n的数量级达到$10^{18}$的时候就不够优越了。这时候我们的Millar_Rabin算法就闪亮登场了。">
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">15</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">16</span></a>
 
   </li>
         
@@ -276,7 +276,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">23</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">24</span></a>
 
   </li>
         
@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
 
   </li>
         
@@ -408,12 +408,24 @@
                 
               
 
-              <time title="Created: 2018-11-29 10:18:24 / Modified: 10:59:03" itemprop="dateCreated datePublished" datetime="2018-11-29T10:18:24+08:00">2018-11-29</time>
+              <time title="Created: 2018-11-29 10:18:24" itemprop="dateCreated datePublished" datetime="2018-11-29T10:18:24+08:00">2018-11-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-09 21:19:43" itemprop="dateModified" datetime="2018-12-09T21:19:43+08:00">2018-12-09</time>
               
             
           </span>
@@ -500,7 +512,7 @@
 <p>$2^{85}$%341 == 32</p>
 <p>这时候就出现问题了，我们就把341这个伪质数揪出来了。<br>我们把质数的这个序列找出来发现一定是形如1,1…1,1,1,1,p-1这样子的，p-1之后可以为无序，我们设x要判断的数，d为x去掉所有2因子之后的结果。先判断$2^{d}$%x为多少，然后不断地把d*2，继续判断余数。<br>只有出现这两种情况时我们认为x是质数<br>1.序列全为1<br>2.序列出现了p-1<br>我们结合代码来讲如何判断<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;i++)&#123;</span><br><span class="line">		LL d=x<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">while</span> (!(d&amp;<span class="number">1</span>)) d&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">		LL s=ksm(q[i],d,x);</span><br><span class="line">		<span class="keyword">while</span> (s!=<span class="number">1</span>&amp;&amp;s!=x<span class="number">-1</span>&amp;&amp;d!=x<span class="number">-1</span>) d&lt;&lt;=<span class="number">1</span>,s=mul(s,s,x);</span><br><span class="line">		<span class="keyword">if</span> (s!=x<span class="number">-1</span>&amp;&amp;!(d&amp;<span class="number">1</span>)) <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//如果找到的是p-1则没事，如果找到的是1，(根据二次探测定理，1前面一定全是1）那么必须全为1。</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
 <p>但是这样判断并不一定完全正确，所以我们需要将2(上文中的底数)换成别的数，一般来说在long long 范围内，2，3，7，61就都够用了。</p>
-<p>这是模板题 <a href="https://loj.ac/problem/143" target="_blank" rel="noopener">https://loj.ac/problem/143</a></p>
+<p>这是模板题 <a href="https://loj.ac/problem/143" target="_blank" rel="noopener">LOJ 143</a></p>
 <h1 id="Pollared-Rho"><a href="#Pollared-Rho" class="headerlink" title="Pollared_Rho"></a>Pollared_Rho</h1><p>为什么要把这两个放在一起讲呢，因为这两个算法的正确性都有那么一点瑕疵，可能算是某种相同点吧，而且Pollard_Rho中要用到Miller_Rabin。<br>先贴出模板题吧，求$\phi(n)$，n&lt;=$10^{18}$<br>如果直接暴力，也是根号的。<br>那么我们随机一个数判断是否为n的因数，也不是很优，甚至劣于暴力。<br>作者对于Pollared_Rho的复杂度证明也不是很精通，这里就讲一讲做法。<br>每次有一个n，我们先用Miller_Rabin 判断他本身是不是质数，如果不是质数，我们先在0…n-1范围内随机一个种子seed，我们依靠这个seed来形成一个随机序列，假设这个随机序列的这一项为x，那么下一项为(x*x+seed)%n，我们每次判断这个随机序列的a,b两项做差，用这个差和n取gcd，然后进一步分解。<br>看代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LL <span class="title">Nex</span><span class="params">(LL x,LL n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (mul(x,x,n)+seed)%n;<span class="comment">//mul为慢速乘，防止乘的时候爆long long</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Pollared_Rho</span><span class="params">(LL n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (n==<span class="number">1</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">if</span> (Miller_Rubin(n))&#123;<span class="comment">//这里计算phi</span></span><br><span class="line">		m[n]++;<span class="comment">//m是个map</span></span><br><span class="line">		<span class="keyword">if</span> (m[n]==<span class="number">1</span>) ans=ans*(n<span class="number">-1</span>);</span><br><span class="line">		<span class="keyword">else</span> ans=ans*n;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)&#123;</span><br><span class="line">		seed=rand()*rand()%(n<span class="number">-1</span>);<span class="comment">//先随机一个seed</span></span><br><span class="line">		LL a=rand()%(n<span class="number">-1</span>),b=Nex(a,n);</span><br><span class="line">		<span class="keyword">while</span> (a!=b)&#123;</span><br><span class="line">			LL kk=gcd(n,<span class="built_in">abs</span>(a-b));</span><br><span class="line">			<span class="keyword">if</span> (kk&gt;<span class="number">1</span>)&#123;</span><br><span class="line">				Pollared_Rho(kk);</span><br><span class="line">				Pollared_Rho(n/kk);</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			a=Nex(a,n),b=Nex(Nex(b,n),n);<span class="comment">//这里很关键，b每次都比a多走一步，如果形成环的话，b势必会追上a，这种判环的方法最为好写，是floyd这个人发明的，注意，不是我们所熟知的那个3方的floyd。</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>以上就是Pollared_Rho 的实现过程，希望对大家有所帮助，如果有写的不对或不好的地方，欢迎评论指正，谢谢。</p>
 
@@ -630,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -689,7 +701,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -732,7 +746,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

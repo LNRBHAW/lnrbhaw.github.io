@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="题目链接https://www.luogu.org/problemnew/show/P3332 前言这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。">
+  <meta name="description" content="题目链接Luogu 3332 前言这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。">
 <meta name="keywords" content="题目分析,数据结构,树套树,Luogu,整体二分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Luogu 3332] K大数查询">
 <meta property="og:url" content="http://yoursite.com/2018/11/29/Luogu-3332-K大数查询/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="题目链接https://www.luogu.org/problemnew/show/P3332 前言这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。">
+<meta property="og:description" content="题目链接Luogu 3332 前言这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-29T03:10:22.170Z">
+<meta property="og:updated_time" content="2018-12-09T13:19:01.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Luogu 3332] K大数查询">
-<meta name="twitter:description" content="题目链接https://www.luogu.org/problemnew/show/P3332 前言这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。">
+<meta name="twitter:description" content="题目链接Luogu 3332 前言这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。">
 
 
 
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">15</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">16</span></a>
 
   </li>
         
@@ -276,7 +276,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">23</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">24</span></a>
 
   </li>
         
@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">13</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">14</span></a>
 
   </li>
         
@@ -408,12 +408,24 @@
                 
               
 
-              <time title="Created: 2018-11-29 11:06:34 / Modified: 11:10:22" itemprop="dateCreated datePublished" datetime="2018-11-29T11:06:34+08:00">2018-11-29</time>
+              <time title="Created: 2018-11-29 11:06:34" itemprop="dateCreated datePublished" datetime="2018-11-29T11:06:34+08:00">2018-11-29</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-09 21:19:01" itemprop="dateModified" datetime="2018-12-09T21:19:01+08:00">2018-12-09</time>
               
             
           </span>
@@ -499,7 +511,7 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.luogu.org/problemnew/show/P3332" target="_blank" rel="noopener">https://www.luogu.org/problemnew/show/P3332</a></p>
+        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.luogu.org/problemnew/show/P3332" target="_blank" rel="noopener">Luogu 3332</a></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这道题真的是好题，写了好多遍，本篇博客讲解两种方法，整体二分和线段树套线段树的做法。<br><a id="more"></a></p>
 <h1 id="整体二分"><a href="#整体二分" class="headerlink" title="整体二分"></a>整体二分</h1><p>如果只有一个询问，那么我们对于这个询问二分一个答案mid，我们判断大于mid的数是否有询问的k个，遍历每一个修改，如果加入的这个数是大于mid的，说明会对这个k有影响，那么我们就用数据结构维护一个区间加，然后把它扔到q2队列里。<br>如果加入的这个数小于mid，说明对目前二分的答案没有影响，就扔到q1队列里。最后数据结构区间查询看一下我询问的这个区间里有多少个数比我大，如果大于等于k，说明我mid还要增大，这时候所有q1队列里的修改都没有意义了，我们直接到q2里去做就行了，反之如果区间查询出来小于k，那么我就把mid减小，然后到q1队列里做，记得把数据结构初始化一下。<br>那么如果多个询问呢，我们就多个询问一起二分答案，这就是整体二分。<br>对于每一个询问，如果大于mid的数ans大于等于k，我们到分治到左边，然后把q[i].k-=ans，因为我们之后就不会让所有大于mid的修改影响这个询问了。否则就分治到右边做下去。</p>
 <p>给同学讲了一遍，发现他理解不了，我觉得还可以再总结总结。</p>
@@ -563,6 +575,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/09/BZOJ-3589-动态树/" rel="prev" title="[BZOJ 3589] 动态树">
+                [BZOJ 3589] 动态树 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -637,7 +653,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -696,7 +712,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -739,7 +757,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
