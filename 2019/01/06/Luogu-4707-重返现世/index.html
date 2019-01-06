@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="前言这篇文章的前置知识是Min_Max容斥，不会的同学可以先看一下我的另一篇博客Min-Max容斥学习笔记里面有详细的证明。 题目链接Luogu 4707 重返现世">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-06T09:38:06.238Z">
+<meta property="og:updated_time" content="2019-01-06T10:00:18.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Luogu 4707] 重返现世">
 <meta name="twitter:description" content="前言这篇文章的前置知识是Min_Max容斥，不会的同学可以先看一下我的另一篇博客Min-Max容斥学习笔记里面有详细的证明。 题目链接Luogu 4707 重返现世">
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">26</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">27</span></a>
 
   </li>
         
@@ -276,7 +276,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">33</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">36</span></a>
 
   </li>
         
@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">23</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">25</span></a>
 
   </li>
         
@@ -409,7 +409,7 @@
                 
               
 
-              <time title="Created: 2019-01-06 13:27:43 / Modified: 17:38:06" itemprop="dateCreated datePublished" datetime="2019-01-06T13:27:43+08:00">2019-01-06</time>
+              <time title="Created: 2019-01-06 13:27:43 / Modified: 18:00:18" itemprop="dateCreated datePublished" datetime="2019-01-06T13:27:43+08:00">2019-01-06</time>
             
 
             
@@ -488,7 +488,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这篇文章的前置知识是Min_Max容斥，不会的同学可以先看一下我的另一篇博客<br><a href="">Min-Max容斥学习笔记</a><br>里面有详细的证明。</p>
 <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.luogu.org/problemnew/show/P4707" target="_blank" rel="noopener">Luogu 4707 重返现世</a><br><a id="more"></a></p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>这道题实际上就是要就是要我们求全集合出现第$n-k+1$大元素的期望时间。<br>直接套用kth Min-Max容斥的结论。<br>$E(kthMax(S))=\sum_{S’\subseteq S}E(Min(S’))*(-1)^{|S’|-k}*\binom{|S’|-1}{k-1}$<br>$E(Min(S’))=\frac{m}{\sum_{i\in S’}P(i)}$<br>发现m的范围并不大，那么我么考虑dp<br>令$sum(S)$表示$\sum_{i\in S}P(i)$，$U$表示全集<br>$g_{i,j}$表示对于集合S，$|S|=i$，$sum(S)=j$的方案数。<br>转移只要考虑每次加进来一个数是否放到集合中就行了，答案的计算应该也是显然的，这里不多赘述了。<br>但是这样dp的复杂度是$O(n^2*m)$的，难以接受。<br>观察到还有$|n-k|\le 10$的限制条件，考虑改变dp状态<br>$f_{i,j}$表示对于集合S，$sum(S)=i$，出现第j大元素的期望时间的总和，显然$1 \le j \le |n-k|$<br>但是直接求期望时间不方便处理，考虑把期望时间拿掉。<br>用式子写出来<br>$f_{i,j}=\sum_{S’ \subseteq U}(-1)^{|S’|-j}*\binom{|S’|-1}{j-1}*[sum(S’)=i]$<br>考虑加入第t个物品:<br>如果不加入，则直接继承答案<br>如果加入的话，答案应该和$f_{i-p[t],j}$有关。<br>仍然用$g_{i,j}$表示对于集合S，$|S|=i$，$sum(S)=j$的方案数。<br>考虑展开$f_{i-p[t],j}$，把枚举集合变为枚举集合的大小。<br>那么$f_{i-p[t],j}=\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-1}*(-1)^{k-j}$<br>再考虑$\Delta f_{i,j}$，枚举转移过来的集合的大小k<br>$\Delta f_{i,j}=\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k}{j-1}*(-1)^{k-j+1}$<br>两个式子做加法<br>$\Delta f_{i,j}+f_{i-p[t],j}=\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k}{j-1}*(-1)^{k-j+1}+\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-1}*(-1)^{k-j}$<br>后面一项添个-1，将公因式提取一下得到<br>$\Delta f_{i,j}+f_{i-p[t],j}=\sum_{k=1}^{n}g_{k,i-p[t]}*[\binom{k}{j-1}-\binom{k-1}{j-1}]*(-1)^{k-j+1}$<br>也就是$\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-2}*(-1)^{k-j+1}$<br>而$(-1)^{k-j+1}=(-1)^{k-j-1}$<br>那么$\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-2}*(-1)^{k-j+1}=f_{i-p[t],j-1}$<br>所以我们dp就可以递推了，枚举第$t$个物品是否加入，滚动一下，用$f’$表示枚举到第$t-1$个物品时的状态。<br>$f_{i,j}=f’_{i,j}-f’_{i-p[t],j}+f’_{i-p[t],j-1}$<br>再考虑一下临界状态，直接代入可以知道$f_{p[t],1}=1$，所以只要讲$f_{0,0}=1$就行了，实际上$j=0$没有意义，所以其他时候不用转移。<br>最后算答案的时候也很简单。<br>枚举$i$，令$j=k$，$ans+=\frac{f[i][j]*m}{j}$就好了</p>
+<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>这道题实际上就是要就是要我们求全集合出现第$n-k+1$大元素的期望时间。<br>直接套用kth Min-Max容斥的结论。<br>$E(kthMax(S))=\sum_{S’\subseteq S}E(Min(S’))*(-1)^{|S’|-k}*\binom{|S’|-1}{k-1}$<br>$E(Min(S’))=\frac{m}{\sum_{i\in S’}P(i)}$<br>发现m的范围并不大，那么我么考虑dp<br>令$sum(S)$表示$\sum_{i\in S}P(i)$，$U$表示全集<br>$g_{i,j}$表示对于集合S，$|S|=i$，$sum(S)=j$的方案数。<br>转移只要考虑每次加进来一个数是否放到集合中就行了，答案的计算应该也是显然的，这里不多赘述了。<br>但是这样dp的复杂度是$O(n^2*m)$的，难以接受。<br>观察到还有$|n-k|\le 10$的限制条件，考虑改变dp状态<br>$f_{i,j}$表示对于集合S，$sum(S)=i$，出现第j大元素的期望时间的总和，显然$1 \le j \le |n-k|$<br>但是直接求期望时间不方便处理，考虑把期望时间拿掉。<br>用式子写出来<br>$f_{i,j}=\sum_{S’ \subseteq U}(-1)^{|S’|-j}*\binom{|S’|-1}{j-1}*[sum(S’)=i]$<br>考虑加入第t个物品:<br>如果不加入，则直接继承答案<br>如果加入的话，答案应该和$f_{i-p[t],j}$有关。<br>仍然用$g_{i,j}$表示对于集合S，$|S|=i$，$sum(S)=j$的方案数。<br>考虑展开$f_{i-p[t],j}$，把枚举集合变为枚举集合的大小。<br>那么$f_{i-p[t],j}=\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-1}*(-1)^{k-j}$<br>再考虑$\Delta f_{i,j}$，枚举转移过来的集合的大小k<br>$\Delta f_{i,j}=\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k}{j-1}*(-1)^{k-j+1}$<br>两个式子做加法<br>$\Delta f_{i,j}+f_{i-p[t],j}=\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k}{j-1}*(-1)^{k-j+1}+\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-1}*(-1)^{k-j}$<br>后面一项添个-1，将公因式提取一下得到<br>$\Delta f_{i,j}+f_{i-p[t],j}=\sum_{k=1}^{n}g_{k,i-p[t]}*[\binom{k}{j-1}-\binom{k-1}{j-1}]*(-1)^{k-j+1}$<br>也就是$\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-2}*(-1)^{k-j+1}$<br>而$(-1)^{k-j+1}=(-1)^{k-j-1}$<br>那么$\sum_{k=1}^{n}g_{k,i-p[t]}*\binom{k-1}{j-2}*(-1)^{k-j+1}=f_{i-p[t],j-1}$<br>所以我们dp就可以递推了，枚举第$t$个物品是否加入，滚动一下，用$f’$表示枚举到第$t-1$个物品时的状态。<br>$f_{i,j}=f’_{i,j}-f’_{i-p[t],j}+f’_{i-p[t],j-1}$<br>再考虑一下临界状态，直接代入可以知道$f_{p[t],1}=1$，所以只要$f_{0,0}=1$就行了，实际上$j=0$没有意义，所以其他时候不用转移。<br>最后算答案的时候也很简单。<br>枚举$i$，令$j=k$，$ans+=\frac{f[i][j]*m}{j}$就好了</p>
 <p>复杂度$O(n*m*|n-k|)$</p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N (10005)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,K,m,d,ans;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">int</span> a[N],f[<span class="number">2</span>][N][<span class="number">11</span>],inv[N]; </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp;t)</span> </span>&#123;</span><br><span class="line">	t=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">bool</span> fl=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">char</span> p=getchar();</span><br><span class="line">	<span class="keyword">while</span> (!<span class="built_in">isdigit</span>(p)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p==<span class="string">'-'</span>) fl=<span class="literal">false</span>;</span><br><span class="line">		p=getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		(t*=<span class="number">10</span>)+=p<span class="number">-48</span>;p=getchar();</span><br><span class="line">	&#125;<span class="keyword">while</span> (<span class="built_in">isdigit</span>(p));</span><br><span class="line">	<span class="keyword">if</span> (!fl) t=-t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Inc</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (a+b&gt;=P)?(a+b-P):(a+b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	read(n),read(K),read(m);</span><br><span class="line">	K=n-K+<span class="number">1</span>;</span><br><span class="line">	inv[<span class="number">0</span>]=inv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=m;i++) inv[i]=(<span class="number">1l</span>l*-P/i*inv[P%i]%P+P)%P;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) read(a[i]);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		f[d][<span class="number">0</span>][<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		d^=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=K;k++)&#123;</span><br><span class="line">				f[d][j][k]=f[d^<span class="number">1</span>][j][k];</span><br><span class="line">				<span class="keyword">if</span> (j&gt;=a[i])&#123;</span><br><span class="line">					f[d][j][k]=Inc(f[d][j][k],f[d^<span class="number">1</span>][j-a[i]][k<span class="number">-1</span>]);</span><br><span class="line">					f[d][j][k]=Inc(f[d][j][k]-f[d^<span class="number">1</span>][j-a[i]][k],P);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=m;j++)&#123;</span><br><span class="line">		ans=Inc(ans,<span class="number">1l</span>l*f[d][j][K]*inv[j]%P*m%P);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -540,6 +540,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/06/二项式反演学习笔记/" rel="prev" title="二项式反演学习笔记">
+                二项式反演学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -614,7 +618,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">23</span>
+                    <span class="site-state-item-count">25</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -693,7 +697,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -758,7 +768,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
