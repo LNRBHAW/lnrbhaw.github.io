@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="前言笛卡尔树，与Treap类似，每个节点拥有两个值，key值和val值。key值是这个节点本身的大小值，在一颗treap中满足二叉查找树的性质，而val值则是一个随机值，学过treap的同学都知道，这个val值是拿来使得树的层高是期望log的，val值满足堆的性质，这里以小根堆为例讲解（当然大根堆不会有任何问题）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-04T05:04:58.378Z">
+<meta property="og:updated_time" content="2019-01-07T11:22:51.032Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笛卡尔树的妙用">
 <meta name="twitter:description" content="前言笛卡尔树，与Treap类似，每个节点拥有两个值，key值和val值。key值是这个节点本身的大小值，在一颗treap中满足二叉查找树的性质，而val值则是一个随机值，学过treap的同学都知道，这个val值是拿来使得树的层高是期望log的，val值满足堆的性质，这里以小根堆为例讲解（当然大根堆不会有任何问题）。">
@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">26</span></a>
 
   </li>
         
@@ -426,7 +426,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-04 13:04:58" itemprop="dateModified" datetime="2019-01-04T13:04:58+08:00">2019-01-04</time>
+                <time title="Modified: 2019-01-07 19:22:51" itemprop="dateModified" datetime="2019-01-07T19:22:51+08:00">2019-01-07</time>
               
             
           </span>
@@ -500,7 +500,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>笛卡尔树，与Treap类似，每个节点拥有两个值，key值和val值。key值是这个节点本身的大小值，在一颗treap中满足二叉查找树的性质，而val值则是一个随机值，学过treap的同学都知道，这个val值是拿来使得树的层高是期望log的，val值满足堆的性质，这里以小根堆为例讲解（当然大根堆不会有任何问题）。<br><a id="more"></a></p>
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>一般笛卡尔树都被用来建一颗treap，复杂度为O(n)的，n表示插入的元素个数。<br>而暴力插入的话是O(n log n)的。<br>这里需要讲清楚的是，笛卡尔树建树，插入的元素必须保证key值递增，而val值是可以乱的，许多博客里没有讲，这里必须要强调一下。</p>
-<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>我们维护笛卡尔树的极右链，就是根，根的右儿子，根的右儿子的右儿子…….<br>放在一个栈里，栈底是根，这样很显然从栈顶到栈底，val值是不断变小的。<br>每当我们进入一个新的节点，我们从栈顶开始找，当找到第一个节点的val值比我小，那么我必须得是它的儿子，而我的key值又比他大，所以我作为它的右儿子，而原先它的右儿子key值比我小，所以作为我的左儿子，这样就维护了一个treap的性质，然后原来那个店变为了我的左儿子，所以就要从极右链中删掉，我加入到极右链中，这样每个点进栈一次，出栈一次，复杂度就是O(n)的，下面贴出具体的代码。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">	read(key[i]),val[i]=rand();</span><br><span class="line">	<span class="keyword">while</span> (top&amp;&amp;val[i]&lt;val[<span class="built_in">stack</span>[top]])&#123;</span><br><span class="line">		lson[i]=<span class="built_in">stack</span>[top];</span><br><span class="line">		top--;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (top) rson[<span class="built_in">stack</span>[top]]=i;</span><br><span class="line">	<span class="built_in">stack</span>[++top]=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>我们维护笛卡尔树的极右链，就是根，根的右儿子，根的右儿子的右儿子…….<br>放在一个栈里，栈底是根，这样很显然从栈顶到栈底，val值是不断变小的。<br>每当我们进入一个新的节点，我们从栈顶开始找，当找到第一个节点的val值比我小，那么我必须得是它的儿子，而我的key值又比他大，所以我作为它的右儿子，而原先它的右儿子key值比我小，所以作为我的左儿子，这样就维护了一个treap的性质，然后原来那个店变为了我的左儿子，所以就要从极右链中删掉，我加入到极右链中，这样每个点进栈一次，出栈一次，复杂度就是O(n)的，下面贴出具体的代码。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">    read(key[i]),val[i]=rand();</span><br><span class="line">    <span class="keyword">while</span> (top&amp;&amp;val[i]&lt;val[<span class="built_in">stack</span>[top]])&#123;</span><br><span class="line">        lson[i]=<span class="built_in">stack</span>[top];</span><br><span class="line">        top--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (top) rson[<span class="built_in">stack</span>[top]]=i;</span><br><span class="line">    <span class="built_in">stack</span>[++top]=i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>以上就是笛卡尔树线性建treap的全部过程，希望对大家的学习有帮助</p>
 
       
@@ -627,7 +627,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -779,7 +779,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

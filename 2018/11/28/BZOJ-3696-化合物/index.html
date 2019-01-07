@@ -117,7 +117,7 @@
 <meta property="og:description" content="题目链接 BZOJ 3696 题目大意 介于这是一道权限题，先讲一下题意 有一棵根节点编号为1的数，给出每一个节点的父亲。 对于点对(x,y)，令他们的LCA为k，定义这对点对的A值为dis[x][k])^dis[y][k]，dis即为两点间的最短距离(边数)， 最后求出对于x=(1…n)，A值为x的点对的数量。 点数1e5，且题目保证最大的深度为500">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/BZOJ-3696-化合物/图1.png">
-<meta property="og:updated_time" content="2018-12-09T13:18:33.967Z">
+<meta property="og:updated_time" content="2019-01-07T11:14:54.416Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[BZOJ 3696] 化合物">
 <meta name="twitter:description" content="题目链接 BZOJ 3696 题目大意 介于这是一道权限题，先讲一下题意 有一棵根节点编号为1的数，给出每一个节点的父亲。 对于点对(x,y)，令他们的LCA为k，定义这对点对的A值为dis[x][k])^dis[y][k]，dis即为两点间的最短距离(边数)， 最后求出对于x=(1…n)，A值为x的点对的数量。 点数1e5，且题目保证最大的深度为500">
@@ -297,7 +297,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">25</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">26</span></a>
 
   </li>
         
@@ -428,7 +428,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-09 21:18:33" itemprop="dateModified" datetime="2018-12-09T21:18:33+08:00">2018-12-09</time>
+                <time title="Modified: 2019-01-07 19:14:54" itemprop="dateModified" datetime="2019-01-07T19:14:54+08:00">2019-01-07</time>
               
             
           </span>
@@ -510,7 +510,7 @@
         <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p> <a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2318" target="_blank" rel="noopener">BZOJ 3696</a></p>
 <h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h1><p> 介于这是一道权限题，先讲一下题意<br> 有一棵根节点编号为1的数，给出每一个节点的父亲。<br> 对于点对(x,y)，令他们的LCA为k，定义这对点对的A值为dis[x][k])^dis[y][k]，dis即为两点间的最短距离(边数)，<br> 最后求出对于x=(1…n)，A值为x的点对的数量。<br> 点数1e5，且题目保证最大的深度为500<br><a id="more"></a></p>
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>看到这道题马上想到树形dp，但是冷静下来分析一下，发现复杂度不太对，写了一下发现跑的飞快，百度了一下这道题的题解，连hzwer大佬都说复杂度不会分析，不过在大佬的帮助下我得知了如何证明复杂度，这里想和大家分享一下。</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>最暴力的做法就是枚举两个点，算一下lca，两个深度异或一下加到答案里，复杂度$n^2*log$，这个应该都没问题，不细讲了。<br>再一步想到枚举lca<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">	f[u][<span class="number">0</span>]=<span class="number">1</span>; <span class="comment">//我们以f[i][j]表示到i这个点距离为j的点的数量，当然指考虑在i下方的点，初始f[u][0]=1</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> p=head[u];p;p=nxt[p])&#123;</span><br><span class="line">		<span class="keyword">int</span> v=son[p];</span><br><span class="line">		dfs(v);</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> d=<span class="number">0</span>;d&lt;=maxdep[u];d++)&#123;<span class="comment">//相当于枚举u之前的子树</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=maxdep[v];i++)&#123;<span class="comment">//枚举v中的点</span></span><br><span class="line">				ans[d^(i+<span class="number">1</span>)]+=<span class="number">1l</span>l*f[u][d]*f[v][i];<span class="comment">//转移</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> d=<span class="number">0</span>;d&lt;=maxdep[v];d++) f[u][d+<span class="number">1</span>]+=f[v][d];<span class="comment">//将v这颗子树加进来</span></span><br><span class="line">		maxdep[u]=max(maxdep[u],maxdep[v]+<span class="number">1</span>);<span class="comment">//更新一下最大深度</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>最暴力的做法就是枚举两个点，算一下lca，两个深度异或一下加到答案里，复杂度$n^2*log$，这个应该都没问题，不细讲了。<br>再一步想到枚举lca<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    f[u][<span class="number">0</span>]=<span class="number">1</span>; <span class="comment">//我们以f[i][j]表示到i这个点距离为j的点的数量，当然指考虑在i下方的点，初始f[u][0]=1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p=head[u];p;p=nxt[p])&#123;</span><br><span class="line">        <span class="keyword">int</span> v=son[p];</span><br><span class="line">        dfs(v);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> d=<span class="number">0</span>;d&lt;=maxdep[u];d++)&#123;<span class="comment">//相当于枚举u之前的子树</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=maxdep[v];i++)&#123;<span class="comment">//枚举v中的点</span></span><br><span class="line">                ans[d^(i+<span class="number">1</span>)]+=<span class="number">1l</span>l*f[u][d]*f[v][i];<span class="comment">//转移</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> d=<span class="number">0</span>;d&lt;=maxdep[v];d++) f[u][d+<span class="number">1</span>]+=f[v][d];<span class="comment">//将v这颗子树加进来</span></span><br><span class="line">        maxdep[u]=max(maxdep[u],maxdep[v]+<span class="number">1</span>);<span class="comment">//更新一下最大深度</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h1><p>粗略的看，两个枚举深度应该是$dep^2$，所以总复杂度是$n*dep^2$，如果是满的话肯定跑不过，不信你可以把maxdep直接改成500。<br>所以每次只更新到maxdep这么神奇？<br>由于我们每个子树中深度相同的点都并到了一起，所以我们每个子树合并时可以看成两条链合并，当短的这条链合并到长的这条链时直接被吃掉了，因为它被合并到了一个和他深度相同的点上去了。<br><img src="\images\BZOJ-3696-化合物\图1.png" alt="图1"><br>例如这边的这个红点，当他与这条绿链合并时，被这个蓝点吃掉了，所以当我们在把左边这个子树与黄链合并的时候，红点和蓝点会同时和左边形成贡献，所以可以看做红点被蓝点吃掉了。<br>那么我们再来考虑总贡献次数，每个点都会在被吃掉前与吃掉它的那一条链上的每个点形成以的贡献，所以总复杂度就是点数*最长链的长度了，即$n*maxdep$，所以树形dp事实上的复杂度是正确的。</p>
 <h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这道树形dp本身不难，但是这种通过每个点的贡献来分析复杂度的方法还是很值得学习的</p>
 
@@ -642,7 +642,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -794,7 +794,7 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
