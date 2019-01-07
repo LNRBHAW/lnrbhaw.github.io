@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
+  <meta name="description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
 <meta name="keywords" content="数学,二项式反演,学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二项式反演学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/01/06/二项式反演学习笔记/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
+<meta property="og:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-06T14:28:26.279Z">
+<meta property="og:updated_time" content="2019-01-07T09:31:26.626Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二项式反演学习笔记">
-<meta name="twitter:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
+<meta name="twitter:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
 
 
 
@@ -413,12 +413,24 @@
                 
               
 
-              <time title="Created: 2019-01-06 19:50:19 / Modified: 22:28:26" itemprop="dateCreated datePublished" datetime="2019-01-06T19:50:19+08:00">2019-01-06</time>
+              <time title="Created: 2019-01-06 19:50:19" itemprop="dateCreated datePublished" datetime="2019-01-06T19:50:19+08:00">2019-01-06</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-07 17:31:26" itemprop="dateModified" datetime="2019-01-07T17:31:26+08:00">2019-01-07</time>
               
             
           </span>
@@ -490,7 +502,7 @@
       
 
       
-        <h1 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h1><p>如果我们现在有一个式子<br>$f_{n}=\sum_{i=0}^{n}\binom{n}{i}g_{i}$<br>告诉我们所有的f，让我们求g<br>这时候就要用到二项式反演了。<br><a id="more"></a><br>$g_{n}=\sum_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$<br>考虑直接代入<br>$g_{n}=\sum_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum_{j=0}^{i}\binom{i}{j}g_{j}$<br>换一下枚举顺序<br>$g_{n}=\sum_{j=0}^{i}g_{j}\sum_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$<br>把后面两个组合数暴力展开可以得到<br>$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$<br>把所有和i无关的项都提前<br>$g_{n}=\sum_{j=0}^{n}g_{j}\binom{n}{j}\sum_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$<br>发现后面这个<br>$\sum_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。<br>当$j=n$时为1<br>其他时候为$(-1+1)^{n-j}=0$<br>所以$g_n=g_n$<br>结论得证</p>
+        <h1 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h1><p>如果我们现在有一个式子<br>$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$<br>告诉我们所有的f，让我们求g<br>这时候就要用到二项式反演了。<br><a id="more"></a><br>$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$<br>考虑直接代入<br>$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$<br>换一下枚举顺序<br>$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$<br>把后面两个组合数暴力展开可以得到<br>$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$<br>把所有和i无关的项都提前<br>$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$<br>发现后面这个<br>$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。<br>当$j=n$时为1<br>其他时候为$(-1+1)^{n-j}=0$<br>所以$g_n=g_n$<br>结论得证</p>
 <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2839" target="_blank" rel="noopener">BZOJ 2839 集合计数</a><br><a href="https://lnrbhaw.github.io/2019/01/06/BZOJ-2839-%E9%9B%86%E5%90%88%E8%AE%A1%E6%95%B0/" target="_blank" rel="noopener">题解</a></p>
 
       
