@@ -117,8 +117,8 @@
 <meta property="og:description" content="前言既然老师讲课都讲过了，那还是要学的，本篇文章介绍的圆方树为狭义的圆方树，解决仙人掌上的系列问题。 仙人掌仙人掌，每条边至多属于一个简单环的连通无向图。图中没有自环，但是有可能有重边。 圆方树圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。上面那个仙人掌建出的圆方树就是这样的罗马数字的点为方点。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/圆方树学习笔记/图1.png">
-<meta property="og:image" content="http://yoursite.com/images/圆方树学习笔记/图1.png">
-<meta property="og:updated_time" content="2019-01-09T22:01:11.822Z">
+<meta property="og:image" content="http://yoursite.com/images/圆方树学习笔记/图2.png">
+<meta property="og:updated_time" content="2019-01-09T22:03:32.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="圆方树学习笔记">
 <meta name="twitter:description" content="前言既然老师讲课都讲过了，那还是要学的，本篇文章介绍的圆方树为狭义的圆方树，解决仙人掌上的系列问题。 仙人掌仙人掌，每条边至多属于一个简单环的连通无向图。图中没有自环，但是有可能有重边。 圆方树圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。上面那个仙人掌建出的圆方树就是这样的罗马数字的点为方点。">
@@ -441,7 +441,7 @@
                 
               
 
-              <time title="Created: 2019-01-10 05:41:12 / Modified: 06:01:11" itemprop="dateCreated datePublished" datetime="2019-01-10T05:41:12+08:00">2019-01-10</time>
+              <time title="Created: 2019-01-10 05:41:12 / Modified: 06:03:32" itemprop="dateCreated datePublished" datetime="2019-01-10T05:41:12+08:00">2019-01-10</time>
             
 
             
@@ -513,7 +513,7 @@
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>既然老师讲课都讲过了，那还是要学的，本篇文章介绍的圆方树为狭义的圆方树，解决仙人掌上的系列问题。</p>
 <h1 id="仙人掌"><a href="#仙人掌" class="headerlink" title="仙人掌"></a>仙人掌</h1><p>仙人掌，每条边至多属于一个简单环的连通无向图。<br><img src="\images\圆方树学习笔记\图1.png" alt="图1"><br>图中没有自环，但是有可能有重边。</p>
-<h1 id="圆方树"><a href="#圆方树" class="headerlink" title="圆方树"></a>圆方树</h1><p>圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。<br>上面那个仙人掌建出的圆方树就是这样的<br><img src="\images\圆方树学习笔记\图1.png" alt="图2"><br>罗马数字的点为方点。<br><a id="more"></a></p>
+<h1 id="圆方树"><a href="#圆方树" class="headerlink" title="圆方树"></a>圆方树</h1><p>圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。<br>上面那个仙人掌建出的圆方树就是这样的<br><img src="\images\圆方树学习笔记\图2.png" alt="图2"><br>罗马数字的点为方点。<br><a id="more"></a></p>
 <h1 id="建树"><a href="#建树" class="headerlink" title="建树"></a>建树</h1><p>通过tarjan一边求点双一边连边。<br>tarjan没有什么不同，建树的部分请结合代码和注释理解。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">cnt=n;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span>&#123;<span class="comment">//由于有重边，fa存边的编号</span></span><br><span class="line">    dfn[u]=low[u]=++tim;</span><br><span class="line">    stk[++top]=u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> p=head[u];p;p=nxt[p])&#123;</span><br><span class="line">        <span class="keyword">if</span> (p!=fa)&#123;</span><br><span class="line">            <span class="keyword">int</span> v=tow[p];</span><br><span class="line">            <span class="keyword">if</span> (!dfn[v])&#123;</span><br><span class="line">                tarjan(v,p^<span class="number">1</span>);</span><br><span class="line">                low[u]=min(low[u],low[v]);</span><br><span class="line">                <span class="keyword">if</span> (dfn[v]==low[v]) s[u].push_back(v);<span class="comment">//如果v不在我这个环内，直接连边</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (dfn[v]&lt;dfn[u])&#123;<span class="comment">//显然整个环中，环的起点dfn最小，所以v即为环的起点</span></span><br><span class="line">                low[u]=min(low[u],dfn[v]);</span><br><span class="line">                s[v].push_back(++cnt);<span class="comment">//建方点</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j=top;stk[j]!=v;j--) s[cnt].push_back(stk[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    top--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这样就把圆方树给建出来了，剩下我们要做的就是根据题目的要求，在圆方树上树形dp就行了。</p>
 
