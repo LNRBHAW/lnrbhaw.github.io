@@ -7,14 +7,14 @@
       <categories>
         <category>题目分析</category>
         <category>LOJ</category>
-        <category>树上高斯消元</category>
         <category>Min-Max容斥</category>
+        <category>树上高斯消元</category>
       </categories>
       <tags>
         <tag>题目分析</tag>
         <tag>LOJ</tag>
-        <tag>树上高斯消元</tag>
         <tag>Min-Max容斥</tag>
+        <tag>树上高斯消元</tag>
       </tags>
   </entry>
   <entry>
@@ -28,8 +28,8 @@
       </categories>
       <tags>
         <tag>题目分析</tag>
-        <tag>Min-Max容斥</tag>
         <tag>Luogu</tag>
+        <tag>Min-Max容斥</tag>
       </tags>
   </entry>
   <entry>
@@ -59,9 +59,9 @@
         <category>二项式反演</category>
       </categories>
       <tags>
+        <tag>学习笔记</tag>
         <tag>数学</tag>
         <tag>二项式反演</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -89,10 +89,10 @@
         <category>Min-Max容斥</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>二项式反演</tag>
         <tag>学习笔记</tag>
+        <tag>数学</tag>
         <tag>Min-Max容斥</tag>
+        <tag>二项式反演</tag>
       </tags>
   </entry>
   <entry>
@@ -279,8 +279,8 @@
         <category>CRT</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>学习笔记</tag>
+        <tag>数学</tag>
         <tag>数论</tag>
       </tags>
   </entry>
@@ -312,8 +312,8 @@
         <category>大质数判定</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>学习笔记</tag>
+        <tag>数学</tag>
         <tag>数论</tag>
       </tags>
   </entry>
@@ -355,8 +355,8 @@
         <category>线性基</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>学习笔记</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -414,8 +414,8 @@
         <category>莫比乌斯反演</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>学习笔记</tag>
+        <tag>数学</tag>
         <tag>数论</tag>
       </tags>
   </entry>
