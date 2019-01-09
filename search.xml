@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[圆方树学习笔记]]></title>
+    <url>%2F2019%2F01%2F10%2F%E5%9C%86%E6%96%B9%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[前言既然老师讲课都讲过了，那还是要学的，本篇文章介绍的圆方树为狭义的圆方树，解决仙人掌上的系列问题。 仙人掌仙人掌，每条边至多属于一个简单环的连通无向图。图中没有自环，但是有可能有重边。 圆方树圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。上面那个仙人掌建出的圆方树就是这样的罗马数字的点为方点。 建树通过tarjan一边求点双一边连边。tarjan没有什么不同，建树的部分请结合代码和注释理解。123456789101112131415161718192021cnt=n;void tarjan(int u,int fa)&#123;//由于有重边，fa存边的编号 dfn[u]=low[u]=++tim; stk[++top]=u; for (int p=head[u];p;p=nxt[p])&#123; if (p!=fa)&#123; int v=tow[p]; if (!dfn[v])&#123; tarjan(v,p^1); low[u]=min(low[u],low[v]); if (dfn[v]==low[v]) s[u].push_back(v);//如果v不在我这个环内，直接连边 &#125; else if (dfn[v]&lt;dfn[u])&#123;//显然整个环中，环的起点dfn最小，所以v即为环的起点 low[u]=min(low[u],dfn[v]); s[v].push_back(++cnt);//建方点 for (int j=top;stk[j]!=v;j--) s[cnt].push_back(stk[j]); &#125; &#125; &#125; top--;&#125; 这样就把圆方树给建出来了，剩下我们要做的就是根据题目的要求，在圆方树上树形dp就行了。]]></content>
+      <categories>
+        <category>学习笔记</category>
+        <category>圆方树</category>
+      </categories>
+      <tags>
+        <tag>学习笔记</tag>
+        <tag>圆方树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[LOJ 2541]「PKUWC2018」猎人杀]]></title>
     <url>%2F2019%2F01%2F09%2FLOJ-2541-%E3%80%8CPKUWC2018%E3%80%8D%E7%8C%8E%E4%BA%BA%E6%9D%80%2F</url>
     <content type="text"><![CDATA[题目链接LOJ 2541 做法以$sum(S)$表示S这个集合中所有人的仇恨值的和。我们先求$P(S)$表示S中所有的人一定死在第一个人之后的概率，其他人随意。显然其他人什么时候死我不关心，只考虑下一枪打在S中或者打在1上，所以$P(S)=\frac{a_1}{sum(S)+a_1}$。考虑最后计算答案，所有人都不能死在1后面。通过容斥可以得到每个状态S的贡献为，$P(S)*(-1)^{|S|+1}$直接计算显然复杂度过大，但是$sum(S)$并不大。由于容斥系数有-1和1，把方案变成系数和即可。用$f[i][j]$表示从第二个人开始前i个人，仇恨值为j的系数和。转移时，考虑第i个人选不选。如果不选$f[i][j]=f[i-1][j]$如果选的话，|S|的奇偶性改变，所以系数取负，$f[i][j]-=f[i-1][j-a[i]]$最后计算答案枚举j即可。这样可以获得50分的成绩。发现每次转移等价于乘上一个生成函数$(x^0-x^{a[i]})$，用分治+NTT解决。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#include&lt;vector&gt;#define LL long long#define N (100005)using namespace std;int n,val,ans,G=3,invG,invL,lim;int a[N],R[N&lt;&lt;2];vector &lt;int&gt; f; const int P=998244353;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;int ksm(int a,int b)&#123; int ret=1; for (;b;b&gt;&gt;=1,a=1ll*a*a%P) if (b&amp;1) ret=1ll*ret*a%P; return ret;&#125;void NTT(vector &lt;int&gt; &amp;f,int lim,int G)&#123; for (int i=0;i&lt;lim;i++)&#123; R[i]=(R[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)*lim&gt;&gt;1); if (i&gt;R[i]) swap(f[i],f[R[i]]); &#125; for (int i=1;i&lt;lim;i&lt;&lt;=1)&#123; int w0=ksm(G,(P-1)/(i&lt;&lt;1)); for (int j=0;j&lt;lim;j+=(i&lt;&lt;1))&#123; int w=1; for (int k=j;k&lt;i+j;k++)&#123; int t=1ll*f[k+i]*w%P; f[k+i]=Inc(f[k]-t,P); f[k]=Inc(f[k],t); w=1ll*w*w0%P; &#125; &#125; &#125; int invL=ksm(lim,P-2); if (G!=3)&#123; for (int i=0;i&lt;lim;i++) f[i]=1ll*f[i]*invL%P; &#125;&#125;int solve(int l,int r,vector &lt;int&gt; &amp;f)&#123; if (l==r)&#123; f.resize(a[l]+1); f[a[l]]=P-1,f[0]=1; return a[l]; &#125; int mid=l+r&gt;&gt;1; vector &lt;int&gt; f0,f1; int len=solve(l,mid,f0)+solve(mid+1,r,f1); for (lim=1;lim&lt;=len;lim&lt;&lt;=1); f0.resize(lim),f1.resize(lim),f.resize(lim); NTT(f0,lim,G),NTT(f1,lim,G); for (int i=0;i&lt;lim;i++) f[i]=1ll*f0[i]*f1[i]%P; NTT(f,lim,invG); return len;&#125;int main()&#123; read(n); for (int i=1;i&lt;=n;i++) read(a[i]),val+=a[i]; invG=ksm(G,P-2); solve(2,n,f); for (int j=0;j&lt;val;j++)&#123; ans=Inc(ans,1ll*a[1]*ksm(a[1]+j,P-2)%P*f[j]%P); &#125; printf("%d",ans); return 0;&#125;]]></content>
@@ -258,8 +271,8 @@
       <categories>
         <category>题目分析</category>
         <category>数据结构</category>
-        <category>Luogu</category>
         <category>树套树</category>
+        <category>Luogu</category>
         <category>整体二分</category>
       </categories>
       <tags>
