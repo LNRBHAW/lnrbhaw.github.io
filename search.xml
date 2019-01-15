@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[Luogu 4859] 已经没有什么好害怕的了]]></title>
+    <url>%2F2019%2F01%2F15%2FLuogu-4859-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86%2F</url>
+    <content type="text"><![CDATA[题目链接[Luogu 4859] 已经没有什么好害怕的了 做法用$a$表示药片数组，$b$表示糖果数组，两个数组都先升序排列。考虑dp，$f_{i,j}$表示前$i$个数中有$j$对$a&gt;b$的方案数，我们这里认为每个a有两种选择，一是选择一个比他小的b来组成新的一对，二是空着不选择，而不是选择一个比他大的b，一定要注意。那么根据上面的定义，可以得到dp方程，f_{i,j}=f_{i-1,j}+f_{i-1,j-1}*(now_i-j+1)由于b是升序，所以对于$a_i$，比它小的b一定是一个前缀，所以$now_i$表示b中比我小的是$[1,now_i]$，因为a也是升序，所以$now_i$一定是单调不降的，我们用一个指针维护即可。那么dp出$f$之后有什么用呢?我们用$ans_i$表示最后所有点都有匹配后$a&gt;b$的对数有$i$对的方案数($f$中不是有些还没匹配吗)，我们最后要求的就是$ans_\frac{n+k}{2}$发现$ans$并不好求，定义$g_i$表示最后所有点都有匹配后$a&gt;b$的对数有大于$i$对的方案数，那么我们将a中原先没有匹配的点随意匹配，即g_i=f_{n,i}*(n-i)!发现$ans_i$对于$g_j$的贡献即为$\binom{i}{j}(i\ge j)$也就是说 g_j=\sum\limits_{i=j}^{n}\binom{i}{j}ans_i可以二项式反演 ans_j=\sum\limits_{i=j}^{n}\binom{i}{j}*(-1)^{n-i}*g_i直接枚举算出$ans_\frac{n+k}{2}$即可 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#define N (2005)#define LL long longusing namespace std;int n,k,r,ans,d;int a[N],b[N],f[N][N],C[N][N],g[N],jc[N];const int P=1000000009;inline bool cmp(int a,int b)&#123; return a&gt;b;&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int main()&#123; read(n),read(k); if ((n+k)&amp;1)&#123; puts("0"); return 0; &#125; for (int i=1;i&lt;=n;i++) read(a[i]); for (int i=1;i&lt;=n;i++) read(b[i]); sort(a+1,a+n+1); sort(b+1,b+n+1); f[0][0]=1; r=0; for (int i=1;i&lt;=n;i++)&#123; for (;r&lt;n&amp;&amp;b[r+1]&lt;a[i];r++); for (int j=0;j&lt;=n;j++)&#123; f[i][j]=f[i-1][j]; if (j&amp;&amp;r&gt;=j) f[i][j]=Inc(f[i][j],1ll*f[i-1][j-1]*(r-j+1)%P); &#125; &#125; C[0][0]=1; for (int i=1;i&lt;=n;i++)&#123; for (int j=1;j&lt;=i;j++) C[i][j]=Inc(C[i-1][j],C[i-1][j-1]); C[i][0]=1; &#125; jc[0]=1; for (int i=1;i&lt;=n;i++) jc[i]=1ll*jc[i-1]*i%P; for (int i=0;i&lt;=n;i++) g[i]=1ll*f[n][i]*jc[n-i]%P; k=(n+k)/2; d=1; for (int i=k;i&lt;=n;i++)&#123; ans=Inc(ans,1ll*C[i][k]*g[i]%P*d); ans=Inc(ans,P); d=-d; &#125; printf("%d",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题目分析</category>
+        <category>Luogu</category>
+        <category>数学</category>
+        <category>二项式反演</category>
+      </categories>
+      <tags>
+        <tag>题目分析</tag>
+        <tag>数学</tag>
+        <tag>二项式反演</tag>
+        <tag>Luogu</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[圆方树学习笔记]]></title>
     <url>%2F2019%2F01%2F10%2F%E5%9C%86%E6%96%B9%E6%A0%91%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[前言既然老师讲课都讲过了，那还是要学的，本篇文章介绍的圆方树为狭义的圆方树，解决仙人掌上的系列问题。 仙人掌仙人掌，每条边至多属于一个简单环的连通无向图。图中没有自环，但是有可能有重边。 圆方树圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。上面那个仙人掌建出的圆方树就是这样的罗马数字的点为方点。 建树通过tarjan一边求点双一边连边。tarjan没有什么不同，建树的部分请结合代码和注释理解。123456789101112131415161718192021cnt=n;void tarjan(int u,int fa)&#123;//由于有重边，fa存边的编号 dfn[u]=low[u]=++tim; stk[++top]=u; for (int p=head[u];p;p=nxt[p])&#123; if (p!=fa)&#123; int v=tow[p]; if (!dfn[v])&#123; tarjan(v,p^1); low[u]=min(low[u],low[v]); if (dfn[v]==low[v]) s[u].push_back(v);//如果v不在我这个环内，直接连边 &#125; else if (dfn[v]&lt;dfn[u])&#123;//显然整个环中，环的起点dfn最小，所以v即为环的起点 low[u]=min(low[u],dfn[v]); s[v].push_back(++cnt);//建方点 for (int j=top;stk[j]!=v;j--) s[cnt].push_back(stk[j]); &#125; &#125; &#125; top--;&#125; 这样就把圆方树给建出来了，剩下我们要做的就是根据题目的要求，在圆方树上树形dp就行了。]]></content>
@@ -84,7 +101,7 @@
   <entry>
     <title><![CDATA[二项式反演学习笔记]]></title>
     <url>%2F2019%2F01%2F06%2F%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$考虑直接代入$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$换一下枚举顺序$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$把后面两个组合数暴力展开可以得到$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$把所有和i无关的项都提前$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$发现后面这个$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。当$j=n$时为1其他时候为$(-1+1)^{n-j}=0$所以$g_n=g_n$结论得证 例题BZOJ 2839 集合计数BZOJ 2839 集合计数 题解]]></content>
+    <content type="text"><![CDATA[二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$考虑直接代入$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$换一下枚举顺序$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$把后面两个组合数暴力展开可以得到$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$把所有和i无关的项都提前$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$发现后面这个$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。当$j=n$时为1其他时候为$(-1+1)^{n-j}=0$所以$g_n=g_n$结论得证 例题BZOJ 2839 集合计数BZOJ 2839 集合计数 题解[Luogu 4859] 已经没有什么好害怕的了]]></content>
       <categories>
         <category>学习笔记</category>
         <category>数学</category>
