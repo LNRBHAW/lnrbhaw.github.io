@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="题目链接LOJ 2541">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-09T02:39:06.477Z">
+<meta property="og:updated_time" content="2019-01-15T07:00:27.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[LOJ 2541]「PKUWC2018」猎人杀">
 <meta name="twitter:description" content="题目链接LOJ 2541">
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">31</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">30</span></a>
 
   </li>
         
@@ -276,7 +276,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">40</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories<span class="badge">42</span></a>
 
   </li>
         
@@ -438,12 +438,24 @@
                 
               
 
-              <time title="Created: 2019-01-09 09:38:40 / Modified: 10:39:06" itemprop="dateCreated datePublished" datetime="2019-01-09T09:38:40+08:00">2019-01-09</time>
+              <time title="Created: 2019-01-09 09:38:40" itemprop="dateCreated datePublished" datetime="2019-01-09T09:38:40+08:00">2019-01-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-15 15:00:27" itemprop="dateModified" datetime="2019-01-15T15:00:27+08:00">2019-01-15</time>
               
             
           </span>
@@ -474,21 +486,21 @@
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/dp/" itemprop="url" rel="index"><span itemprop="name">dp</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/LOJ/dp/" itemprop="url" rel="index"><span itemprop="name">dp</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/多项式/" itemprop="url" rel="index"><span itemprop="name">多项式</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/LOJ/dp/多项式/" itemprop="url" rel="index"><span itemprop="name">多项式</span></a></span>
 
                 
                 
                   , 
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/多项式/NTT/" itemprop="url" rel="index"><span itemprop="name">NTT</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/LOJ/dp/多项式/NTT/" itemprop="url" rel="index"><span itemprop="name">NTT</span></a></span>
 
                 
                 
@@ -530,7 +542,7 @@
 
       
         <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://loj.ac/problem/2541" target="_blank" rel="noopener">LOJ 2541</a><br><a id="more"></a></p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>以$sum(S)$表示S这个集合中所有人的仇恨值的和。<br>我们先求$P(S)$表示S中所有的人一定死在第一个人之后的概率，其他人随意。<br>显然其他人什么时候死我不关心，只考虑下一枪打在S中或者打在1上，所以$P(S)=\frac{a_1}{sum(S)+a_1}$。<br>考虑最后计算答案，所有人都不能死在1后面。<br>通过容斥可以得到每个状态S的贡献为，$P(S)*(-1)^{|S|+1}$<br>直接计算显然复杂度过大，但是$sum(S)$并不大。<br>由于容斥系数有-1和1，把方案变成系数和即可。<br>用$f[i][j]$表示从第二个人开始前i个人，仇恨值为j的系数和。<br>转移时，考虑第i个人选不选。<br>如果不选$f[i][j]=f[i-1][j]$<br>如果选的话，|S|的奇偶性改变，所以系数取负，$f[i][j]-=f[i-1][j-a[i]]$<br>最后计算答案枚举j即可。<br>这样可以获得50分的成绩。<br>发现每次转移等价于乘上一个生成函数$(x^0-x^{a[i]})$，用分治+NTT解决。</p>
+<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>以$sum(S)$表示S这个集合中所有人的仇恨值的和。<br>我们先求$P(S)$表示S中所有的人一定死在第一个人之后的概率，其他人随意。<br>显然其他人什么时候死我不关心，只考虑下一枪打在S中或者打在1上，所以$P(S)=\frac{a_1}{sum(S)+a_1}$。<br>考虑最后计算答案，所有人都不能死在1后面。<br>通过容斥可以得到每个状态S的贡献为，$P(S)*(-1)^{|S|}$<br>直接计算显然复杂度过大，但是$sum(S)$并不大。<br>由于容斥系数有-1和1，把方案变成系数和即可。<br>用$f[i][j]$表示从第二个人开始前i个人，仇恨值为j的系数和。<br>转移时，考虑第i个人选不选。<br>如果不选$f[i][j]=f[i-1][j]$<br>如果选的话，|S|的奇偶性改变，所以系数取负，$f[i][j]-=f[i-1][j-a[i]]$<br>最后计算答案枚举j即可。<br>这样可以获得50分的成绩。<br>发现每次转移等价于乘上一个生成函数$(x^0-x^{a[i]})$，用分治+NTT解决。</p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N (100005)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,val,ans,G=<span class="number">3</span>,invG,invL,lim;</span><br><span class="line"><span class="keyword">int</span> a[N],R[N&lt;&lt;<span class="number">2</span>];</span><br><span class="line"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; f; </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp;t)</span> </span>&#123;</span><br><span class="line">	t=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">bool</span> fl=<span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">char</span> p=getchar();</span><br><span class="line">	<span class="keyword">while</span> (!<span class="built_in">isdigit</span>(p)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (p==<span class="string">'-'</span>) fl=<span class="literal">false</span>;</span><br><span class="line">		p=getchar();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		(t*=<span class="number">10</span>)+=p<span class="number">-48</span>;p=getchar();</span><br><span class="line">	&#125;<span class="keyword">while</span> (<span class="built_in">isdigit</span>(p));</span><br><span class="line">	<span class="keyword">if</span> (!fl) t=-t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Inc</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (a+b&gt;=P)?(a+b-P):(a+b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ksm</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> ret=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (;b;b&gt;&gt;=<span class="number">1</span>,a=<span class="number">1l</span>l*a*a%P) <span class="keyword">if</span> (b&amp;<span class="number">1</span>) ret=<span class="number">1l</span>l*ret*a%P;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; &amp;f,<span class="keyword">int</span> lim,<span class="keyword">int</span> G)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++)&#123;</span><br><span class="line">		R[i]=(R[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)*lim&gt;&gt;<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">if</span> (i&gt;R[i]) swap(f[i],f[R[i]]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;lim;i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">int</span> w0=ksm(G,(P<span class="number">-1</span>)/(i&lt;&lt;<span class="number">1</span>));</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;lim;j+=(i&lt;&lt;<span class="number">1</span>))&#123;</span><br><span class="line">			<span class="keyword">int</span> w=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> k=j;k&lt;i+j;k++)&#123;</span><br><span class="line">				<span class="keyword">int</span> t=<span class="number">1l</span>l*f[k+i]*w%P;</span><br><span class="line">				f[k+i]=Inc(f[k]-t,P);</span><br><span class="line">				f[k]=Inc(f[k],t);</span><br><span class="line">				w=<span class="number">1l</span>l*w*w0%P;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> invL=ksm(lim,P<span class="number">-2</span>);</span><br><span class="line">	<span class="keyword">if</span> (G!=<span class="number">3</span>)&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) f[i]=<span class="number">1l</span>l*f[i]*invL%P;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; &amp;f)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l==r)&#123;</span><br><span class="line">		f.resize(a[l]+<span class="number">1</span>);</span><br><span class="line">		f[a[l]]=P<span class="number">-1</span>,f[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">return</span> a[l];		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">	<span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt; f0,f1;</span><br><span class="line">	<span class="keyword">int</span> len=solve(l,mid,f0)+solve(mid+<span class="number">1</span>,r,f1);</span><br><span class="line">	<span class="keyword">for</span> (lim=<span class="number">1</span>;lim&lt;=len;lim&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">	f0.resize(lim),f1.resize(lim),f.resize(lim);</span><br><span class="line">	NTT(f0,lim,G),NTT(f1,lim,G);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) f[i]=<span class="number">1l</span>l*f0[i]*f1[i]%P;</span><br><span class="line">	NTT(f,lim,invG);</span><br><span class="line">	<span class="keyword">return</span> len;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	read(n);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) read(a[i]),val+=a[i];</span><br><span class="line">	invG=ksm(G,P<span class="number">-2</span>);</span><br><span class="line">	solve(<span class="number">2</span>,n,f);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;val;j++)&#123;</span><br><span class="line">		ans=Inc(ans,<span class="number">1l</span>l*a[<span class="number">1</span>]*ksm(a[<span class="number">1</span>]+j,P<span class="number">-2</span>)%P*f[j]%P);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
@@ -756,7 +768,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">40</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">42</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -829,9 +845,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
