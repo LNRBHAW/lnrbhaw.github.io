@@ -6,15 +6,11 @@
     <content type="text"><![CDATA[题目链接[Luogu 4859] 已经没有什么好害怕的了 做法用$a$表示药片数组，$b$表示糖果数组，两个数组都先升序排列。考虑dp，$f_{i,j}$表示前$i$个数中有$j$对$a&gt;b$的方案数，我们这里认为每个a有两种选择，一是选择一个比他小的b来组成新的一对，二是空着不选择，而不是选择一个比他大的b，一定要注意。那么根据上面的定义，可以得到dp方程，f_{i,j}=f_{i-1,j}+f_{i-1,j-1}*(now_i-j+1)由于b是升序，所以对于$a_i$，比它小的b一定是一个前缀，所以$now_i$表示b中比我小的是$[1,now_i]$，因为a也是升序，所以$now_i$一定是单调不降的，我们用一个指针维护即可。那么dp出$f$之后有什么用呢?我们用$ans_i$表示最后所有点都有匹配后$a&gt;b$的对数有$i$对的方案数($f$中不是有些还没匹配吗)，我们最后要求的就是$ans_\frac{n+k}{2}$发现$ans$并不好求，定义$g_i$表示最后所有点都有匹配后$a&gt;b$的对数有大于$i$对的方案数，那么我们将a中原先没有匹配的点随意匹配，即g_i=f_{n,i}*(n-i)!发现$ans_i$对于$g_j$的贡献即为$\binom{i}{j}(i\ge j)$也就是说 g_j=\sum\limits_{i=j}^{n}\binom{i}{j}ans_i可以二项式反演 ans_j=\sum\limits_{i=j}^{n}\binom{i}{j}*(-1)^{n-i}*g_i直接枚举算出$ans_\frac{n+k}{2}$即可 代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#define N (2005)#define LL long longusing namespace std;int n,k,r,ans,d;int a[N],b[N],f[N][N],C[N][N],g[N],jc[N];const int P=1000000009;inline bool cmp(int a,int b)&#123; return a&gt;b;&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int main()&#123; read(n),read(k); if ((n+k)&amp;1)&#123; puts("0"); return 0; &#125; for (int i=1;i&lt;=n;i++) read(a[i]); for (int i=1;i&lt;=n;i++) read(b[i]); sort(a+1,a+n+1); sort(b+1,b+n+1); f[0][0]=1; r=0; for (int i=1;i&lt;=n;i++)&#123; for (;r&lt;n&amp;&amp;b[r+1]&lt;a[i];r++); for (int j=0;j&lt;=n;j++)&#123; f[i][j]=f[i-1][j]; if (j&amp;&amp;r&gt;=j) f[i][j]=Inc(f[i][j],1ll*f[i-1][j-1]*(r-j+1)%P); &#125; &#125; C[0][0]=1; for (int i=1;i&lt;=n;i++)&#123; for (int j=1;j&lt;=i;j++) C[i][j]=Inc(C[i-1][j],C[i-1][j-1]); C[i][0]=1; &#125; jc[0]=1; for (int i=1;i&lt;=n;i++) jc[i]=1ll*jc[i-1]*i%P; for (int i=0;i&lt;=n;i++) g[i]=1ll*f[n][i]*jc[n-i]%P; k=(n+k)/2; d=1; for (int i=k;i&lt;=n;i++)&#123; ans=Inc(ans,1ll*C[i][k]*g[i]%P*d); ans=Inc(ans,P); d=-d; &#125; printf("%d",ans); return 0;&#125;]]></content>
       <categories>
         <category>题目分析</category>
-        <category>数学</category>
         <category>Luogu</category>
-        <category>二项式反演</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>数学</tag>
         <tag>二项式反演</tag>
-        <tag>Luogu</tag>
       </tags>
   </entry>
   <entry>
@@ -23,10 +19,9 @@
     <content type="text"><![CDATA[前言既然老师讲课都讲过了，那还是要学的，本篇文章介绍的圆方树为狭义的圆方树，解决仙人掌上的系列问题。 仙人掌仙人掌，每条边至多属于一个简单环的连通无向图。图中没有自环，但是有可能有重边。 圆方树圆方树做的事情就是把仙人掌的每个环拿出来，建一个新的方点，环的起点向方点连边，方点再向环上其他点连边，原先非环边保留。注意这里点边都只从父亲连向孩子。上面那个仙人掌建出的圆方树就是这样的罗马数字的点为方点。 建树通过tarjan一边求点双一边连边。tarjan没有什么不同，建树的部分请结合代码和注释理解。123456789101112131415161718192021cnt=n;void tarjan(int u,int fa)&#123;//由于有重边，fa存边的编号 dfn[u]=low[u]=++tim; stk[++top]=u; for (int p=head[u];p;p=nxt[p])&#123; if (p!=fa)&#123; int v=tow[p]; if (!dfn[v])&#123; tarjan(v,p^1); low[u]=min(low[u],low[v]); if (dfn[v]==low[v]) s[u].push_back(v);//如果v不在我这个环内，直接连边 &#125; else if (dfn[v]&lt;dfn[u])&#123;//显然整个环中，环的起点dfn最小，所以v即为环的起点 low[u]=min(low[u],dfn[v]); s[v].push_back(++cnt);//建方点 for (int j=top;stk[j]!=v;j--) s[cnt].push_back(stk[j]); &#125; &#125; &#125; top--;&#125; 这样就把圆方树给建出来了，剩下我们要做的就是根据题目的要求，在圆方树上树形dp就行了。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>圆方树</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
+        <tag>连通分量</tag>
         <tag>圆方树</tag>
       </tags>
   </entry>
@@ -37,16 +32,11 @@
       <categories>
         <category>题目分析</category>
         <category>LOJ</category>
-        <category>dp</category>
-        <category>多项式</category>
-        <category>NTT</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>dp</tag>
-        <tag>LOJ</tag>
+        <tag>生成函数</tag>
         <tag>NTT</tag>
-        <tag>多项式</tag>
       </tags>
   </entry>
   <entry>
@@ -56,12 +46,9 @@
       <categories>
         <category>题目分析</category>
         <category>LOJ</category>
-        <category>树上高斯消元</category>
-        <category>Min-Max容斥</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>LOJ</tag>
+        <tag>高斯消元</tag>
         <tag>树上高斯消元</tag>
         <tag>Min-Max容斥</tag>
       </tags>
@@ -73,12 +60,10 @@
       <categories>
         <category>题目分析</category>
         <category>Luogu</category>
-        <category>Min-Max容斥</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>Min-Max容斥</tag>
-        <tag>Luogu</tag>
+        <tag>FWT</tag>
       </tags>
   </entry>
   <entry>
@@ -88,12 +73,8 @@
       <categories>
         <category>题目分析</category>
         <category>BZOJ</category>
-        <category>数学</category>
-        <category>二项式反演</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>BZOJ</tag>
         <tag>数学</tag>
         <tag>二项式反演</tag>
       </tags>
@@ -101,16 +82,13 @@
   <entry>
     <title><![CDATA[二项式反演学习笔记]]></title>
     <url>%2F2019%2F01%2F06%2F%E4%BA%8C%E9%A1%B9%E5%BC%8F%E5%8F%8D%E6%BC%94%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$考虑直接代入$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$换一下枚举顺序$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$把后面两个组合数暴力展开可以得到$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$把所有和i无关的项都提前$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$发现后面这个$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。当$j=n$时为1其他时候为$(-1+1)^{n-j}=0$所以$g_n=g_n$结论得证 例题BZOJ 2839 集合计数BZOJ 2839 集合计数 题解Luogu 4859 已经没有什么好害怕的了 Luogu 4859 已经没有什么好害怕的了 题解]]></content>
+    <content type="text"><![CDATA[二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$考虑直接代入$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$换一下枚举顺序$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$把后面两个组合数暴力展开可以得到$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$把所有和i无关的项都提前$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$发现后面这个$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。当$j=n$时为1其他时候为$(-1+1)^{n-j}=0$所以$g_n=g_n$结论得证 例题BZOJ 2839 集合计数BZOJ 2839 集合计数 题解Luogu 4859 已经没有什么好害怕的了Luogu 4859 已经没有什么好害怕的了 题解]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数学</category>
-        <category>二项式反演</category>
       </categories>
       <tags>
         <tag>数学</tag>
         <tag>二项式反演</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -120,11 +98,9 @@
       <categories>
         <category>题目分析</category>
         <category>Luogu</category>
-        <category>Min-Max容斥</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>Luogu</tag>
+        <tag>Min-Max容斥</tag>
       </tags>
   </entry>
   <entry>
@@ -133,14 +109,12 @@
     <content type="text"><![CDATA[前言PKUWC2018的D2T3好像是个Min-Max容斥板子题，还是要学习一下的。 用途给定一个集合S，告诉你其中每个元素单位时间出现的概率，问你每个元素至少出现一次的期望时间。 Min-Max容斥做这道题我们需要用到Min-Max容斥的结论，这里先来证明Min-Max容斥的正确性。需要二项式反演的基础知识，不会二项式反演戳这里给定集合S，令$Max(S)$为S中的最大值，$Min(S)$为S中的最小值，有结论$Max(S)=\sum\limits_{S’\subseteq S}Min(S’)*(-1)^{|S’|-1}$这为什么是对的呢。我们先考虑构造容斥系数$f$，使得$Max(S)=\sum\limits_{S’\subseteq S}Min(S’)*f_{|S’|}$枚举第$x+1$大值的贡献，也就是有多少个集合的最小值是全集的第$x+1$大值。那么比我大的x个可以随便选。这个值为$\sum\limits_{i=0}^{x}\binom{x}{i}*f_{i+1}$考虑会对最后答案有贡献的只有$x=0$的时候，所以定义kronecker delta函数$g(x)=[x=0]$$g(x)=\sum\limits_{i=0}^{x}\binom{x}{i}*f_{i+1}$直接二项式反演得到$f_{x+1}=\sum\limits_{i=0}^{x}\binom{x}{i}*g_{i}*(-1)^{x-i}$由于$g$只在$i=0$时为1，所以$f_{x+1}=(-1)^{x}$$f_{x}=(-1)^{x-1}$$Max(S)=\sum\limits_{S’\subseteq S}Min(S’)*(-1)^{|S’|-1}$同时这个结论在期望意义下也是成立的，那么这道题就可以做了。 做法对于一个集合S，我们定义它的权值为它出现的时间。$Min(S)$表示这个集合中最小的元素$Max(S)$表示这个集合中最大的元素$P[i]$表示i这个元素单位时间出现的概率，$E$表示期望时间显然有$Min(S)=\sum\limits_{i\in S}P(i)$，而$E(Min(S))=\frac{1}{P(Min(S))}$然后Min-Max容斥告诉我们$E(Max(S))=\sum\limits_{S’\subseteq S}E(Min(S’))*(-1)^{|S’|-1}$注意特判$S’$不能是空集。 例题例题一贴个板子题先。Hdu 4336 Card Collector考虑每张牌如果都要出现，那么就是求$Max(全集)$，直接套公式做就好了。 例题二Luogu 3175 [HAOI 2015] 按位或Luogu 3175 [HAOI 2015] 按位或 题解 例题三LOJ 2542「PKUWC2018」随机游走LOJ 2542「PKUWC2018」随机游走 题解 kth Min-Max容斥顾名思义，就是可以求第k大元素出现的期望时间。上面的公式求的是最大元素出现的期望时间，下面给出求第k大元素出现期望时间的公式。$E(kthMax(S))=\sum\limits_{S’ \subseteq S}E(Min(S’))*(-1)^{|S’|-k}*\binom{|S’|-1}{k-1}$把k=1带进去就得到了前面的那个公式。证明思路与$k=1$时如出一辙先构造容斥系数$f$，使得$kthMax(S)=\sum\limits_{S’\subseteq S}Min(S’)*f_{|S’|}$考虑第$x+1$大值的贡献这个值为$\sum\limits_{i=0}^{x}\binom{x}{i}*f_{i+1}$考虑会对最后答案有贡献的从$x=0$变为了$x=k-1$的，所以定义kronecker delta函数$g(x)=[x=k-1]$$g(x)=\sum\limits_{i=0}^{x}\binom{x}{i}*f_{i+1}$二项式反演$f_{x+1}=\sum\limits_{i=0}^{x}\binom{x}{i}*g_{i}*(-1)^{x-i}$由于$g$只在$i=k-1$时为1，所以$f_{x+1}=(-1)^{x-k+1}*\binom{x}{k-1}$$f_{x}=(-1)^{x-k}*\binom{x-1}{k-1}$$kthMax(S)=\sum\limits_{S’ \subseteq S}Min(S’)*(-1)^{|S’|-k}*\binom{|S’|-1}{k-1}$同样在期望意义下是对的。也贴个题Luogu 4707 重返现世Luogu 4707 重返现世 题解]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数学</category>
-        <category>Min-Max容斥</category>
       </categories>
       <tags>
         <tag>数学</tag>
         <tag>二项式反演</tag>
-        <tag>学习笔记</tag>
         <tag>Min-Max容斥</tag>
+        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -149,11 +123,8 @@
     <content type="text"><![CDATA[前言受到NOIP的影响，大家都开始学习动态dp，博主比较菜，学的比较晚，以下的学习笔记主要是配合例题和代码讲解。 例题例题一 【模板】动态dpLuogu P4719【模板】动态dp 题目大意给定一个$n$个点的树，每个点有点权$a[i]$。有$m$次修改操作，每次操作给定$x,y$表示将$a[x]$修改为$y$你需要每次修改后找出若干个点，使得这些点互不相邻，并且点权和最大。$ n,m\le 1e5$ 分析 首先考虑不带修的情况，我们令$f[i][1]$表示以i为根的子树，选了i这个的点最大点权，$f[i][0]$表示不选i这个点时的最大点权和。我们以$u\to v$表示v是u的字节点考虑转移$f[u][1]=a[u]+\sum_{u\to v}f[v][0],f[u][0]=\sum_{u\to v}Max(f[v][0],f[v][1])$应该非常显然，不做赘述。 现在我们考虑要支持修改了。先树链剖分，以$son[u]$表示u的重儿子，那么原来的转移方程可以变为$f[u][1]=a[u]+\sum_{u\to v,v\ne son[u]}f[v][0]+f[son[u]][0]$$f[u][0]=\sum_{u\to v,v\ne son[u]}Max(f[v][0],f[v][1])+Max(f[son[u]][0],f[son[u]][1])$我们令$g[u][0]=\sum_{u\to v,v\ne son[u]}Max(f[v][0],f[v][1])$$g[u][1]=a[u]+\sum_{u\to v,v\ne son[u]}f[v][0]$也就是f中除了重儿子的部分那么我们的dp就可以化为$f[u][1]=g[u][1]+f[son[u]][0]$$f[u][0]=g[u][0]+Max(f[son[u]][0],f[son[u]][1])$再用矩阵来描述每一次转移把矩阵乘法重新定义一下。$c[i][j]=\sum_{k=1}^{n}a[i][k]*b[k][j] \to c[i][j]=Max(a[i][k]+a[k][j])$这样的矩阵乘法也是满足结合律的假装是吧，博主也不会证那么 \left[ \begin {matrix} g[u][0]&g[u][0]\\g[u][0]&-\infty \end {matrix} \right] \left[ \begin {matrix} f[son[u]][0]\\f[son[u]][1] \end {matrix} \right] = \left[ \begin {matrix} f[u][0]\\f[u][1] \end {matrix} \right]重儿子上的信息每次在线段树上查询，轻儿子的信息直接暴力维护。每次修改一个点。(1)先将自己的矩阵改掉(2)跳到重链顶端，暴力修改重链顶端的父亲的矩阵(3)跳到重链顶端的父亲重复步骤(1)(2)(3)直至跳到节点0由于最多跳log条重链，每次修改前要线段树上查询我的f值，所以修改一次的总复杂度是$log^2$的。查询的复杂度为$log$，所以总复杂度为$n*log^2(n)$代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (100005)using namespace std;int n,m,tot,cnt,x,y;int a[N],son[N],tow[N&lt;&lt;1],nxt[N&lt;&lt;1],head[N],size[N],dep[N],top[N],down[N],dfn[N],g[N][2],f[N][2],fnd[N],fa[N];template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline void add(int x,int y)&#123; tow[++tot]=y,nxt[tot]=head[x],head[x]=tot;&#125;void dfs(int u)&#123; f[u][0]=0; f[u][1]=a[u]; size[u]=1; for (int p=head[u];p;p=nxt[p])&#123; int v=tow[p]; if (v!=fa[u])&#123; fa[v]=u; dfs(v); f[u][0]+=max(f[v][0],f[v][1]); f[u][1]+=f[v][0]; size[u]+=size[v]; if (size[v]&gt;size[son[u]]) son[u]=v; &#125; &#125;&#125;void dfs1(int u,int f)&#123; dfn[u]=++cnt; fnd[cnt]=u; top[u]=f; down[f]=dfn[u]; if (son[u]) dfs1(son[u],f); for (int p=head[u];p;p=nxt[p])&#123; int v=tow[p]; if (v!=fa[u]&amp;&amp;v!=son[u]) dfs1(v,v); &#125;&#125;struct matrix&#123; int a[2][2]; inline matrix()&#123;memset(a,0,sizeof(a));&#125;; inline matrix(int x,int y)&#123;a[0][0]=a[0][1]=x,a[1][0]=y,a[1][1]=-1e9;&#125; inline matrix operator * (const matrix &amp;t) const&#123; matrix ret; for (int i=0;i&lt;=1;i++)&#123; for (int j=0;j&lt;=1;j++)&#123; ret.a[i][j]=max(a[i][0]+t.a[0][j],a[i][1]+t.a[1][j]); &#125; &#125; return ret; &#125;&#125;;void dfs2(int u)&#123; g[u][1]=a[u]; g[u][0]=0; for (int p=head[u];p;p=nxt[p])&#123; int v=tow[p]; if (v!=son[u]&amp;&amp;v!=fa[u])&#123; dfs2(v); g[u][0]+=max(f[v][0],f[v][1]); g[u][1]+=f[v][0]; &#125; &#125; if (son[u]) dfs2(son[u]);&#125;struct node&#123; int l,r; matrix data;&#125;T[N&lt;&lt;2];void build(int u,int l,int r)&#123; T[u].l=l,T[u].r=r; if (l==r)&#123; T[u].data=matrix(g[fnd[l]][0],g[fnd[l]][1]); return; &#125; int mid=l+r&gt;&gt;1,v=u&lt;&lt;1; build(v,l,mid); build(v|1,mid+1,r); T[u].data=T[v].data*T[v|1].data; &#125;void modify(int u,int op)&#123; if (T[u].l==T[u].r)&#123; T[u].data=matrix(g[fnd[op]][0],g[fnd[op]][1]); return; &#125; int mid=T[u].l+T[u].r&gt;&gt;1,v=u&lt;&lt;1; if (op&lt;=mid) modify(v,op); else modify(v|1,op); T[u].data=T[v].data*T[v|1].data;&#125;matrix query(int u,int L,int R)&#123; if (L&lt;=T[u].l&amp;&amp;T[u].r&lt;=R) return T[u].data; int mid=T[u].l+T[u].r&gt;&gt;1,v=u&lt;&lt;1; if (R&lt;=mid) return query(v,L,R); if (L&gt;mid) return query(v|1,L,R); return query(v,L,R)*query(v|1,L,R);&#125;int main()&#123; read(n),read(m); for (int i=1;i&lt;=n;i++) read(a[i]); for (int i=1;i&lt;n;i++)&#123; read(x),read(y); add(x,y),add(y,x); &#125; dfs(1); dfs1(1,1); dfs2(1); build(1,1,n); for (int i=1;i&lt;=m;i++)&#123; read(x),read(y); g[x][1]+=y-a[x]; a[x]=y; while (x)&#123; modify(1,dfn[x]); x=top[x]; matrix tmp=query(1,dfn[x],down[x]); int ff=fa[x]; g[ff][0]-=max(f[x][0],f[x][1]); g[ff][1]-=f[x][0]; f[x][0]=tmp.a[0][0]; f[x][1]=tmp.a[1][0]; g[ff][0]+=max(f[x][0],f[x][1]); g[ff][1]+=f[x][0]; x=fa[x]; &#125; printf("%d\n",max(f[1][0],f[1][1])); &#125; return 0;&#125; 例题二 动态dp【加强版】动态dp加强版 题目大意和例题一一样，只不过强制在线，并且$n,m\le 1e6$ 分析好像树剖跑不过去了，那么我们考虑用lct来代替树剖，复杂度确实是少了一个log，但是实际表现不理想，lct还是常数太大了。实际上我们用不到access,change_root,link,cut等操作，那我们是不是可以考虑构造一种类似的数据结构呢。全局平衡二叉树闪亮登场。 全局平衡二叉树概述与lct类似，把每条重链用一棵辅助树来维护，辅助树之间用虚边相连，每个节点维护自己所在重链辅助树的子树矩阵的乘积。如果会lct的话比较好理解。 建树我们定义每个点的权重$fs[u]=size[u]-size[fs[u]]$，对于每条重链，每次找到带权重心，左右递归建树即可，深度比我小的点在左儿子，深度比我大的点在右儿子。 复杂度证明可以参考 杨哲《SPOJ375 QTREE 解法的一些研究》 代码这里直接贴出全体的代码，建树的代码也包括在其中。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (1000005)using namespace std;int n,x,y,tot,top,lastans,root,m;int a[N],tow[N&lt;&lt;1],son[N],nxt[N&lt;&lt;1],head[N],size[N],fs[N],fa[N],Fa[N],st[N],ch[N][2]; bool kill[N];template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline void add(int x,int y)&#123; tow[++tot]=y,nxt[tot]=head[x],head[x]=tot;&#125;void dfs(int u)&#123; size[u]=1; for (int p=head[u];p;p=nxt[p])&#123; int v=tow[p]; if (v!=fa[u])&#123; fa[v]=u; dfs(v); size[u]+=size[v]; if (size[v]&gt;size[son[u]]) son[u]=v; &#125; &#125; fs[u]=size[u]-size[son[u]];&#125;struct matrix&#123; int a[2][2]; inline matrix()&#123;a[0][0]=a[0][1]=a[1][0]=a[1][1]=-1e9;&#125; inline matrix operator * (const matrix &amp;t) const&#123; matrix ret; for (int i=0;i&lt;=1;i++)&#123; for (int j=0;j&lt;=1;j++)&#123; ret.a[i][j]=max(a[i][0]+t.a[0][j],a[i][1]+t.a[1][j]); &#125; &#125; return ret; &#125; inline int mx()&#123; return max(max(a[0][0],a[1][0]),max(a[0][1],a[1][1])); &#125; inline void add(int x,int y)&#123; a[0][0]+=x,a[0][1]+=x,a[1][0]+=y; &#125;&#125;T[N],sum[N];void update(int u,int f)&#123; Fa[u]=f; kill[u]=1; T[f].add(sum[u].mx(),max(sum[u].a[0][0],sum[u].a[0][1]));&#125;void pushup(int u)&#123; sum[u]=sum[ch[u][0]]*T[u]*sum[ch[u][1]];&#125;int sbuild(int l,int r)&#123; if (l&gt;r) return 0; int tt=0,tmp=0; for (int i=l;i&lt;=r;i++) tt+=fs[st[i]]; for (int i=l;i&lt;=r;i++)&#123; tmp+=fs[st[i]]; if (tmp&gt;=(tt&gt;&gt;1))&#123; Fa[ch[st[i]][0]=sbuild(l,i-1)]=st[i]; Fa[ch[st[i]][1]=sbuild(i+1,r)]=st[i]; pushup(st[i]); return st[i]; &#125; &#125;&#125;int build(int u)&#123; for (int i=u;i;i=son[i])&#123; for (int p=head[i];p;p=nxt[p])&#123; int v=tow[p]; if (v!=fa[i]&amp;&amp;v!=son[i])&#123; int kk=build(v); update(kk,i); &#125; &#125; &#125; top=0; for (int i=u;i;i=son[i]) st[++top]=i; return sbuild(1,top);&#125;void modify(int u,int data)&#123; T[u].a[1][0]+=data-a[u]; a[u]=data; while (u)&#123; if (kill[u])&#123; int t1=sum[u].mx(),t2=max(sum[u].a[0][0],sum[u].a[0][1]); pushup(u); T[Fa[u]].add(sum[u].mx()-t1,max(sum[u].a[0][0],sum[u].a[0][1])-t2); &#125; else&#123; pushup(u); &#125; u=Fa[u]; &#125;&#125;int main()&#123; read(n),read(m); for (int i=1;i&lt;=n;i++) read(a[i]); T[0].a[0][0]=T[0].a[1][1]=0; sum[0].a[0][0]=sum[0].a[1][1]=0; for (int i=1;i&lt;=n;i++)&#123; T[i].a[1][0]=a[i]; T[i].a[0][0]=T[i].a[0][1]=0; &#125; for (int i=1;i&lt;n;i++)&#123; read(x),read(y); add(x,y); add(y,x); &#125; dfs(1); root=build(1); while (m--)&#123; read(x),read(y); modify(x,y); lastans=sum[root].mx(); printf("%d\n",lastans); &#125; return 0;&#125; 例题三 洪水Bzoj 4712 题目大意给定一颗n个点的树，每个点有点权。给m次操作，操作分成两类。(1)修改操作，修改一个点的点权(2)询问操作，对于一个节点，删除若干个点，使得询问的点与其子树中所有叶子均不连通，回答删除点的最小权值和$n,m \le 2e5$ 分析我们与例题一类似考虑，先考虑不带修改的情况。以$f[u]$表示使得u与其子树中所有叶子节点不连通的最小删除点权和。我们以$u\to v$表示v是u的字节点转移$f[u]=Min(a[u],\sum_{u\to v}f[v])$以$son[u]$表示u的重儿子。$f[u]=Min(a[u],f[son[v]]+\sum_{u\to v,v\ne son[u]}f[v])$令$g[u]=\sum_{u\to v,v\ne son[u]}f[v]$与例题一一样重新定义一下矩阵乘法，加法变为取max，乘法变为加法那么有 \left[ \begin {matrix} 0&0\\a[u]&g[u] \end {matrix} \right] \left[ \begin {matrix} 0\\f[son[u]] \end {matrix} \right] = \left[ \begin {matrix} 0\\f[u] \end {matrix} \right]博主手推，可能不是很优秀剩下的就和例题一一样了。但是要注意一个问题，询问的时候还需要查询每个几点的f值，并不是只有根节点的。对于一个节点的dp值，应该是这条重链上所有深度大于等于他的矩阵的乘积，(当我们查询根节点的时候，一定是整颗子树)，由于全局平衡二叉树的深度满足二叉查找树，所以我们在每次向上跳的过程中，如果我是从左儿子上去的，那么要把我父亲及父亲的整个右子树都乘上来，如果从右儿子上去则不用乘。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define int LL#define N (200005)using namespace std;int n,x,y,tot,m,root,top;int tow[N&lt;&lt;1],head[N],nxt[N&lt;&lt;1],size[N],fs[N],son[N],fa[N],Fa[N],st[N],ch[N][2],a[N];bool kill[N],leaf[N];char c[10];template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline void add(int x,int y)&#123; tow[++tot]=y,nxt[tot]=head[x],head[x]=tot;&#125;struct matrix&#123; int a[2][2]; inline matrix()&#123;memset(a,0,sizeof(a));&#125; inline matrix operator *(const matrix &amp;t) const&#123; matrix ret; for (int i=0;i&lt;=1;i++)&#123; for (int j=0;j&lt;=1;j++)&#123; ret.a[i][j]=min(a[i][0]+t.a[0][j],a[i][1]+t.a[1][j]); &#125; &#125; return ret; &#125; inline int f()&#123; return min(a[1][0],a[1][1]); &#125; inline void pri()&#123; printf("%d %d\n%d %d\n\n",a[0][0],a[0][1],a[1][0],a[1][1]); &#125;&#125;T[N],sum[N],sum1[N];void dfs(int u)&#123; size[u]=1; leaf[u]=1; for (int p=head[u];p;p=nxt[p])&#123; int v=tow[p]; if (v!=fa[u])&#123; fa[v]=u; leaf[u]=0; dfs(v); size[u]+=size[v]; if (size[v]&gt;size[son[u]]) son[u]=v; &#125; &#125; fs[u]=size[u]-size[son[u]];&#125;void update(int u,int f)&#123; Fa[u]=f; T[f].a[1][1]+=sum[u].f(); kill[u]=1;&#125;void pushup(int u)&#123; sum[u]=sum[ch[u][0]]*T[u]*sum[ch[u][1]]; sum1[u]=T[u]*sum[ch[u][1]];&#125;int sbuild(int l,int r)&#123; if (l&gt;r) return 0; int tt=0,tmp=0; for (int i=l;i&lt;=r;i++) tt+=fs[st[i]]; for (int i=l;i&lt;=r;i++)&#123; tmp+=fs[st[i]]; if (tmp&gt;=(tt&gt;&gt;1))&#123; Fa[ch[st[i]][0]=sbuild(l,i-1)]=st[i]; Fa[ch[st[i]][1]=sbuild(i+1,r)]=st[i]; pushup(st[i]); return st[i]; &#125; &#125;&#125;int build(int u)&#123; for (int i=u;i;i=son[i])&#123; for (int p=head[i];p;p=nxt[p])&#123; int v=tow[p]; if (v!=fa[i]&amp;&amp;v!=son[i]) update(build(v),i); &#125; &#125; top=0; for (int i=u;i;i=son[i])&#123; st[++top]=i; &#125; return sbuild(1,top);&#125;void modify(int x,int y)&#123; T[x].a[1][0]+=y; a[x]+=y; while (x)&#123; if (kill[x])&#123; T[Fa[x]].a[1][1]-=sum[x].f(); pushup(x); T[Fa[x]].a[1][1]+=sum[x].f(); &#125; else pushup(x); x=Fa[x]; &#125;&#125;signed main()&#123; read(n); for (int i=1;i&lt;=n;i++) read(a[i]); for (int i=1;i&lt;n;i++)&#123; read(x),read(y); add(x,y); add(y,x); &#125; sum[0].a[0][1]=sum[0].a[1][0]=1e15; for (int i=1;i&lt;=n;i++) T[i].a[1][0]=a[i]; dfs(1); for (int i=1;i&lt;=n;i++)&#123; if (leaf[i]) T[i].a[1][1]=1e15; &#125; root=build(1); //for (int i=1;i&lt;=n;i++) T[i].pri(); //for (int i=1;i&lt;=n;i++) sum[i].pri(); read(m); while (m--)&#123; scanf("%s",c); if (c[0]=='Q')&#123; read(x); matrix ret=sum1[x]; while (!kill[x]&amp;&amp;x)&#123; if (ch[Fa[x]][0]==x) ret=ret*sum1[Fa[x]]; x=Fa[x]; &#125; printf("%lld\n",ret.f()); &#125; else&#123; read(x),read(y); modify(x,y); &#125; &#125; return 0;&#125; 例题四 [SDOI2017]切树游戏Luogu 3781 [SDOI2017]切树游戏 链接txc大爷的博客写的非常的好 结语动态dp的套路实际上都一样。核心内容就在于先推出不带修改时的dp方程，再将dp方程中重儿子的信息分离出来，用矩阵来表示转移。树链剖分后，重儿子的信息用线段树维护，轻儿子的信息暴力修改即可，由于树剖的优秀性质，跳上去的过程中最多暴力修改log次，复杂度就是对的，再利用全局平衡二叉树可以使复杂度更优。以上就是博主对动态dp的个人理解，如果有写的不对的地方，欢迎在评论中指出，感激不尽。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>动态dp</category>
-        <category>全局平衡二叉树</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>动态dp</tag>
         <tag>全局平衡二叉树</tag>
       </tags>
@@ -166,10 +137,6 @@
         <category>题目分析</category>
         <category>CF</category>
       </categories>
-      <tags>
-        <tag>题目分析</tag>
-        <tag>CF</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[[LOJ 6433] 「PKUSC2018」最大前缀和]]></title>
@@ -178,13 +145,9 @@
       <categories>
         <category>题目分析</category>
         <category>LOJ</category>
-        <category>dp</category>
-        <category>状压dp</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>dp</tag>
-        <tag>LOJ</tag>
         <tag>状压dp</tag>
       </tags>
   </entry>
@@ -195,13 +158,9 @@
       <categories>
         <category>题目分析</category>
         <category>LOJ</category>
-        <category>dp</category>
-        <category>状压dp</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>dp</tag>
-        <tag>LOJ</tag>
         <tag>状压dp</tag>
       </tags>
   </entry>
@@ -212,12 +171,9 @@
       <categories>
         <category>题目分析</category>
         <category>LOJ</category>
-        <category>dp</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>dp</tag>
-        <tag>LOJ</tag>
       </tags>
   </entry>
   <entry>
@@ -227,9 +183,6 @@
       <categories>
         <category>杂文</category>
       </categories>
-      <tags>
-        <tag>杂文</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[[BZOJ 4311] 向量]]></title>
@@ -238,12 +191,8 @@
       <categories>
         <category>题目分析</category>
         <category>BZOJ</category>
-        <category>数据结构</category>
-        <category>KDtree</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>BZOJ</tag>
         <tag>数据结构</tag>
         <tag>KDtree</tag>
       </tags>
@@ -254,11 +203,8 @@
     <content type="text"><![CDATA[前言博主原先对于计算几何可谓是一窍不通，刚好做到两道极角排序的题，才刚刚有点感受到计算几何的魅(e)力(xin)。 极角排序所谓极角，指的就是以x轴正半轴为始边，逆时针转过的角，这个角的范围是$[0,2\pi]$。 极角排序的求法 利用atan2函数atan2(y,x)，表示(x,y)这个点与原点连线，这条线与x轴正半轴的夹角，这里的这个极角的范围是$[-\pi,\pi]$的，一二象限为正，三四象限为负。所以我们从小到大排完序后，实际上是第三象限$\to$第四象限$\to$第一象限$\to$第二象限。123456789101112struct node&#123; int x,y; double angle; inline bool operator &lt; (const node &amp;t) const&#123; return ansgle&lt;t.angle; &#125;&#125;for (int i=1;i&lt;=n;i++)&#123; read(a[i].x),read(a[i].y); a[i].angle=atan2(a[i].y,a[i].x);&#125;sort(a+1,a+n+1,cmp); 利用叉积来进行排序叉积已知两点坐标，通过叉积可以求得与原点所围成的三角形的有向面积。比如这两个点为a,b.$\frac{1}{2}*(a.x*b.y-a.y*b.x)$即为该三角形面积，那么为什么说是有向面积呢，如果这个值是正的，说明b位于a的正方向，即逆时针方向(当然，这个角度小于$\pi$)，反之，如果这个面积是负的，说明b位于a的负方向，即顺时针方向。那么我们就可以通过叉积来求极角了 1234567891011121314struct node&#123; int x,y; double angle; inline int operator * (const node &amp;t) const&#123; return a.x*b.y-a.y*b.x; &#125; &#125;inline bool cmp(node a,node b)&#123; return a*b&gt;0;&#125;for (int i=1;i&lt;=n;i++)&#123; read(a[i].x),read(a[i].y);&#125;sort(a+1,a+n+1,cmp); 比较两种求法的优劣第一种求法的常数比较优秀，但是精度有一定的损失。而叉积的求法常数较大，但是没有精度损失，可以根据情况的不同进行选择。 例题1.Luogu 2992题目大意：给你平面上n个点，保证任意两个点的连线都不经过原点，我们称所有包括原点的三角形为黄金三角形，问有多少个黄金三角形。$n\le100000$直接求黄金三角形好像有点难，我们考虑算出所有三角形的数量去减去非黄金三角形的数量。所有三角形的数量组合数算出。对于非黄金三角形，先确定一个点a，如果另外两个点均在我正方向$\pi$内，那么这三个点一定能构成一个非黄金三角形，如果不能理解的话可以画个图。我们先将所有的点极角排序，那么就可以一个指针扫过去知道有多少个点是在这个范围内的，组合数计算即可。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (100005)using namespace std;int n,tot,r;LL ans;struct node&#123; int x,y; long double angle;&#125;a[N]; inline bool cmp(node a,node b)&#123; return a.angle&lt;b.angle;&#125;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline bool cj(int x,int y)&#123; return 1ll*a[x].x*a[y].y&gt;=1ll*a[x].y*a[y].x;//逆时针旋转小于pi &#125;int main()&#123; read(n); for (int i=1;i&lt;=n;i++) read(a[i].x),read(a[i].y),a[i].angle=atan2(a[i].y,a[i].x); sort(a+1,a+n+1,cmp); r=2; for (int i=1;i&lt;=n;i++)&#123; while (r!=i&amp;&amp;cj(i,r)) tot++,r=r%n+1; ans-=1ll*tot*(tot-1)/2; tot--; &#125; ans+=1ll*n*(n-1)*(n-2)/6; printf("%lld",ans); return 0;&#125; Luogu3476题目大意：给定平面上n个位于第一象限的点，求这些点所能组成的三角形的面积和。$0\le n\le3000$三个点不好处理，数据范围又是可以跑$n^2$的，考虑先枚举一个点，计算所有在它右边的点与它组成三角形的面积。先将所有点按照x坐标排序，如果x坐标相同则按y排序，枚举一个点，再将在我右侧的点极角排序。从小到大扫过去，那么叉积所得的值就一定是正的了，再将叉积展开，就可以得到一个后缀和的形式了，预处理一下即可。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (3005)using namespace std;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int n,tot;LL sumx,sumy,ans;struct node&#123; int x,y;&#125;a[N],q[N]; inline bool cmp(node a,node b)&#123; return a.x==b.x?a.y&lt;b.y:a.x&lt;b.x;&#125;inline bool cmp1(node a,node b)&#123; return 1ll*a.x*b.y-1ll*a.y*b.x&gt;0;&#125;int main()&#123; read(n); for (int i=1;i&lt;=n;i++)&#123; read(a[i].x),read(a[i].y); &#125; sort(a+1,a+n+1,cmp); for (int i=1;i&lt;=n;i++)&#123; tot=0; for (int j=i+1;j&lt;=n;j++)&#123; tot++; q[tot].x=a[j].x-a[i].x; q[tot].y=a[j].y-a[i].y; &#125; sort(q+1,q+tot+1,cmp1); sumx=0,sumy=0; for (int j=1;j&lt;=tot;j++) sumx+=q[j].x,sumy+=q[j].y; for (int j=1;j&lt;=tot;j++)&#123; sumx-=q[j].x,sumy-=q[j].y; ans+=sumy*q[j].x-sumx*q[j].y; &#125; &#125; printf("%lld.%lld",ans/2,(ans&amp;1)*5); return 0;&#125; 结语简单的讲解了一下极角排序，希望能够有所帮助。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>计算几何</category>
-        <category>极角排序</category>
       </categories>
       <tags>
-        <tag>学习笔记</tag>
         <tag>计算几何</tag>
         <tag>极角排序</tag>
       </tags>
@@ -270,12 +216,8 @@
       <categories>
         <category>题目分析</category>
         <category>BZOJ</category>
-        <category>数据结构</category>
-        <category>树链剖分</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>BZOJ</tag>
         <tag>数据结构</tag>
         <tag>树链剖分</tag>
       </tags>
@@ -287,15 +229,10 @@
       <categories>
         <category>题目分析</category>
         <category>Luogu</category>
-        <category>数据结构</category>
-        <category>树套树</category>
-        <category>整体二分</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
         <tag>数据结构</tag>
         <tag>树套树</tag>
-        <tag>Luogu</tag>
         <tag>整体二分</tag>
       </tags>
   </entry>
@@ -306,12 +243,8 @@
       <categories>
         <category>题目分析</category>
         <category>BZOJ</category>
-        <category>数据结构</category>
-        <category>树套树</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>BZOJ</tag>
         <tag>数据结构</tag>
         <tag>树套树</tag>
       </tags>
@@ -322,14 +255,11 @@
     <content type="text"><![CDATA[前言CRT，中国剩余定理，用于求解同余方程。据说古代有个著名问题叫韩信点兵，数学化一下就是x ≡ 2(mod 3)x ≡ 3(mod 5)x ≡ 2(mod 7) 求解我们三个等式分开求解，最后加起来，那么如果x1是5和7的公倍数，后面加的时候就不会产生影响。由第一个等式我们得到，x1是5和7的公倍数，且%3==2。转化一下得到若a是5和7的公倍数，且%3==1，那么2a就是一个合法的x，余数的可乘性。那么要保证是5和7的公倍数，就$*35$，又要保证%3==1，那么再乘以35在%3意义下的逆元就行了，最后乘以2，所以x1=35$*({35}^{-1})*2$同理求出x2,x3,然后x1+x2+x3就是一个合法解，最小解的话模一下最小公倍数就可以了这其实就是中国剩余定理对于一组同余方程如果保证$m_1,m_2…m_k$ 两两互质, 且令P为$m_1,m_2…m_k$之积则有结论 x ≡ ($a_1*M_1*M_1^{-1}+a_2*M_2*M_2^{-1}+…+a_k*M_k*M_k^{-1}$)(mod P)其中$M_i$为$\frac{P}{m_i}$,$M_i^{-1}$即$M_i$在模$m_i$意义下的逆元($M_i*M_i^{-1}$≡1(mod $m_i$))原理就和前面举的例子一样，只不过扩展了一下。希望能对学习有帮助，谢谢。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数学</category>
-        <category>数论</category>
-        <category>CRT</category>
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>学习笔记</tag>
         <tag>数论</tag>
+        <tag>CRT</tag>
       </tags>
   </entry>
   <entry>
@@ -339,12 +269,8 @@
       <categories>
         <category>题目分析</category>
         <category>BZOJ</category>
-        <category>数据结构</category>
-        <category>线段树合并</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>BZOJ</tag>
         <tag>数据结构</tag>
         <tag>线段树合并</tag>
       </tags>
@@ -355,13 +281,9 @@
     <content type="text"><![CDATA[Miller_Rabin质数判断我们朴素的质数判断算法是枚举小于等于$\sqrt{n}$的数，判断是否都不能整除n，这样的复杂度是$\sqrt{n}$，那么当n的数量级达到$10^{18}$的时候就不够优越了。这时候我们的Millar_Rabin算法就闪亮登场了。我们的故事从费马小定理讲起，$a^{p-1}$≡1(mod p)，当p为质数的时候。在费马小定理被证明出来的很长一段时间内，人们都认为费马小定理的逆定理是正确的，即如果$2^{p-1}$≡1(mod p)，那么就认为p是个质数，但其实341就是一个反例，这种我们成为强伪素数的数可以把这种判定方法轻松卡掉。但是我们发现了这样一个事情，我们称为二次探测定理 如果$x^2≡1$(mod p)，那么也就是说$(x+1)(x-1)≡0$ (mod p)，又因为p是质数，所以$x+1$≡0(mod p)或者$x-1$≡0(mod p)，所以x mod p=1或者 x mod p=-1 那么我们有了二次探测定理，我们再来看341这个数。 $2^{340}$%341 == 1 $2^{170}$%341 == 1 $2^{85}$%341 == 32 这时候就出现问题了，我们就把341这个伪质数揪出来了。我们把质数的这个序列找出来发现一定是形如1,1…1,1,1,1,p-1这样子的，p-1之后可以为无序，我们设x要判断的数，d为x去掉所有2因子之后的结果。先判断$2^{d}$%x为多少，然后不断地把d*2，继续判断余数。只有出现这两种情况时我们认为x是质数1.序列全为12.序列出现了p-1我们结合代码来讲如何判断1234567for (int i=1;i&lt;=t;i++)&#123; LL d=x-1; while (!(d&amp;1)) d&gt;&gt;=1; LL s=ksm(q[i],d,x); while (s!=1&amp;&amp;s!=x-1&amp;&amp;d!=x-1) d&lt;&lt;=1,s=mul(s,s,x); if (s!=x-1&amp;&amp;!(d&amp;1)) return 0;//如果找到的是p-1则没事，如果找到的是1，(根据二次探测定理，1前面一定全是1）那么必须全为1。&#125; 但是这样判断并不一定完全正确，所以我们需要将2(上文中的底数)换成别的数，一般来说在long long 范围内，2，3，7，61就都够用了。 这是模板题 LOJ 143 Pollared_Rho为什么要把这两个放在一起讲呢，因为这两个算法的正确性都有那么一点瑕疵，可能算是某种相同点吧，而且Pollard_Rho中要用到Miller_Rabin。先贴出模板题吧，求$\phi(n)$，n&lt;=$10^{18}$如果直接暴力，也是根号的。那么我们随机一个数判断是否为n的因数，也不是很优，甚至劣于暴力。作者对于Pollared_Rho的复杂度证明也不是很精通，这里就讲一讲做法。每次有一个n，我们先用Miller_Rabin 判断他本身是不是质数，如果不是质数，我们先在0…n-1范围内随机一个种子seed，我们依靠这个seed来形成一个随机序列，假设这个随机序列的这一项为x，那么下一项为(x*x+seed)%n，我们每次判断这个随机序列的a,b两项做差，用这个差和n取gcd，然后进一步分解。看代码12345678910111213141516171819202122232425LL Nex(LL x,LL n)&#123; return (mul(x,x,n)+seed)%n;//mul为慢速乘，防止乘的时候爆long long&#125;void Pollared_Rho(LL n)&#123; if (n==1) return; if (Miller_Rubin(n))&#123;//这里计算phi m[n]++;//m是个map if (m[n]==1) ans=ans*(n-1); else ans=ans*n; return; &#125; while (1)&#123; seed=rand()*rand()%(n-1);//先随机一个seed LL a=rand()%(n-1),b=Nex(a,n); while (a!=b)&#123; LL kk=gcd(n,abs(a-b)); if (kk&gt;1)&#123; Pollared_Rho(kk); Pollared_Rho(n/kk); return; &#125; a=Nex(a,n),b=Nex(Nex(b,n),n);//这里很关键，b每次都比a多走一步，如果形成环的话，b势必会追上a，这种判环的方法最为好写，是floyd这个人发明的，注意，不是我们所熟知的那个3方的floyd。 &#125; &#125;&#125; 以上就是Pollared_Rho 的实现过程，希望对大家有所帮助，如果有写的不对或不好的地方，欢迎评论指正，谢谢。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数学</category>
-        <category>数论</category>
-        <category>大质数判定</category>
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>学习笔记</tag>
         <tag>数论</tag>
       </tags>
   </entry>
@@ -372,14 +294,10 @@
       <categories>
         <category>题目分析</category>
         <category>BZOJ</category>
-        <category>dp</category>
-        <category>树形dp</category>
       </categories>
       <tags>
-        <tag>题目分析</tag>
-        <tag>BZOJ</tag>
-        <tag>树</tag>
         <tag>dp</tag>
+        <tag>树形dp</tag>
       </tags>
   </entry>
   <entry>
@@ -389,9 +307,6 @@
       <categories>
         <category>杂文</category>
       </categories>
-      <tags>
-        <tag>杂文</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[线性基学习笔记]]></title>
@@ -399,12 +314,10 @@
     <content type="text"><![CDATA[前言首先讲一下线性基是什么东西，线性基是一个集合，你在原集合中找到一个子集，子集中的数xor起来一定能在线性基中找一个对应子集的xor和与其相等。比如说，{x,y}和{x,x^y} 就满足这么样一个关系。 原理我们把这个扩展一下，比如说我们现在有一个集合A，我新加进来一个数a，那么a与A中的数xor一下肯定是没有问题的。 性质定义一个数的M值为他二进制上第一个1出现的位置。 我们每往线性基中插入一个数，我们要让这个数的M值与之前线性基中的每一个数的M值都不同。 插入那么如何实现呢？1234567891011void insert(LL c)&#123; for (int i=51;i&gt;=0;i--)&#123; if (c&amp;bit[i])&#123; if (!xxj[i])&#123; xxj[i]=c; break; &#125; c=c^xxj[i]; &#125; &#125;&#125; 在这里，xxj[i]表示目前线性基中M值为i的这个数是多少。那么当我们新插入一个数C我们从大到小枚举C的每一个二进制位，如果当前位置上为1，如果对应的xxj[i]没有数，那么这个数就变成xxj[i]，否则xor上xxj[i]，通过我们前面的原理，这样正确性是对的，而且这样我们再扫后面的位置时，保证出现的1就是第一个出现的例：xxj[3]=101xxj[2]=0插入110110—&gt;11所以插入xxj[2]的时候M值已经为2了（这个应该比较好想） 那么我们就完成了线性基的插入，基于二进制位，所以插入的复杂度是log的，而且通过这种插入方式，我们线性基的大小就是基于二进制的位数了，log个。 合并合并两个线性基只需要把一个线性基暴力插入另一个即可，复杂度：线性基大小*插入复杂度，log方 删除这种不加特技的线性基不支持删除操作 取最大值我们从最高位倒着扫下来，扫到第i位，如果当前的答案ans这一位上为1，那么我们xor上xxj[i]一定只会变小，而且这个影响无法消除，因为xxj[i+1..n]都不可能在那ans第i位上变为1，（根据xxj[i]的性质），同理，如果ans这一位上位0，那么xor上ans[i]一定会让答案变大。当然如果xxj[i]==0,那就没有影响1234567LL query_max()&#123; LL ret=0; for (int i=51;i&gt;=0;i--)&#123; if ((xxj[i]^ret)&gt;ret) ret=ret^xxj[i]; &#125; return ret;&#125; 取xor d的最大值那么只需要把ret的初值赋为d就行了，原理也和上面的相同 取最小值只需要找到最小的i，且xxj[i]不等于0就行了 取k小值乍一看，一般的线性基好像不可做，问题在哪儿？10000010000001同时选1和2比只选1要差，所以我们无法做 但是如果线性基长成这样10000000100000001000000010000000100那么就好做了，因为选取1和2一定比只选1要优。 所以我么需要对原来的线性基rebuild一下，使得它变成上面那样的形式，当然100001001000010000101这种形式也是可以的，xxj[最后一位]上没有数，所以同时选2和3也比只选2优，尽管最后一位上的1被消掉了所以我们要使得若xxj[i]!=0，那么线性基里其他的数第i位上都为0，所以我们只需要拿xxj[i]去xor一下那些数就好了。rebuild之后的线性基怎么做：把k转成二进制，若k的第i位为1，那么将ans xor 上rebuild后第i大的xxj就行了。1234567891011121314151617181920void rebuild()&#123; for (int i=60;i&gt;=0;i--) for (int j=i-1;j&gt;=0;j--) if (d[i]&amp;(1LL&lt;&lt;j)) d[i]^=d[j]; for (int i=0;i&lt;=60;i++) if (d[i]) p[cnt++]=d[i];&#125;long long kthquery(long long k)&#123; int ret=0; if (k&gt;=(1LL&lt;&lt;cnt)) return -1; for (int i=60;i&gt;=0;i--) if (k&amp;(1LL&lt;&lt;i)) ret^=p[i]; return ret;&#125; 以上就是我对线性基的一些个人理解，希望能帮助大家学习，谢谢同时在此感谢Yveh的博客给了很大帮助。也感谢同学给予的帮助zhouyuheng2003]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数学</category>
-        <category>线性基</category>
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>学习笔记</tag>
+        <tag>线性基</tag>
       </tags>
   </entry>
   <entry>
@@ -413,12 +326,10 @@
     <content type="text"><![CDATA[前言笛卡尔树，与Treap类似，每个节点拥有两个值，key值和val值。key值是这个节点本身的大小值，在一颗treap中满足二叉查找树的性质，而val值则是一个随机值，学过treap的同学都知道，这个val值是拿来使得树的层高是期望log的，val值满足堆的性质，这里以小根堆为例讲解（当然大根堆不会有任何问题）。 应用一般笛卡尔树都被用来建一颗treap，复杂度为O(n)的，n表示插入的元素个数。而暴力插入的话是O(n log n)的。这里需要讲清楚的是，笛卡尔树建树，插入的元素必须保证key值递增，而val值是可以乱的，许多博客里没有讲，这里必须要强调一下。 实现我们维护笛卡尔树的极右链，就是根，根的右儿子，根的右儿子的右儿子…….放在一个栈里，栈底是根，这样很显然从栈顶到栈底，val值是不断变小的。每当我们进入一个新的节点，我们从栈顶开始找，当找到第一个节点的val值比我小，那么我必须得是它的儿子，而我的key值又比他大，所以我作为它的右儿子，而原先它的右儿子key值比我小，所以作为我的左儿子，这样就维护了一个treap的性质，然后原来那个店变为了我的左儿子，所以就要从极右链中删掉，我加入到极右链中，这样每个点进栈一次，出栈一次，复杂度就是O(n)的，下面贴出具体的代码。123456789for (int i=1;i&lt;=n;i++)&#123; read(key[i]),val[i]=rand(); while (top&amp;&amp;val[i]&lt;val[stack[top]])&#123; lson[i]=stack[top]; top--; &#125; if (top) rson[stack[top]]=i; stack[++top]=i;&#125; 以上就是笛卡尔树线性建treap的全部过程，希望对大家的学习有帮助]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数据结构</category>
-        <category>笛卡尔树</category>
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>学习笔记</tag>
+        <tag>笛卡尔树</tag>
       </tags>
   </entry>
   <entry>
@@ -427,12 +338,10 @@
     <content type="text"><![CDATA[前言先贴一道模板题 Luogu 2495题意，给你一棵n个点的有边权树，有m次询问，每次询问k个点，要删除一些边使得这k个点均不与1号点联通。数据范围：$2\le n\le250000,m\ge1,\sum k_i\le500000,1\le ki\le n-1$；考虑树形dp1234567891011121314LL get_ans(int u)&#123; bool leaf=1; LL ret=0; for (int p=head[u];p;p=nxt[p])&#123; ret+=get_ans(a[p]); leaf=0; &#125; head[u]=0; if (del[u])&#123; del[u]=0; return ff[u]; &#125; return min(ret,1ll*ff[u]);&#125; ff表示我连向我父亲的边的边权。我是直接暴力dfs一遍，如果我这个点要删除，那么一定是删我的ff边最优。否则选择删我ff边或者一个一个删我的子节点 这样dp一遍是O(n)的，但是m次询问就T了，但是注意到$\sum k$并不大，于是虚树闪亮登场了 介绍虚树就是把原树中少量的有效节点和他们两两的lca拿出来，这样就可以去除一些无效节点，从而降低复杂度。如果有效节点是k个，那么虚树中节点的个数是2*k个，为什么，请看下文。 实现先讲讲如何建虚树，在本题中，虚树上的边权就是原先这条路径上边权的min，因为你要删肯定是删最小边最优。先dfs一遍，求出基本信息。123456789101112void dfs(int u)&#123; dfn[u]=++tim; for (int p=head[u];p;p=nxt[p])&#123; int v=a[p]; if (v!=f[u][0])&#123; f[v][0]=u; minn[v][0]=b[p]; dep[v]=dep[u]+1; dfs(v); &#125; &#125;&#125; 先倍增求lca预处理好，倍增的时候最小值也处理好123456789101112131415161718192021222324for (int j=1;j&lt;=20;j++)&#123; for (int i=1;i&lt;=n;i++) f[i][j]=f[f[i][j-1]][j-1], minn[i][j]=min(minn[i][j-1],minn[f[i][j-1]][j-1]);&#125;int lca(int x,int y)&#123; if (dep[x]&lt;dep[y]) swap(x,y); int tmp=dep[x]-dep[y]; for (int i=0;i&lt;=20;i++)&#123; if (tmp&amp;(1&lt;&lt;i)) x=f[x][i]; &#125; if (x==y) return x; for (int i=20;i&gt;=0;i--)&#123; if (f[x][i]!=f[y][i]) x=f[x][i],y=f[y][i]; &#125; return f[x][0];&#125;int dist(int x,int y)&#123; if (dep[x]&lt;dep[y]) swap(x,y); int tmp=dep[x]-dep[y],ret=1e9; for (int i=0;i&lt;=20;i++)&#123; if (tmp&amp;(1&lt;&lt;i)) ret=min(ret,minn[x][i]),x=f[x][i]; &#125; return ret;&#125; 然后把所有有效点按照dfn值排序，每次新加入一个节点，他最多会和前面的一个节点产生一个lca。简单证明一下，设当前加入的节点x，与y节点产生了一个新的lca,lca1。假设x还与z产生了一个新的lca,lca2，不妨假设dep[lca2]&gt;deplca1个的。 构建虚树维护一个栈，表示从根到栈顶元素的这条链我们新加入一个节点记为x，链的末端，即栈顶，为p，lca为lca(x,p)，有两种情况: 1.p和x分立在lca的两棵子树下. 2.lca是p. 为什么lca不能是x? 因为如果lca是x,说明dfn[lca]=dfn[x]$ &lt; $dfn[p],而我们是按照dfs序号遍历的,于是dfn[p]$ &lt;$dfn[x],矛盾.) 对于第二种情况,直接在栈中插入节点x即可,不要连接任何边(后面会说为什么).对于第一种情况,要仔细分析.我们是按照dfn遍历的(因为很重要所以多说几遍……),有dfn[x]&gt;dfn[p]&gt;dfn[lca].这说明什么呢? 说明一件很重要的事:我们已经把lca所引领的子树中,p所在的子树全部遍历完了!简略的证明:如果没有遍历完,那么肯定有一个未加入的点h,满足dfn[h]$ &lt;$dfn[x],我们按照dfs序号递增顺序遍历的话,应该把h加进来了才能考虑x.这样,我们就直接构建lca引领的,p所在的那个子树. 我们在退栈的时候构建子树.p所在的子树如果还有其它部分,它一定在之前就构建好了(所有退栈的点都已经被正确地连入树中了),就剩那条链.如何正确地把p到lca那部分连进去呢?设栈顶的节点为p,栈顶第二个节点为q.重复以下操作: 如果dfn[q]&gt;dfn[lca],可以直接连边$q\to p$,然后退一次栈. 如果dfn[q]=dfn[lca],说明q=lca,直接连边$lca\to p$,此时子树已经构建完毕. 如果dfn[q]&lt;dfn[lca],说明lca被p与q夹在中间,此时连边$lca\to p$,退一次栈,再把lca压入栈.此时子树构建完毕最后,为了维护dfs链,要把x压入栈. 整个过程就是这样 上面这个讨论的过程来自chenhuan001的博客，把一些有小错误的地方改正了，我就是看着这个学会的，讲的非常清楚。还不明白的可以结合代码1234567891011121314151617void insert(int x)&#123; if (!top)&#123; st[++top]=x; return; &#125; int ll=lca(st[top],x); while (dep[st[top-1]]&gt;dep[ll]&amp;&amp;top&gt;1)&#123; add(st[top-1],st[top],dist(st[top-1],st[top])); top--; &#125; if (dep[ll]&lt;dep[st[top]])&#123; add(ll,st[top],dist(ll,st[top])); top--; &#125; if (!top||dep[st[top]]&lt;dep[ll]) st[++top]=ll; st[++top]=x;&#125; 那我们把虚树建出来后，用最前面讲的dp跑一边就好了。好了,以上就是我个人对虚树的一些理解，希望可以帮助大家学习，如果还有疑问可以给我留言，或者到我好友的博客看更详细的代码和建树过程的描述。https://blog.csdn.net/zhouyuheng2003/article/details/79110326谢谢。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>虚树</category>
       </categories>
       <tags>
-        <tag>树</tag>
         <tag>dp</tag>
-        <tag>学习笔记</tag>
+        <tag>树形dp</tag>
         <tag>虚树</tag>
       </tags>
   </entry>
@@ -442,12 +351,9 @@
     <content type="text"><![CDATA[前言矩阵乘法，常常被用作递推式的优化，如果把一个递推式一步的递推转换成乘上一个矩阵，那么由于矩阵乘法有结合律，所以我们就可以快速幂啦，起到优化的效果。而递推式出现最多的地方当然就是dp了，所以今天想简单的总结一下矩阵乘法优化dp。 正文博主做的题比较少，见到的这类题也比较少，但有一道题感觉还是比较经典的。给出一张有向图，问从1号点出发，走过路径长度为T，到达n号点的方案数，其中$T\le 2e9$，每条边的边权均为1，$n\le100$。 那么显然有dp，$f[i][j]$表示到第j个点，当前走过的路径长度为i的方案数，那么我们枚举j的所有出边，设终点为k，则$f[i+1][k]+=f[i][j]$。但是这样子不方便我们理解矩阵乘法，我换一种dp方式，$f[i][j][k]$表示从j到k走了i条边的方案数，然后我们把给我们的邻接矩阵定义为map好了，那么首先$f[1][j][k]$就对应了map对吧，因为你只能走一步，当然只能走map上的边咯。接下来我们考虑转移，我们$f[i][j][k]$能由什么得到，我们显然是从k出发倒退一步对吧，假设上一步我们是$p\to k$，那么$f[i-1][j][p]\to f[i][j][k]$对吧，我们把这个dp的式子用代码写出来。123456789for (int i=1;i&lt;=T;i++)&#123; for (int j=1;j&lt;=n;j++)&#123; for (int k=1;k&lt;=n;k++)&#123; for (int p=1;p&lt;=n;p++)&#123; if (map[p][k]==1) f[i][j][k]+=f[i-1][j][p]; &#125; &#125; &#125;&#125; 然后神奇的事情就要发生了，我们把这个式子变一下形123456789for (int i=1;i&lt;=T;i++)&#123; for (int j=1;j&lt;=n;j++)&#123; for (int k=1;k&lt;=n;k++)&#123; for (int p=1;p&lt;=n;p++)&#123; f[i][j][k]+=f[i-1][j][p]*map[p][k]; &#125; &#125; &#125;&#125; 如果map[p][k]是0的话*0没有影响，如果是1的话没有区别对吧。再仔细观察一下这个式子，是不是发现和矩乘的形式一模一样。我们把i单独拎出来，那么f[i]这个矩阵就是由f[i-1]这个矩阵乘上map矩阵得到的，是不是非常神奇，接下来问题就好办了。前面已经说过f[1]就是map，所以我们要求走T步，只要把map矩阵自乘T次得到ans，ans[1][n]就是最终答案了。 这道题经典就在于它的递推矩阵正是map矩阵本身，非常神奇，许多人知道这个结论，但是并不知道是怎么来的，希望上文能够帮助大家理解。 而其他题目dp的矩阵就因题而异了，博主由于水平的问题也讲不出更多了，然后有一道非常好的例题给大家安利一下。Luogu 1297SCOI2009 迷路简述一下题意，就是有一张有向图，每条边有边权，注意不再是1，但是边权的范围1..9，然后走T的长度，问从1到n的方案数。$T\le 1000000000$如果边权不是1的话，用上面的转移就不对了，那怎么办，数据范围这么大，不矩乘不行啊，而边权又这么小，我们是不是可以把边权变成1。我们把每个点x变成$x[1]…x[9]，map[x[i]][x[i+1]]=1$，然后如果$x\to y$有一条边权为t的边，我们就令$map[x[t]][y[1]]=1$，这样子我们就保证了从x走到y要花t的时间，然后边权也都被我们变成1了，这样我们再和上面一样做就行了。希望本文对大家有帮助，以上全是基于博主的个人见解，如果有错误或者建议非常欢迎在评论留言，感激不尽。]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>dp</category>
-        <category>矩阵乘法</category>
       </categories>
       <tags>
         <tag>dp</tag>
-        <tag>学习笔记</tag>
         <tag>矩阵乘法</tag>
       </tags>
   </entry>
@@ -457,14 +363,11 @@
     <content type="text"><![CDATA[前言停更好久了，刚好我们老师讲了莫比乌斯反演，那我就来开数论这个天坑吧。 莫比乌斯反演比如说我们现在有一个函数$f(n)=\sum_{d|n}g(d)$假设f非常容易求得，但是g很难求，那么我们是不是可以通过f来求g呢$g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$然后$mu(d)$这个东西就是莫比乌斯函数，所以这个变换也叫莫比乌斯变换 关于莫比乌斯函数 若 $d=1$，则 $\mu(d)=1$ 若 $d=p_1*p_2*p_3*p_4*..*p_n$ (注意不是笔者偷懒，而是p的次数都是1，且都是互异的质数) 那么$\mu(d)=(-1)^{n}$ other wise $\mu(d)=0$莫比乌斯函数的性质 性质1 对于正整数n，有$\sum_{d|n}\mu(d)=[n=1]$中括号在这里表达bool表达式，如果满足中括号内的条件则为1，否则为0证明： n=1，根据定义，显然成立 n&gt;1，设$n=p_1^{x_1}*p_2^{x_2}*p_3^{x_3}*…*p_k^{x_k}$，也就是把n质因数分解那么d一定能表示为$p_1^{y_1}*p_2^{y_2}*p_3^{y_3}*…*p_k^{y_k}$，其中($0\le y_i\le x_i$)，那么根据定义，只要有一个y大于二，那么$\mu(d)=0$，没有贡献，所以我们只要考虑所有y均为0,1时的情况。我们假设这k个中有r个y=1，那么出现这种情况的方案数为$C_{k}^{r}$，总贡献为$C_{k}^{r}*(-1)^{r}$我们再把每个d的贡献加起来$\sum_{r=0}^{k}*C_{k}^{r}*(-1)^{r}$是不是觉得有点眼熟呢，没错，这就是我们的二项式定理，所以上式就等于$(1+(-1))^k=0$结论得证。 性质2莫比乌斯函数为积性函数证明：若有两个互质的数a,b我们把它们分别分解质因数$a=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}$$b=q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$由于a,b互质，$a*b=p_1^{x_1}*p_2^{x_2}*…*p_k^{x_k}*q_1^{y_1}*q_2^{y_2}*…*q_t^{y_t}$如果$\mu(a)==0或\mu(b)==0$为0，那么说明一定有一个x或y&gt;=2，那么$\mu(a*b)$也一定为0.若$\mu(a)$与$\mu(b)$均为1，说明k与t均为偶数，那么k+t也为偶数，所以$\mu(a*b)$也为1若$\mu(a)$与$\mu(b)$均为-1，说明k与t均为奇数，那么k+t为偶数，所以$\mu(a*b)$为1若$\mu(a)为1，\mu(b)$为-1，说明k为偶数，t为奇数，那么k+t为奇数，所以$\mu(a*b)$为-1，$\mu(b)为1，\mu(a)$为-1与上一条同理。综上所述，莫比乌斯函数为积性函数。 莫比乌斯函数的求法这里介绍一下如何使用线性筛筛出莫比乌斯函数1234567891011121314151617memset(isprime,1,sizeof(isprime));isprime[1]=0;mu[1]=1;for (int i=2;i&lt;=100000;i++)&#123; if (isprime[i])&#123;prime[++pri]=i;mu[i]=-1;&#125;//质数的mu显然是-1 for (int j=1;j&lt;=pri&amp;&amp;i*prime[j]&lt;=100000;j++)&#123; int tt=i*prime[j]; isprime[tt]=0; if (i%prime[j]==0)&#123;//说明prime[j]这个质因子次数大于1，所以mu为0 mu[tt]=0; break; &#125; else&#123; mu[tt]=-mu[i];//说明新出现了一个质数，所以要再*=-1 &#125; &#125;&#125; 其复杂度就是线性筛的复杂度，和筛质数，筛phi都是一样的。 莫比乌斯反演我们现在已经知道了莫比乌斯函数和他的一些性质，那么我们试着证明一下莫比乌斯反演的正确性。 $g(n)=\sum_{d|n}f(\frac{n}{d})*\mu(d)$再把$f$展开 g(n)=\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)然后我们把g的sigma换到前面去 g(n)=\sum_{i|n}g(i)\sum_{d|\frac{n}{i}}\mu(d)我们考虑后面这个sigma的值1.当i=n时，$\sum_{d|\frac{n}{i}}\mu(d)=1，g(i)\sum_{d|\frac{n}{i}}\mu(d)=g(n)$2.当i为小于n且是n的因数时，根据$\sum_{d|n}\mu(d)=[n=1]$那么$\sum_{d|\frac{n}{i}}\mu(d)=0$，乘上一个g(i)仍然为0，那么上下两种情况加起来就是$\sum_{d|n}\mu(d)\sum_{i|\frac{n}{d}}g(i)$所以就是g(n)，证毕 莫比乌斯反演的变形变形一：$f(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}g(d*i)—-&gt;g(i)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)$证明：我们把上面二式的f展开$\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}f(d*i)*\mu(d)=\sum_{d=1}^{\lfloor{\frac{n}{i}}\rfloor}\mu(d)\sum_{d1=1}^{\lfloor{\frac{n}{d*i}}\rfloor}g(d1*d*i)$我们令d1*d=T那么原式=$\sum_{T=1}^{\lfloor{\frac{n}{i}}\rfloor}g(T*i)\sum_{d|T}\mu(d)$仔细想一下i,d,T的关系应该不难理解当(1)T=1时，$\sum_{d|T}\mu(d)=1，g(T*i)\sum_{d|T}\mu(d)=g(i)$(2)T&gt;1时，$\sum_{d|T}\mu(d)=0，g(T*i)\sum_{d|T}\mu(d)=0$综上所述，结论正确变形二：$f(i)=\sum_{i|d}g(d)—-&gt;g(i)=\sum_{i|d}f(d)*\mu(\frac{d}{i})$证明：另$\frac{d}{i}=k$那么$\sum_{i|d}f(d)*\mu(\frac{d}{i})=\sum_{k=1}^{\infty}\mu(k)*f(k*i)=\sum_{k=1}^{\infty}\mu(k)*\sum_{k*i|t}g(t)=\sum_{i|t}*g(t)*\sum_{k|\frac{t}{i}}\mu(k)$又是熟悉的套路，就是把$\mu$换成前缀和，就有非常好的性质了，那么最后得到的这个式子，只有在t=i时，后面的这个$\mu$的sigma才会变成1，所以加起来就是f(i)。 尾声以上就是笔者对莫比乌斯反演的一些理解与介绍，军训每天逃机房花了5天终于码完了，希望能给大家带来帮助]]></content>
       <categories>
         <category>学习笔记</category>
-        <category>数学</category>
-        <category>数论</category>
-        <category>莫比乌斯反演</category>
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>学习笔记</tag>
         <tag>数论</tag>
+        <tag>莫比乌斯反演</tag>
       </tags>
   </entry>
   <entry>
@@ -474,8 +377,5 @@
       <categories>
         <category>杂文</category>
       </categories>
-      <tags>
-        <tag>杂文</tag>
-      </tags>
   </entry>
 </search>
