@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-15T13:48:28.018Z">
+<meta property="og:updated_time" content="2019-01-16T10:02:39.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二项式反演学习笔记">
 <meta name="twitter:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
@@ -459,7 +459,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-15 21:48:28" itemprop="dateModified" datetime="2019-01-15T21:48:28+08:00">2019-01-15</time>
+                <time title="Modified: 2019-01-16 18:02:39" itemprop="dateModified" datetime="2019-01-16T18:02:39+08:00">2019-01-16</time>
               
             
           </span>
@@ -533,7 +533,7 @@
       
         <h1 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h1><p>如果我们现在有一个式子<br>$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$<br>告诉我们所有的f，让我们求g<br>这时候就要用到二项式反演了。<br><a id="more"></a><br>$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$<br>考虑直接代入<br>$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$<br>换一下枚举顺序<br>$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$<br>把后面两个组合数暴力展开可以得到<br>$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$<br>把所有和i无关的项都提前<br>$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$<br>发现后面这个<br>$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。<br>当$j=n$时为1<br>其他时候为$(-1+1)^{n-j}=0$<br>所以$g_n=g_n$<br>结论得证</p>
 <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2839" target="_blank" rel="noopener">BZOJ 2839 集合计数</a><br><a href="https://lnrbhaw.github.io/2019/01/06/BZOJ-2839-%E9%9B%86%E5%90%88%E8%AE%A1%E6%95%B0/" target="_blank" rel="noopener">BZOJ 2839 集合计数 题解</a><br><a href="https://www.luogu.org/problemnew/show/P4859" target="_blank" rel="noopener">Luogu 4859 已经没有什么好害怕的了</a></p>
-<p>[Luogu 4859 已经没有什么好害怕的了 题解]<a href="https://lnrbhaw.github.io/2019/01/15/Luogu-4859-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86/" target="_blank" rel="noopener">https://lnrbhaw.github.io/2019/01/15/Luogu-4859-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86/</a></p>
+<p><a href="https://lnrbhaw.github.io/2019/01/15/Luogu-4859-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86/" target="_blank" rel="noopener">Luogu 4859 已经没有什么好害怕的了 题解</a></p>
 
       
     </div>
