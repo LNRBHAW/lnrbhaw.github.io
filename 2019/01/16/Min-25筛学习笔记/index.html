@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="LNRBHAW">
 <meta property="og:description" content="前言在yx大佬不厌其烦的帮助下终于还是学会了Min-25筛。其实不算特别难理解，主要是原先没人给讲解自己瞎走了许多弯路，代码实现也相对容易，听说可以代替杜教筛来求积性函数前缀和，名字好奇怪啊，不知道怎么来的。复杂度O(\frac{n^\frac{3}{4}}{\log n})求单点时略优于杜教筛。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-17T03:03:08.569Z">
+<meta property="og:updated_time" content="2019-01-17T03:11:58.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Min-25筛学习笔记">
 <meta name="twitter:description" content="前言在yx大佬不厌其烦的帮助下终于还是学会了Min-25筛。其实不算特别难理解，主要是原先没人给讲解自己瞎走了许多弯路，代码实现也相对容易，听说可以代替杜教筛来求积性函数前缀和，名字好奇怪啊，不知道怎么来的。复杂度O(\frac{n^\frac{3}{4}}{\log n})求单点时略优于杜教筛。">
@@ -459,7 +459,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-17 11:03:08" itemprop="dateModified" datetime="2019-01-17T11:03:08+08:00">2019-01-17</time>
+                <time title="Modified: 2019-01-17 11:11:58" itemprop="dateModified" datetime="2019-01-17T11:11:58+08:00">2019-01-17</time>
               
             
           </span>
@@ -518,7 +518,7 @@
 
       
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在yx大佬不厌其烦的帮助下终于还是学会了Min-25筛。<br>其实不算特别难理解，主要是原先没人给讲解自己瞎走了许多弯路，代码实现也相对容易，听说可以代替杜教筛来求积性函数前缀和，<del>名字好奇怪啊，不知道怎么来的</del>。<br>复杂度<script type="math/tex">O(\frac{n^\frac{3}{4}}{\log n})</script><br>求单点时略优于杜教筛。<br><a id="more"></a></p>
-<h1 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min-25筛"></a>Min-25筛</h1><h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>首先，如果要用Min-25筛有前置条件，即积性函数$f(i)$在i为质数时是个低次多项式，并且在i是质数的幂次时可以快速求得。<br>既然$f(i)$在i是质数时是个低次多项式，我们不妨把这个多项式拆开，形如<script type="math/tex">f(i)=i^{k_1}+i^{k_2}+i^{k_3}(i\in prime)</script><br>显然每个幂次不会互相干扰，那么我们就分开处理。<br>假设现在$f(i)=i^k(i\in prime)$<br>并且$f$为完全积性函数，因为合数会被筛掉，所以没有影响。<br>定义$P_i$表示第$i$小的质数，$sum_i$表示$\sum\limits_{j=1}^{i}f(P_j)$，$Minn_i$表示$i$的最小质因数<br>$g(n,i)表示\sum\limits_{j=2}^{n}[Minn_j&gt;P_i或j\in prime]f(j)$<br>可以理解为用前$i$个做埃氏筛后剩下的数的$f$的和。<br>考虑如何计算$g(n,i)$。<br>由于是个埃氏筛的过程，我们考虑第i个质数会筛掉哪些合数。<br>显然会筛掉最小的合数为$P_i^2$<br>如果$P_i^2&gt;n$，那么啥都筛不掉，$g(n,i)=g(n,i-1)$<br>如果$P_i^2\le n$，那么$P_i的[1,\frac{n}{P_i}]$倍都可以，这些答案存在$g(\frac{n}{P_i},b-1)$中，但是这里面还包括了$P_1,P_2….P_{b-1}$这些质数。<br>所以$g(n,i)=g(n,i-1)-f(P_i)<em>(g(\frac{n}{P_i},b-1)-sum[b-1])$<br>发现n的取值都形如$\lfloor \frac{a}{b}\rfloor$，通过整数分块，预处理这$2</em>\sqrt{n}$个值的g即可。<br>利用滚动数组完成递推</p>
+<h1 id="Min-25筛"><a href="#Min-25筛" class="headerlink" title="Min-25筛"></a>Min-25筛</h1><h2 id="第一部分"><a href="#第一部分" class="headerlink" title="第一部分"></a>第一部分</h2><p>首先，如果要用Min-25筛有前置条件，即积性函数$f(i)$在i为质数时是个低次多项式，并且在i是质数的幂次时可以快速求得。<br>既然$f(i)$在i是质数时是个低次多项式，我们不妨把这个多项式拆开，形如<script type="math/tex">f(i)=i^{k_1}+i^{k_2}+i^{k_3}(i\in prime)</script><br>显然每个幂次不会互相干扰，那么我们就分开处理。<br>假设现在$f(i)=i^k(i\in prime)$<br>并且$f$为完全积性函数，因为合数会被筛掉，所以没有影响。<br>定义$P_i$表示第$i$小的质数，$sum_i$表示$\sum\limits_{j=1}^{i}f(P_j)$，$Minn_i$表示$i$的最小质因数<br>$g(n,i)表示\sum\limits_{j=2}^{n}[Minn_j&gt;P_i或j\in prime]f(j)$<br>可以理解为用前$i$个做埃氏筛后剩下的数的$f$的和。<br>考虑如何计算$g(n,i)$。<br>由于是个埃氏筛的过程，我们考虑第i个质数会筛掉哪些合数。<br>显然会筛掉最小的合数为$P_i^2$<br>如果$P_i^2&gt;n$，那么啥都筛不掉，$g(n,i)=g(n,i-1)$<br>如果$P_i^2\le n$，那么$P_i的[1,\frac{n}{P_i}]$倍都可以，这些答案存在$g(\frac{n}{P_i},b-1)$中，但是这里面还包括了$P_1,P_2….P_{b-1}$这些质数。<br>所以$g(n,i)=g(n,i-1)-f(P_i)*(g(\frac{n}{P_i},b-1)-sum[b-1])$<br>发现n的取值都形如$\lfloor \frac{a}{b}\rfloor$，通过整数分块，预处理这$2*\sqrt{n}$个值的g即可。<br>利用滚动数组完成递推</p>
 <h2 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h2><p>我们令$S(n,m)$表示$\sum\limits_{i=2}^{n}[Minn_i\ge P_m]f(j)$<br>我们要求的$S(n,1)$<br>考虑质数的贡献，显然是$g(n,\infty)-sum_{m-1}$<br>考虑合数的贡献，不能从$g$中直接得到，因为$g$中对于合数我们假设他为完全积性函数，而事实上并不是，这样做只是方便计算质数。<br>我们枚举每个合数的最小质因数，已及最小质因数的次数(否则无法积性函数)，那么贡献为</p>
 <script type="math/tex; mode=display">\sum_{i=b}^{\infty} \sum_{t\ge 1, prime_i^{t+1}\le n}\left( S(\lfloor \frac{n}{P_i^t} \rfloor,i+1) * f(P_i^t) + f(P_i^{t+1}) \right)</script><p>结合定义应该可以理解，与求g的过程相似。<br>S递归解决即可。</p>
 <h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.luogu.org/problemnew/show/P4213" target="_blank" rel="noopener">Luogu 4213 Sum</a><br>让你求<script type="math/tex">\sum_{i=1}^{n}\phi(i)</script>和<script type="math/tex">\sum_{i=1}^{n}\mu(i)</script><br>我们以求$\phi$为例，$f(i)=i-1(i\in prime)$，我们把按照上面的说法分成$f(i)=i和f(i)=-1$分别把g求出来，合并后求S即可。<br>求$\mu$没有本质的区别。</p>
