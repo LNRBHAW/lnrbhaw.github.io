@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。 暴力直接把每个点看成一个方程，$x^0,x^1\dots x^{n-1}$的系数看成未知数，高斯消元解方程，复杂度为$n^3$ 朴素拉格朗日插值我们构造出函数$l_i(x)$，使得$x$取$x_i$时等于1，$x$取$x_1,x_2\dots x_n$(不包括$x_i$)时为0.设我们">
+  <meta name="description" content="前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。">
 <meta name="keywords" content="数学,拉格朗日插值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="拉格朗日插值学习笔记">
 <meta property="og:url" content="http://yoursite.com/2019/01/25/拉格朗日插值学习笔记/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。 暴力直接把每个点看成一个方程，$x^0,x^1\dots x^{n-1}$的系数看成未知数，高斯消元解方程，复杂度为$n^3$ 朴素拉格朗日插值我们构造出函数$l_i(x)$，使得$x$取$x_i$时等于1，$x$取$x_1,x_2\dots x_n$(不包括$x_i$)时为0.设我们">
+<meta property="og:description" content="前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-25T02:41:43.121Z">
+<meta property="og:updated_time" content="2019-01-25T03:23:11.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="拉格朗日插值学习笔记">
-<meta name="twitter:description" content="前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。 暴力直接把每个点看成一个方程，$x^0,x^1\dots x^{n-1}$的系数看成未知数，高斯消元解方程，复杂度为$n^3$ 朴素拉格朗日插值我们构造出函数$l_i(x)$，使得$x$取$x_i$时等于1，$x$取$x_1,x_2\dots x_n$(不包括$x_i$)时为0.设我们">
+<meta name="twitter:description" content="前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。">
 
 
 
@@ -442,7 +442,7 @@
                 
               
 
-              <time title="Created: 2019-01-25 08:46:19 / Modified: 10:41:43" itemprop="dateCreated datePublished" datetime="2019-01-25T08:46:19+08:00">2019-01-25</time>
+              <time title="Created: 2019-01-25 08:46:19 / Modified: 11:23:11" itemprop="dateCreated datePublished" datetime="2019-01-25T08:46:19+08:00">2019-01-25</time>
             
 
             
@@ -505,7 +505,7 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。<br><a id="more"></a></p>
 <h1 id="暴力"><a href="#暴力" class="headerlink" title="暴力"></a>暴力</h1><p>直接把每个点看成一个方程，$x^0,x^1\dots x^{n-1}$的系数看成未知数，高斯消元解方程，复杂度为$n^3$</p>
 <h1 id="朴素拉格朗日插值"><a href="#朴素拉格朗日插值" class="headerlink" title="朴素拉格朗日插值"></a>朴素拉格朗日插值</h1><p>我们构造出函数$l_i(x)$，使得$x$取$x_i$时等于1，$x$取$x_1,x_2\dots x_n$(不包括$x_i$)时为0.<br>设我们最后要求的函数为$f(x)$</p>
 <script type="math/tex; mode=display">f(x)=\sum\limits_{i=1}^{n}y_i*l_i(x)</script><p>这步应该显然，接下里我们考虑如何构造$l_i(x)$。</p>
