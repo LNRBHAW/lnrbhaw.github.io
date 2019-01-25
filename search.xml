@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[拉格朗日插值学习笔记]]></title>
+    <url>%2F2019%2F01%2F25%2F%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[前言我们都知道两点确定一条直线，三个点确定一个二次函数，现在给你$n$个点，让你求出一个$n-1$次函数怎么做。 暴力直接把每个点看成一个方程，$x^0,x^1\dots x^{n-1}$的系数看成未知数，高斯消元解方程，复杂度为$n^3$ 朴素拉格朗日插值我们构造出函数$l_i(x)$，使得$x$取$x_i$时等于1，$x$取$x_1,x_2\dots x_n$(不包括$x_i$)时为0.设我们最后要求的函数为$f(x)$ f(x)=\sum\limits_{i=1}^{n}y_i*l_i(x)这步应该显然，接下里我们考虑如何构造$l_i(x)$。 l_i(x)=\prod\limits_{j=1,j\ne i}^{n}\frac{x-x_j}{x_i-x_j}显然是满足上面我们的要求的。但这若我们新增一个点或删除一个点，再次插值的话复杂度为$n^2$ 重心拉格朗日插值我们发现$l_i$的分子是有非常多的重复的。考虑令 l(x)=\prod\limits_{j=1}^{n}(x-x_j)那么 l_i(x)=\frac{l(x)}{x-x_i}\frac{1}{\prod_{j=1,j\ne i}^{n}(x_i-x_j)}再令 w_i=\frac{1}{\prod_{j=1,j\ne i}^{n}(x_i-x_j)}我们称$w_i$为重心权，所以这个插值方法也叫做重心拉格朗日插值最后 f(x)=\sum\limits_{i=1}^{n}y_i*\frac{l(x)}{x-x_i}*w_i如果我们要插入或者删除一个点的话，复杂度就降到了$O(n)$ 代码贴上求单点值的代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (2005)using namespace std;int n,k,l,ans;const int P=998244353;int w[N],x[N],y[N]; template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline int ksm(int a,int b)&#123; int ret=1; for (;b;b&gt;&gt;=1,a=1ll*a*a%P) if (b&amp;1) ret=1ll*ret*a%P; return ret;&#125;inline int inv(int a)&#123; return ksm(a,P-2);&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;int main()&#123; read(n),read(k); for (int i=1;i&lt;=n;i++)&#123; read(x[i]),read(y[i]); &#125; for (int i=1;i&lt;=n;i++)&#123; w[i]=1; for (int j=1;j&lt;=n;j++)&#123; if (i!=j) w[i]=1ll*w[i]*(x[i]-x[j]+P)%P; &#125; w[i]=inv(w[i]); &#125; l=1; for (int i=1;i&lt;=n;i++) l=1ll*l*(k-x[i]+P)%P; ans=0; for (int i=1;i&lt;=n;i++)&#123; ans=Inc(ans,1ll*l*inv(Inc(k-x[i],P))%P*w[i]%P*y[i]%P); &#125; printf("%d",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>拉格朗日插值</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[Luogu 3643] [APIO2016] 划艇]]></title>
     <url>%2F2019%2F01%2F24%2FLuogu-3643-APIO2016-%E5%88%92%E8%89%87%2F</url>
     <content type="text"><![CDATA[题目链接Luogu 3643 题目大意给你一个长度为n的数列，数列第i项可以取$[l_i,r_i]$，或者不取，使得最后取的数单调递增，问方案数，若所有数均不取不计入方案。$n\le 500,l_i\le r_i\le 1e9$ 做法我们先考虑这样一个问题，一个长度为n的数列，数列的每个数可以取$[1,L]$，使得数列单调递增的方案数。那么这个答案显然是$\binom{L}{n}$，当你选的数确定后，放的位置也自然就确定了。接下来将问题改为一个长度为n的数列，数列的每个数可以取$[1,L]$或不取，使得最后取的数单调递增的方案数。假设我们从这样一个数列中取n个数 0,0,\dots 0,0,1,2,3,\dots L-1,L前面总共有n个0。我们将每种取数的方案如下映射到一个数列上。如果取到第i个0，那么数列的第i位不取。剩下取到的非0的数按照升序依次填入取的位即可。这个映射显然是个双射，所以我们要求的答案即为$\binom{n+L}{n}$那么知道了这个有什么用呢？我们先将原先的值域离散成若干段左开右闭的区间，那么$[l_i,r_i]$就表示若干段左开右闭的区间了。考虑dp用$f_{i,j}$表示数列的前i项，第i项取在j这个区间中的方案数。再枚举k，表示数列的第k项取，并且取的区间小于j。也就是说数列的$[k+1,i-1]$这些要么不取，要么全部取在j这个区间中。根据我们上面的结论，转移即为 f_{i,j}=\sum\limits_{k=0}^{i-1}\binom{L+t}{t}\sum\limits_{p=1}^{j-1}f_{k,p}$L$表示$j$这段开区间的长度，t表示$[k+1,i]$中有多少个位置，能取的范围是包括$j$这段开区间的，(如果不包括，显然只能不取)对于后面这个式子我们用前缀和优化。k从大往小枚举，组合数可以$O(1)$递推。最后求答案并非是$\sum\limits_{j=1}^{\infty} f_{n,j}$，因为第n项可以不取，而$f_{i,j}$中i这一项是必须取的。所以我们考虑最后取的是哪一项，后面的都不取 ans=\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{\infty}f_{i,j}代码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (505)using namespace std;int n,ans,t; int l[N],r[N],q[N&lt;&lt;1],f[N][N&lt;&lt;1],sum[N][N&lt;&lt;1],inv[N&lt;&lt;1];const int P=1000000007;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;int main()&#123; read(n); for (int i=1;i&lt;=n;i++)&#123; read(l[i]),read(r[i]); q[++t]=l[i],q[++t]=r[i]+1; &#125; sort(q+1,q+t+1); t=unique(q+1,q+t+1)-q-1; inv[0]=inv[1]=1; for (int i=2;i&lt;=n;i++)&#123; inv[i]=Inc(1ll*-P/i*inv[P%i]%P,P); &#125; for (int i=1;i&lt;=n;i++)&#123; l[i]=lower_bound(q+1,q+t+1,l[i])-q; r[i]=lower_bound(q+1,q+t+1,r[i]+1)-q-1; &#125; f[0][0]=1; for (int j=0;j&lt;=t;j++) sum[0][j]=1; for (int i=1;i&lt;=n;i++)&#123; for (int j=l[i];j&lt;=r[i];j++)&#123; int fw=q[j+1]-q[j],C=fw,x=fw,y=1; for (int k=i-1;k&gt;=0;k--)&#123; f[i][j]=Inc(f[i][j],1ll*sum[k][j-1]*C%P); if (l[k]&lt;=j&amp;&amp;r[k]&gt;=j)&#123; C=1ll*C*(x+1)%P*inv[y+1]%P; x++,y++; &#125; &#125; &#125; //for (int j=1;j&lt;=t;j++) printf("%d %d %d\n",i,j,f[i][j]); sum[i][0]=f[i][0]; for (int j=1;j&lt;=t;j++) sum[i][j]=Inc(sum[i][j-1],f[i][j]); &#125; for (int i=1;i&lt;=n;i++) ans=Inc(ans,sum[i][t]); printf("%d",ans); return 0;&#125;]]></content>
@@ -73,9 +85,9 @@
         <category>LOJ</category>
       </categories>
       <tags>
+        <tag>Min-Max容斥</tag>
         <tag>高斯消元</tag>
         <tag>树上高斯消元</tag>
-        <tag>Min-Max容斥</tag>
       </tags>
   </entry>
   <entry>
@@ -139,7 +151,6 @@
         <tag>数学</tag>
         <tag>二项式反演</tag>
         <tag>Min-Max容斥</tag>
-        <tag>学习笔记</tag>
       </tags>
   </entry>
   <entry>
