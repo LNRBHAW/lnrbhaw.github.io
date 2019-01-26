@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[LOJ 2026] [JLOI2016]成绩比较]]></title>
+    <url>%2F2019%2F01%2F26%2FLOJ-2026-JLOI2016-%E6%88%90%E7%BB%A9%E6%AF%94%E8%BE%83%2F</url>
+    <content type="text"><![CDATA[题目链接LOJ 2026 做法非常自然的就想到dp，以$f_{i,j}$表示前$i$门课，目前碾压了$j$人的方案数。枚举我这门课的分数$a$，前$i-1$门中有$k$个人被碾压。$u_i$表示这门课的最高分，$r_i$表示B神这门课的排名。转移如下 f_{i,j}=\sum\limits_{k=j}^{n-1}f_{i-1,k}*\binom{k}{j}*\binom{n-1-k}{n-r_i-j}\sum\limits_{a=1}^{u_i}*(x-a)^{r_i-1}*a^{n-r_i}实际上就是强行钦定j个人的分数仍然小于等于我，k-j个人的分数都大于我。分数小于等于我的实际人数为$n-r_i$个，已经钦定了$j$个，所以还剩$n-r_i-j$个在除了k个被钦定过的人之外选。后面这个求和就是计算有不同分数的方案数。以上做法可以获得40分。主要原始是在$u_i$大的时候枚举的复杂度无法接受。发现后面一个求和显然是个关于$u_i$的n次函数(由于有求和，所以再加一次)，我们用拉格朗日插值就可以在$O(n)$的时间复杂度内计算出。预处理快速幂，时间复杂度$O(n^4)$LOJ太快了，不预处理快速幂都能过 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (105)using namespace std;int n,m,op;int f[N][N],a[N],rnk[N],C[N][N],y[N],w[N],mi[N][N]; const int P=1000000007;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int ksm(int a,int b)&#123; int ret=1; for (;b;b&gt;&gt;=1,a=1ll*a*a%P) if (b&amp;1) ret=1ll*ret*a%P; return ret;&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125; int main()&#123; read(n),read(m),read(op); for (int i=1;i&lt;=m;i++) read(a[i]); for (int i=1;i&lt;=m;i++) read(rnk[i]); C[0][0]=1; for (int i=1;i&lt;=n;i++)&#123; for (int j=1;j&lt;=i;j++) C[i][j]=Inc(C[i-1][j-1],C[i-1][j]); C[i][0]=1; &#125; f[0][n-1]=1; for (int i=0;i&lt;=n;i++)&#123; for (int j=0;j&lt;=n;j++) mi[i][j]=ksm(i,j); &#125; for (int i=1;i&lt;=m;i++)&#123; for (int j=0;j&lt;=n-rnk[i];j++)&#123; for (int x=0;x&lt;=n;x++)&#123; y[x]=0; for (int num=1;num&lt;=x;num++) y[x]=Inc(y[x],1ll*mi[x-num][rnk[i]-1]*mi[num][n-rnk[i]]%P); &#125; for (int x=0;x&lt;=n;x++)&#123; w[x]=1; for (int l=0;l&lt;=n;l++)&#123; if (x!=l) w[x]=1ll*w[x]*(x-l+P)%P; &#125; w[x]=ksm(w[x],P-2); &#125; int l=1; for (int x=0;x&lt;=n;x++) l=1ll*l*(a[i]-x+P)%P; int t=0; if (a[i]&lt;=n)&#123; t=y[a[i]]; &#125; else&#123; for (int x=0;x&lt;=n;x++)&#123; t=Inc(t,1ll*y[x]*w[x]%P*l%P*ksm(a[i]-x,P-2)%P); &#125; &#125; for (int k=j;k&lt;n;k++)&#123; f[i][j]=Inc(f[i][j],1ll*f[i-1][k]*C[k][j]%P*t%P*C[n-1-k][n-rnk[i]-j]%P); &#125; //printf("%d %d %d\n",i,j,f[i][j]); &#125; &#125; printf("%d",f[m][op]); return 0;&#125;]]></content>
+      <categories>
+        <category>题目分析</category>
+        <category>LOJ</category>
+      </categories>
+      <tags>
+        <tag>dp</tag>
+        <tag>拉格朗日插值</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[Luogu 4593] [TJOI2018]教科书般的亵渎]]></title>
     <url>%2F2019%2F01%2F25%2FLuogu-4593-TJOI2018-%E6%95%99%E7%A7%91%E4%B9%A6%E8%88%AC%E7%9A%84%E4%BA%B5%E6%B8%8E%2F</url>
     <content type="text"><![CDATA[题目链接Luogu 4593 做法有个显然的结论，干掉这些怪需要亵渎的数量为$m+1$张，那么第一次亵渎的分数为 \sum\limits_{i=1}^{n}i^{m+1}-\sum\limits_{i=1}^{m}a_i^{m+1}而第二次到第$m+1$亵渎的分数也都是形如这个形式。后面一项求和的项数很少，我们可以直接暴力，而前面一项则是经典的自然数幂和问题，我们使用拉格朗日插值求解。对于$\sum\limits_{i=1}^{n}i^k$，我们把它看成一个关于n的函数，通过伯努利数或斯特林数或其他各种各样的做法我们知道他是一个$k+1$次函数，所以我们只要先暴力代入$i=[0,k+1]$计算答案，再暴力插值即可。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (100005)using namespace std;const int P=1000000007;int ans,m,T; int x[N],y[N],w[N];LL a[N];LL n;template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;inline int ksm(int a,int b)&#123; int ret=1; for (;b;b&gt;&gt;=1,a=1ll*a*a%P) if (b&amp;1) ret=1ll*ret*a%P; return ret;&#125;inline int inv(int a)&#123; return ksm(a,P-2);&#125;void init()&#123; y[0]=0; x[0]=0; for (int i=1;i&lt;=m+1;i++)&#123; x[i]=i; y[i]=Inc(y[i-1],ksm(i,m)); //printf("%d %d\n",x[i],y[i]); &#125; for (int i=0;i&lt;=m+1;i++)&#123; w[i]=1; for (int j=0;j&lt;=m+1;j++)&#123; if (i!=j) w[i]=1ll*w[i]*(x[i]-x[j]+P)%P; &#125; w[i]=inv(w[i]); &#125;&#125;int query(LL t)&#123; int l=1; t%=P; for (int i=0;i&lt;=m+1;i++) if (t==x[i]) return y[i]; for (int i=0;i&lt;=m+1;i++) l=1ll*l*(t-x[i]+P)%P; int ans=0; for (int i=0;i&lt;=m+1;i++)&#123; ans=Inc(ans,1ll*y[i]*l%P*inv(Inc(t-x[i],P))%P*w[i]%P); &#125; //printf("query %lld %d\n",t,ans); return ans;&#125;int main()&#123; read(T); while (T--)&#123; read(n),read(m); for (int i=1;i&lt;=m;i++)&#123; read(a[i]); &#125; sort(a+1,a+m+1); m++; init(); ans=0; for (int i=1;i&lt;=m;i++)&#123; ans=Inc(ans,query(n-a[i-1])); for (int j=i;j&lt;m;j++)&#123; ans=Inc(ans-ksm((a[j]-a[i-1])%P,m),P); &#125; &#125; printf("%d\n",ans); &#125; return 0;&#125;]]></content>
@@ -9,7 +22,6 @@
         <category>Luogu</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>拉格朗日插值</tag>
       </tags>
   </entry>
@@ -21,7 +33,6 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>拉格朗日插值</tag>
       </tags>
   </entry>
@@ -98,9 +109,9 @@
         <category>LOJ</category>
       </categories>
       <tags>
-        <tag>Min-Max容斥</tag>
         <tag>高斯消元</tag>
         <tag>树上高斯消元</tag>
+        <tag>Min-Max容斥</tag>
       </tags>
   </entry>
   <entry>
