@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="题目链接Luogu 3175 [HAOI 2015] 按位或 做法">
+  <meta name="description" content="题目链接Luogu 3175 [HAOI 2015] 按位或">
 <meta name="keywords" content="Min-Max容斥,FWT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Luogu 3175] [HAOI2015]按位或">
 <meta property="og:url" content="http://yoursite.com/2019/01/07/Luogu-3175-HAOI2015-按位或/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="题目链接Luogu 3175 [HAOI 2015] 按位或 做法">
+<meta property="og:description" content="题目链接Luogu 3175 [HAOI 2015] 按位或">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-16T12:27:21.574Z">
+<meta property="og:updated_time" content="2019-02-10T12:06:47.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[Luogu 3175] [HAOI2015]按位或">
-<meta name="twitter:description" content="题目链接Luogu 3175 [HAOI 2015] 按位或 做法">
+<meta name="twitter:description" content="题目链接Luogu 3175 [HAOI 2015] 按位或">
 
 
 
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">34</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags<span class="badge">35</span></a>
 
   </li>
         
@@ -295,7 +295,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">38</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">39</span></a>
 
   </li>
         
@@ -455,7 +455,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-16 20:27:21" itemprop="dateModified" datetime="2019-01-16T20:27:21+08:00">2019-01-16</time>
+                <time title="Modified: 2019-02-10 20:06:47" itemprop="dateModified" datetime="2019-02-10T20:06:47+08:00">2019-02-10</time>
               
             
           </span>
@@ -520,9 +520,8 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.luogu.org/problemnew/show/P3175" target="_blank" rel="noopener">Luogu 3175 [HAOI 2015] 按位或</a></p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><a id="more"></a>
-<p>为了表述的方便，下面称集合S为状态S，因为集合S本质上是表示二进制上某些位为1，某些位为0的状态，<br>定义S中的权值为S这个状态的每一位1出现的期望时间。<br>直接套Min-Max容斥的结论，</p>
+        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.luogu.org/problemnew/show/P3175" target="_blank" rel="noopener">Luogu 3175 [HAOI 2015] 按位或</a><br><a id="more"></a></p>
+<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>为了表述的方便，下面称集合S为状态S，因为集合S本质上是表示二进制上某些位为1，某些位为0的状态，<br>定义S中的权值为S这个状态的每一位1出现的期望时间。<br>直接套Min-Max容斥的结论，</p>
 <script type="math/tex; mode=display">E(Max(S))=\sum_{S'\subseteq S}(-1)^{|S'|-1}E(Min(S'))</script><p>$E(Max(2^{n}-1))$就是我们要求的答案。<br>对于$E(Min(S))$，考虑定义，它的值应该等于所有与S有交集的状态的概率和，再取倒数。<br>即<script type="math/tex">E(Min(S))=\frac{1}{\sum_{S'\cap S\ne \varnothing}p[S']}</script><br>有交集的状态不好求，那么考虑求与我没有交集的状态，显然这些状态就是我补集的子集，所以我们先FWT一下求出子集和，然后暴力套公式就好了。</p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N (25)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,lim,d;</span><br><span class="line"><span class="keyword">int</span> pc[<span class="number">1</span>&lt;&lt;<span class="number">20</span>];</span><br><span class="line"><span class="keyword">double</span> p[<span class="number">1</span>&lt;&lt;<span class="number">20</span>],ans; </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp;t)</span> </span>&#123;</span><br><span class="line">    t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> fl=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">char</span> p=getchar();</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(p)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="string">'-'</span>) fl=<span class="literal">false</span>;</span><br><span class="line">        p=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        (t*=<span class="number">10</span>)+=p<span class="number">-48</span>;p=getchar();</span><br><span class="line">    &#125;<span class="keyword">while</span> (<span class="built_in">isdigit</span>(p));</span><br><span class="line">    <span class="keyword">if</span> (!fl) t=-t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">double</span> *f)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;lim;i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;lim;j+=(i&lt;&lt;<span class="number">1</span>))&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k=j;k&lt;i+j;k++)&#123;</span><br><span class="line">                f[i+k]+=f[k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    read(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++) <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;p[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++) pc[i]=pc[i&gt;&gt;<span class="number">1</span>]+(i&amp;<span class="number">1</span>);</span><br><span class="line">    lim=<span class="number">1</span>&lt;&lt;n;</span><br><span class="line">    FWT(p);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++)&#123;</span><br><span class="line">        <span class="keyword">double</span> k=<span class="number">1</span>-p[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>-i];</span><br><span class="line">        <span class="keyword">if</span> (pc[i]&amp;<span class="number">1</span>) d=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> d=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span> (k==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"INF"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ans=ans+(<span class="number">1</span>/k)*d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.10lf"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -649,7 +648,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">39</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -757,7 +756,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">34</span>
+                      
+                    
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
