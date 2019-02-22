@@ -108,25 +108,27 @@
 
 
 
-  <meta name="description" content="前言矩阵乘法，常常被用作递推式的优化，如果把一个递推式一步的递推转换成乘上一个矩阵，那么由于矩阵乘法有结合律，所以我们就可以快速幂啦，起到优化的效果。而递推式出现最多的地方当然就是dp了，所以今天想简单的总结一下矩阵乘法优化dp。">
-<meta name="keywords" content="dp,矩阵乘法">
+  <meta name="description" content="简介$prufer$序列，是讲一棵树唯一转化为一个序列，在解决无根树的计数问题时十分有用。">
+<meta name="keywords" content="prufer序列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈矩阵乘法的应用">
-<meta property="og:url" content="http://yoursite.com/2018/11/25/浅谈矩阵乘法的应用/index.html">
+<meta property="og:title" content="prufer序列学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/02/22/prufer序列学习笔记/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="前言矩阵乘法，常常被用作递推式的优化，如果把一个递推式一步的递推转换成乘上一个矩阵，那么由于矩阵乘法有结合律，所以我们就可以快速幂啦，起到优化的效果。而递推式出现最多的地方当然就是dp了，所以今天想简单的总结一下矩阵乘法优化dp。">
+<meta property="og:description" content="简介$prufer$序列，是讲一棵树唯一转化为一个序列，在解决无根树的计数问题时十分有用。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-16T12:31:44.997Z">
+<meta property="og:image" content="http://yoursite.com/images/prufer序列学习笔记/图1.png">
+<meta property="og:updated_time" content="2019-02-22T11:36:48.131Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈矩阵乘法的应用">
-<meta name="twitter:description" content="前言矩阵乘法，常常被用作递推式的优化，如果把一个递推式一步的递推转换成乘上一个矩阵，那么由于矩阵乘法有结合律，所以我们就可以快速幂啦，起到优化的效果。而递推式出现最多的地方当然就是dp了，所以今天想简单的总结一下矩阵乘法优化dp。">
+<meta name="twitter:title" content="prufer序列学习笔记">
+<meta name="twitter:description" content="简介$prufer$序列，是讲一棵树唯一转化为一个序列，在解决无根树的计数问题时十分有用。">
+<meta name="twitter:image" content="http://yoursite.com/images/prufer序列学习笔记/图1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/25/浅谈矩阵乘法的应用/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/22/prufer序列学习笔记/">
 
 
 
@@ -136,7 +138,7 @@
   };
 </script>
 
-  <title>浅谈矩阵乘法的应用 | LNRBHAW</title>
+  <title>prufer序列学习笔记 | LNRBHAW</title>
   
 
 
@@ -395,7 +397,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/25/浅谈矩阵乘法的应用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/prufer序列学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LNRBHAW">
@@ -412,7 +414,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈矩阵乘法的应用
+          <h1 class="post-title" itemprop="name headline">prufer序列学习笔记
               
             
           </h1>
@@ -420,6 +422,10 @@
 
         <div class="post-meta">
         
+            <i class="fa fa-thumb-tack"></i>
+            <font color="FF0000">置顶</font>
+            <span class="post-meta-divider">|</span>
+          
           <span class="post-time">
 
             
@@ -438,24 +444,12 @@
                 
               
 
-              <time title="Created: 2018-11-25 09:27:18" itemprop="dateCreated datePublished" datetime="2018-11-25T09:27:18+08:00">2018-11-25</time>
+              <time title="Created: 2019-02-22 17:50:39 / Modified: 19:36:48" itemprop="dateCreated datePublished" datetime="2019-02-22T17:50:39+08:00">2019-02-22</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-01-16 20:31:44" itemprop="dateModified" datetime="2019-01-16T20:31:44+08:00">2019-01-16</time>
               
             
           </span>
@@ -513,13 +507,16 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>矩阵乘法，常常被用作递推式的优化，如果把一个递推式一步的递推转换成乘上一个矩阵，那么由于矩阵乘法有结合律，所以我们就可以快速幂啦，起到优化的效果。而递推式出现最多的地方当然就是dp了，所以今天想简单的总结一下矩阵乘法优化dp。<br><a id="more"></a></p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>博主做的题比较少，见到的这类题也比较少，但有一道题感觉还是比较经典的。<br>给出一张有向图，问从1号点出发，走过路径长度为T，到达n号点的方案数，其中$T\le 2e9$，每条边的边权均为1，$n\le100$。</p>
-<p>那么显然有dp，$f[i][j]$表示到第j个点，当前走过的路径长度为i的方案数，那么我们枚举j的所有出边，设终点为k，则$f[i+1][k]+=f[i][j]$。<br>但是这样子不方便我们理解矩阵乘法，我换一种dp方式，$f[i][j][k]$表示从j到k走了i条边的方案数，然后我们把给我们的邻接矩阵定义为map好了，那么首先$f[1][j][k]$就对应了map对吧，因为你只能走一步，当然只能走map上的边咯。接下来我们考虑转移，我们$f[i][j][k]$能由什么得到，我们显然是从k出发倒退一步对吧，假设上一步我们是$p\to k$，那么$f[i-1][j][p]\to f[i][j][k]$对吧，我们把这个dp的式子用代码写出来。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=T;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> p=<span class="number">1</span>;p&lt;=n;p++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">map</span>[p][k]==<span class="number">1</span>) f[i][j][k]+=f[i<span class="number">-1</span>][j][p];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后神奇的事情就要发生了，我们把这个式子变一下形<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=T;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;k++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> p=<span class="number">1</span>;p&lt;=n;p++)&#123;</span><br><span class="line">                f[i][j][k]+=f[i<span class="number">-1</span>][j][p]*<span class="built_in">map</span>[p][k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果map[p][k]是0的话*0没有影响，如果是1的话没有区别对吧。<br>再仔细观察一下这个式子，是不是发现和矩乘的形式一模一样。<br>我们把i单独拎出来，那么f[i]这个矩阵就是由f[i-1]这个矩阵乘上map矩阵得到的，是不是非常神奇，接下来问题就好办了。<br>前面已经说过f[1]就是map，所以我们要求走T步，只要把map矩阵自乘T次得到ans，ans[1][n]就是最终答案了。</p>
-<p>这道题经典就在于它的递推矩阵正是map矩阵本身，非常神奇，许多人知道这个结论，但是并不知道是怎么来的，希望上文能够帮助大家理解。</p>
-<p>而其他题目dp的矩阵就因题而异了，博主由于水平的问题也讲不出更多了，然后有一道非常好的例题给大家安利一下。<br><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1297" target="_blank" rel="noopener">Luogu 1297</a><br>SCOI2009 迷路<br>简述一下题意，就是有一张有向图，每条边有边权，注意不再是1，但是边权的范围1..9，然后走T的长度，问从1到n的方案数。<br>$T\le 1000000000$<br>如果边权不是1的话，用上面的转移就不对了，那怎么办，数据范围这么大，不矩乘不行啊，而边权又这么小，我们是不是可以把边权变成1。<br>我们把每个点x变成$x[1]…x[9]，map[x[i]][x[i+1]]=1$，然后如果$x\to y$有一条边权为t的边，我们就令$map[x[t]][y[1]]=1$，这样子我们就保证了从x走到y要花t的时间，然后边权也都被我们变成1了，这样我们再和上面一样做就行了。<br>希望本文对大家有帮助，以上全是基于博主的个人见解，如果有错误或者建议非常欢迎在评论留言，感激不尽。</p>
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>$prufer$序列，是讲一棵树唯一转化为一个序列，在解决无根树的计数问题时十分有用。<br><a id="more"></a></p>
+<h1 id="无根树转-prufer-序列"><a href="#无根树转-prufer-序列" class="headerlink" title="无根树转$prufer$序列"></a>无根树转$prufer$序列</h1><p>我们定义一棵树的叶子为这棵树上度数为$1$的点。<br>每次找到编号最小的叶子节点，讲目前唯一与它相连的点的编号加入$prufer$序列，并删除这个叶子节点。<br>当最后还剩两个点的时候停止。<br>比如下图的$prufer$序列为$\{3,2,2,1,1\}$。<br><img src="\images\prufer序列学习笔记\图1.png" alt="图1"><br>实现的话拿个$set$维护一下叶子结点就好了。</p>
+<h1 id="prufer-序列转无根树"><a href="#prufer-序列转无根树" class="headerlink" title="$prufer$序列转无根树"></a>$prufer$序列转无根树</h1><p>先有一个点集V，表示目前可能为叶子的集合，初始时等于{1..n}。<br>从前往后扫$prufer$序列，设$prufer$序列上这一位为$u$，找到$V$中没在之后的$prufer$序列中出现过，编号最小的节点$v$，将$u,v$连上一条边，并把$v$从$V$中删除。<br>直至最后$V$中剩下两个节点，将这两个节点间连边后停止。<br>实现的话同样是一个set可以搞定。</p>
+<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>通过上面这两种转化方式，显然一棵无根树只会与恰好一个$prufer$序列对应.<br>最重要的性质就是每个点在$prufer$序列中恰好出现度数-1次。</p>
+<h1 id="带标号无根树计数"><a href="#带标号无根树计数" class="headerlink" title="带标号无根树计数"></a>带标号无根树计数</h1><p>给你$n$个点，让你求出$n$个点的无根树的数量为多少。<br><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1430" target="_blank" rel="noopener">BZOJ 1430</a><br>根据上面的两条性质，题目转化为在一个长度为$n-2$的序列中填上$[1..n]$的方案数，显然为$n^{n-2}$<br>例题中再乘以一个$(n-1)!$阶乘就好了。</p>
+<h1 id="带标号无根树计数推广"><a href="#带标号无根树计数推广" class="headerlink" title="带标号无根树计数推广"></a>带标号无根树计数推广</h1><h2 id="推广1"><a href="#推广1" class="headerlink" title="推广1"></a>推广1</h2><p>给你$n$个点，并给定每个点的度数$d_i$，求出这$n$个点可以构成无根树的数量。<br>题意可以转化为，在长度为$n-2$的数列中，填上$[1..n]$，且$i$出现$d_i-1$次。<br>那么答案应该为</p>
+<script type="math/tex; mode=display">\frac{(n-2)!}{\prod\limits_{i=1}^{n}(d_i-1)!}</script><h2 id="推广2"><a href="#推广2" class="headerlink" title="推广2"></a>推广2</h2><p>给你$n$个点，$k$个点的度数确定，剩下点的度数随意，求出这$n$个点可以构成的无根树的数量。<br><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1005" target="_blank" rel="noopener">BZOJ 1005</a><br>假设prufer序列还有$res$个位置未确定<br>$res=(n-2)-\sum\limits_{i=1}^{k}(d_i-1)$<br>总方案为</p>
+<script type="math/tex; mode=display">\frac{(n-2)!}{res!*\prod\limits_{i=1}^{k}(d_i-1)!}*(n-k)^{res}</script><p>例题只需要在这个基础上加一个高精度即可。</p>
+<h1 id="带标号有根树计数"><a href="#带标号有根树计数" class="headerlink" title="带标号有根树计数"></a>带标号有根树计数</h1><p>只需要给无根树选一个根就好了</p>
+<script type="math/tex; mode=display">n^{n-2}*n</script><h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>博主水平有限，目前只会不带标号的计数，带标号的有机会再更。</p>
 
       
     </div>
@@ -543,9 +540,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/dp/" rel="tag"># dp</a>
-          
-            <a href="/tags/矩阵乘法/" rel="tag"># 矩阵乘法</a>
+            <a href="/tags/prufer序列/" rel="tag"># prufer序列</a>
           
         </div>
       
@@ -558,8 +553,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/23/莫比乌斯反演学习笔记/" rel="next" title="莫比乌斯反演学习笔记">
-                <i class="fa fa-chevron-left"></i> 莫比乌斯反演学习笔记
+              <a href="/2019/02/22/BZOJ-2671-Calc/" rel="next" title="[BZOJ 2671] Calc">
+                <i class="fa fa-chevron-left"></i> [BZOJ 2671] Calc
               </a>
             
           </div>
@@ -567,10 +562,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/25/虚树学习笔记/" rel="prev" title="虚树学习笔记">
-                虚树学习笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -794,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#无根树转-prufer-序列"><span class="nav-number">2.</span> <span class="nav-text">无根树转$prufer$序列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#prufer-序列转无根树"><span class="nav-number">3.</span> <span class="nav-text">$prufer$序列转无根树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性质"><span class="nav-number">4.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带标号无根树计数"><span class="nav-number">5.</span> <span class="nav-text">带标号无根树计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带标号无根树计数推广"><span class="nav-number">6.</span> <span class="nav-text">带标号无根树计数推广</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#推广1"><span class="nav-number">6.1.</span> <span class="nav-text">推广1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推广2"><span class="nav-number">6.2.</span> <span class="nav-text">推广2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#带标号有根树计数"><span class="nav-number">7.</span> <span class="nav-text">带标号有根树计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结语"><span class="nav-number">8.</span> <span class="nav-text">结语</span></a></li></ol></div>
             
 
           </div>
