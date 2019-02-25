@@ -3,7 +3,15 @@
   <entry>
     <title><![CDATA[[BZOJ 1007] [HNOI2008] 水平可见直线]]></title>
     <url>%2F2019%2F02%2F25%2FBZOJ-1007-HNOI2008-%E6%B0%B4%E5%B9%B3%E5%8F%AF%E8%A7%81%E7%9B%B4%E7%BA%BF%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[题目链接BZOJ 1007 做法我们每加入一条直线，那么它下方的直线就看不到了。所以最后能看到的形状一定是一个下凸壳。所以我们先按斜率从小到大排序。用一个单调栈维护每一段凸壳是哪一条直线，以及这一段凸壳的左端点。每次加入一条新的直线，如果这条直线与目前栈顶的这条直线的交点，小于这段凸壳的左端点，那么栈顶这条直线一定不在凸壳上了，从栈中弹出。最后加入我这条直线就行了。至于精度问题，博主在算交点的时候，用两个整数来表示这个交点的分子和分母，存的时候也存两个整数，就能解决了。 代码12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (100005)using namespace std;int n,top,t;int st[N],dk[N],db[N],ans[N]; template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;struct node&#123; int k,b,id;&#125;a[N];inline bool cmp(node a,node b)&#123; return a.k==b.k?a.b&gt;b.b:a.k&lt;b.k;&#125;int main()&#123; read(n); for (int i=1;i&lt;=n;i++)&#123; read(a[i].k),read(a[i].b); a[i].id=i; &#125; sort(a+1,a+n+1,cmp); st[++top]=1; for (int i=2;i&lt;=n;i++)&#123; if (a[i].k==a[i-1].k) continue; int tk=a[i].k-a[st[top]].k,tb=a[st[top]].b-a[i].b; //printf("%d %d\n",tk,tb); while (top&amp;&amp;1ll*tb*dk[top]&lt;=1ll*db[top]*tk&amp;&amp;st[top]!=1)&#123; top--; tk=a[i].k-a[st[top]].k,tb=a[st[top]].b-a[i].b; &#125; st[++top]=i; db[top]=tb; dk[top]=tk; &#125; while (top)&#123; ans[++t]=a[st[top]].id; top--; &#125; sort(ans+1,ans+t+1); for (int i=1;i&lt;=t;i++) printf("%d ",ans[i]); return 0;&#125;]]></content>
+      <categories>
+        <category>题目分析</category>
+        <category>BZOJ</category>
+      </categories>
+      <tags>
+        <tag>计算几何</tag>
+        <tag>凸包</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[[BZOJ 1145] [CTSC2008] 图腾totem]]></title>
