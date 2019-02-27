@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
-<meta name="keywords" content="数学,二项式反演">
+  <meta name="description" content="题目链接BZOJ 1043">
+<meta name="keywords" content="计算几何">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二项式反演学习笔记">
-<meta property="og:url" content="http://yoursite.com/2019/01/06/二项式反演学习笔记/index.html">
+<meta property="og:title" content="[BZOJ 1043] [HAOI2008]下落的圆盘">
+<meta property="og:url" content="http://yoursite.com/2019/02/27/BZOJ-1043-HAOI2008-下落的圆盘/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
+<meta property="og:description" content="题目链接BZOJ 1043">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-16T12:30:47.619Z">
+<meta property="og:updated_time" content="2019-02-27T10:33:34.345Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二项式反演学习笔记">
-<meta name="twitter:description" content="二项式反演如果我们现在有一个式子$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$告诉我们所有的f，让我们求g这时候就要用到二项式反演了。">
+<meta name="twitter:title" content="[BZOJ 1043] [HAOI2008]下落的圆盘">
+<meta name="twitter:description" content="题目链接BZOJ 1043">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/06/二项式反演学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/27/BZOJ-1043-HAOI2008-下落的圆盘/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>二项式反演学习笔记 | LNRBHAW</title>
+  <title>[BZOJ 1043] [HAOI2008]下落的圆盘 | LNRBHAW</title>
   
 
 
@@ -395,7 +395,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/二项式反演学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/BZOJ-1043-HAOI2008-下落的圆盘/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LNRBHAW">
@@ -412,7 +412,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">二项式反演学习笔记
+          <h1 class="post-title" itemprop="name headline">[BZOJ 1043] [HAOI2008]下落的圆盘
               
             
           </h1>
@@ -420,10 +420,6 @@
 
         <div class="post-meta">
         
-            <i class="fa fa-thumb-tack"></i>
-            <font color="FF0000">置顶</font>
-            <span class="post-meta-divider">|</span>
-          
           <span class="post-time">
 
             
@@ -442,24 +438,12 @@
                 
               
 
-              <time title="Created: 2019-01-06 19:50:19" itemprop="dateCreated datePublished" datetime="2019-01-06T19:50:19+08:00">2019-01-06</time>
+              <time title="Created: 2019-02-27 18:17:42 / Modified: 18:33:34" itemprop="dateCreated datePublished" datetime="2019-02-27T18:17:42+08:00">2019-02-27</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-01-16 20:30:47" itemprop="dateModified" datetime="2019-01-16T20:30:47+08:00">2019-01-16</time>
               
             
           </span>
@@ -476,7 +460,14 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/" itemprop="url" rel="index"><span itemprop="name">题目分析</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/BZOJ/" itemprop="url" rel="index"><span itemprop="name">BZOJ</span></a></span>
 
                 
                 
@@ -517,8 +508,9 @@
       
 
       
-        <h1 id="二项式反演"><a href="#二项式反演" class="headerlink" title="二项式反演"></a>二项式反演</h1><p>如果我们现在有一个式子<br>$f_{n}=\sum\limits_{i=0}^{n}\binom{n}{i}g_{i}$<br>告诉我们所有的f，让我们求g<br>这时候就要用到二项式反演了。<br><a id="more"></a><br>$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}f_{i}$<br>考虑直接代入<br>$g_{n}=\sum\limits_{i=0}^{n}(-1)^{n-i}\binom{n}{i}\sum\limits_{j=0}^{i}\binom{i}{j}g_{j}$<br>换一下枚举顺序<br>$g_{n}=\sum\limits_{j=0}^{i}g_{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n}{i}\binom{i}{j}$<br>把后面两个组合数暴力展开可以得到<br>$\binom{n}{i}\binom{i}{j}=\binom{n}{j}\binom{n-j}{n-i}$<br>把所有和i无关的项都提前<br>$g_{n}=\sum\limits_{j=0}^{n}g_{j}\binom{n}{j}\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$<br>发现后面这个<br>$\sum\limits_{i=j}^{n}(-1)^{n-i}\binom{n-j}{n-i}$ 就是二项式定理。<br>当$j=n$时为1<br>其他时候为$(-1+1)^{n-j}=0$<br>所以$g_n=g_n$<br>结论得证</p>
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2839" target="_blank" rel="noopener">BZOJ 2839 集合计数</a><br><a href="https://lnrbhaw.github.io/2019/01/06/BZOJ-2839-%E9%9B%86%E5%90%88%E8%AE%A1%E6%95%B0/" target="_blank" rel="noopener">BZOJ 2839 集合计数 题解</a><br><a href="https://www.luogu.org/problemnew/show/P4859" target="_blank" rel="noopener">Luogu 4859 已经没有什么好害怕的了</a><br><a href="https://lnrbhaw.github.io/2019/01/15/Luogu-4859-%E5%B7%B2%E7%BB%8F%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%AE%B3%E6%80%95%E7%9A%84%E4%BA%86/" target="_blank" rel="noopener">Luogu 4859 已经没有什么好害怕的了 题解</a></p>
+        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1043" target="_blank" rel="noopener">BZOJ 1043</a><br><a id="more"></a></p>
+<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>博主的计算几何是在是太差了，只能做做这种入门题。<br>我们发现$n$的范围并不大，我们可以考虑对于每个圆，算出后面每个圆覆盖他的部分。<br>覆盖他的部分我们把弧对应到圆心角的一个区间。<br>加入我们现在要算圆$i$被圆$j$覆盖的圆心角的区间。<br>首先先特判圆$i$和圆$j$相离，以及圆$j$被圆$i$包含的情况。<br>如果圆$i$被圆$j$包含，那么$i$圆心角整个区间被覆盖。<br>我们画个图可以发现，$i$的圆心，两圆的一个交点，$j$的圆心，构成一个三角形。<br>用余弦定理可以算出角度，再计算两个圆心的极角，就可以把弧对应到圆心角的一段区间上了。<br>现在问题就变成了有一条线段，在上面覆盖一些线段，求没有被覆盖的长度。按左端点排序后扫一遍就好了。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N (1005)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,t;</span><br><span class="line"><span class="keyword">double</span> pi=<span class="built_in">acos</span>(<span class="number">-1</span>),res,ans,maxen;</span><br><span class="line"><span class="keyword">double</span> x[N],y[N],r[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">line</span>&#123;</span></span><br><span class="line">    <span class="keyword">double</span> st,en;</span><br><span class="line">&#125;kill[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(line a,line b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.st&lt;b.st;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp;t)</span> </span>&#123;</span><br><span class="line">    t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> fl=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">char</span> p=getchar();</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(p)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="string">'-'</span>) fl=<span class="literal">false</span>;</span><br><span class="line">        p=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        (t*=<span class="number">10</span>)+=p<span class="number">-48</span>;p=getchar();</span><br><span class="line">    &#125;<span class="keyword">while</span> (<span class="built_in">isdigit</span>(p));</span><br><span class="line">    <span class="keyword">if</span> (!fl) t=-t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">double</span> <span class="title">sqr</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x*x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    read(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf%lf%lf"</span>,&amp;r[i],&amp;x[i],&amp;y[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        t=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;=n;j++)&#123;</span><br><span class="line">            <span class="keyword">double</span> dis=<span class="built_in">sqrt</span>(sqr(x[i]-x[j])+sqr(y[i]-y[j]));</span><br><span class="line">            <span class="keyword">if</span> (dis&gt;=r[i]+r[j]) <span class="keyword">continue</span>;<span class="comment">// 相离 </span></span><br><span class="line">            <span class="keyword">if</span> (r[i]&gt;r[j]&amp;&amp;dis+r[j]&lt;=r[i]) <span class="keyword">continue</span>;<span class="comment">//a 包含 b</span></span><br><span class="line">            <span class="keyword">if</span> (r[i]&lt;r[j]&amp;&amp;dis+r[i]&lt;=r[j])&#123;<span class="comment">//b 包含 a</span></span><br><span class="line">                kill[++t]=(line)&#123;<span class="number">0</span>,<span class="number">2</span>*pi&#125;;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">double</span> alpha=(sqr(r[i])+sqr(dis)-sqr(r[j]))/(<span class="number">2</span>*dis*r[i]);</span><br><span class="line">            <span class="keyword">double</span> beta=<span class="built_in">atan2</span>(y[j]-y[i],x[j]-x[i]);</span><br><span class="line">            alpha=<span class="built_in">acos</span>(alpha);</span><br><span class="line">            <span class="comment">//printf("emm %.3lf %.3lf\n",alpha,beta); </span></span><br><span class="line">            <span class="keyword">double</span> l=beta-alpha,r=beta+alpha;</span><br><span class="line">            <span class="keyword">if</span> (l&lt;<span class="number">0</span>) l+=<span class="number">2</span>*pi;</span><br><span class="line">            <span class="keyword">if</span> (r&lt;<span class="number">0</span>) r+=<span class="number">2</span>*pi;</span><br><span class="line">            <span class="keyword">if</span> (l&gt;r) kill[++t]=(line)&#123;<span class="number">0</span>,r&#125;,kill[++t]=(line)&#123;l,<span class="number">2</span>*pi&#125;;</span><br><span class="line">            <span class="keyword">else</span> kill[++t]=(line)&#123;l,r&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(kill+<span class="number">1</span>,kill+t+<span class="number">1</span>,cmp);</span><br><span class="line">        <span class="comment">//for (int j=1;j&lt;=t;j++) printf("kill %.3lf %.3lf\n",kill[j].st,kill[j].en);</span></span><br><span class="line">        <span class="keyword">if</span> (t==<span class="number">0</span>)&#123;</span><br><span class="line">            ans+=r[i]*<span class="number">2</span>*pi;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        kill[++t].st=<span class="number">2</span>*pi; </span><br><span class="line">        maxen=<span class="number">0</span>;</span><br><span class="line">        res=kill[<span class="number">1</span>].st;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;t;j++)&#123;</span><br><span class="line">            maxen=max(maxen,kill[j].en);</span><br><span class="line">            <span class="keyword">if</span> (maxen&lt;kill[j+<span class="number">1</span>].st) res+=kill[j+<span class="number">1</span>].st-maxen;</span><br><span class="line">        &#125;</span><br><span class="line">        ans+=res*r[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.3lf"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -542,9 +534,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数学/" rel="tag"># 数学</a>
-          
-            <a href="/tags/二项式反演/" rel="tag"># 二项式反演</a>
+            <a href="/tags/计算几何/" rel="tag"># 计算几何</a>
           
         </div>
       
@@ -557,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/06/Luogu-4707-重返现世/" rel="next" title="[Luogu 4707] 重返现世">
-                <i class="fa fa-chevron-left"></i> [Luogu 4707] 重返现世
+              <a href="/2019/02/26/BZOJ-1027-JSOI2007-合金/" rel="next" title="[BZOJ 1027][JSOI2007] 合金">
+                <i class="fa fa-chevron-left"></i> [BZOJ 1027][JSOI2007] 合金
               </a>
             
           </div>
@@ -566,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/06/BZOJ-2839-集合计数/" rel="prev" title="[BZOJ 2839] 集合计数">
-                [BZOJ 2839] 集合计数 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -805,7 +791,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二项式反演"><span class="nav-number">1.</span> <span class="nav-text">二项式反演</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">2.</span> <span class="nav-text">例题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#做法"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
