@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="题目链接CF 1129 D 题目大意现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。$n \le 10^5$">
-<meta name="keywords" content="dp,分块">
+  <meta name="description" content="题目链接CF 1129 D 题目大意现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。$k \le n \le 10^5$">
+<meta name="keywords" content="分块,dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[CF 1129 D] Isolation">
 <meta property="og:url" content="http://yoursite.com/2019/02/28/CF-1129-D-Isolation/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="题目链接CF 1129 D 题目大意现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。$n \le 10^5$">
+<meta property="og:description" content="题目链接CF 1129 D 题目大意现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。$k \le n \le 10^5$">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-28T12:09:11.323Z">
+<meta property="og:updated_time" content="2019-02-28T23:51:17.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[CF 1129 D] Isolation">
-<meta name="twitter:description" content="题目链接CF 1129 D 题目大意现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。$n \le 10^5$">
+<meta name="twitter:description" content="题目链接CF 1129 D 题目大意现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。$k \le n \le 10^5$">
 
 
 
@@ -438,12 +438,24 @@
                 
               
 
-              <time title="Created: 2019-02-28 19:41:56 / Modified: 20:09:11" itemprop="dateCreated datePublished" datetime="2019-02-28T19:41:56+08:00">2019-02-28</time>
+              <time title="Created: 2019-02-28 19:41:56" itemprop="dateCreated datePublished" datetime="2019-02-28T19:41:56+08:00">2019-02-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-03-01 07:51:17" itemprop="dateModified" datetime="2019-03-01T07:51:17+08:00">2019-03-01</time>
               
             
           </span>
@@ -509,7 +521,7 @@
 
       
         <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://codeforces.com/contest/1129/problem/D" target="_blank" rel="noopener">CF 1129 D</a></p>
-<h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h1><p>现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。<br>$n \le 10^5$<br><a id="more"></a></p>
+<h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h1><p>现在有一个数列，长度为$n$，其中每个数均$\le n$，要求把数列分成若干段，使得这个数列每段中只出现$1$次的数均不超过$k$个。<br>$k \le n \le 10^5$<br><a id="more"></a></p>
 <h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>首先$n^2$的$dp$非常显然。</p>
 <script type="math/tex; mode=display">f_i=\sum_{j=0}^{i-1}f_j*[区间[j+1,i]中仅出现一次的数的个数\le k]</script><p>我们考虑构造一个序列$v$，$\sum\limits_{i=l}^{r}v_i$表示区间$[l,r]$中仅出现一次的数的个数。<br>考虑如何构造$v$<br>我们每次新加进来一个数，$v_i=1$，$v_{pre[i]}=-1$，$v_{pre[pre[i]]}=0$，$pre[i]$是所有位置上的数与我相同的位置中最靠近我的一个，当然，是在我前面。<br>我们在对$v$做一次前缀和，得到数组$S$，那么我们上面的式子可以改写为</p>
 <script type="math/tex; mode=display">f_i=\sum_{j=0}^{i-1}f_j*[S_i-S_j\le k]</script><script type="math/tex; mode=display">f_i=\sum_{j=0}^{i-1}f_j*[S_j\ge S_i-k]</script><p>把问题转化一下。<br>维护一个数列，支持区间加，以及区间查询$S$小于一个数的$f$的和。<br>我们对原序列分块，每个块内维护权值的后缀和，我们对于每个区间用一个$lazy$标记维护整个块都加的值。如果有一个块有一部分被修改了，我们就暴力重构整一个块，所以每次修改的复杂度是$O(块大小)+O(块数)$，可以做到$\sqrt n$。<br>询问的时候，如果是整块，那么就先处理一下$lazy$标记，再在后缀和上查询一下就好了。<br>非整块部分暴力即可。<br>这题还有一些比较好的性质，我们每次插入一个数都只会改变最多两个区间的$S$值。<br>此外，在块内维护后缀和的时候还有一些小$tips$，发现$abs(S_i-S_{i-1})\le 1$的，所以我们把一个块内所有的$S$值，都减去最小的$S$值，那么$S$的区间是不会超过块大小的。最后在在整个区间的$lazy$标记上把减去的那个数加回来就好了。</p>
@@ -537,9 +549,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/dp/" rel="tag"># dp</a>
-          
             <a href="/tags/分块/" rel="tag"># 分块</a>
+          
+            <a href="/tags/dp/" rel="tag"># dp</a>
           
         </div>
       
