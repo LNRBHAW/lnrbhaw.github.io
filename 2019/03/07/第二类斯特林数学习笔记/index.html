@@ -108,25 +108,25 @@
 
 
 
-  <meta name="description" content="题目链接Luogu 3175 [HAOI 2015] 按位或">
-<meta name="keywords" content="FWT,Min-Max容斥">
+  <meta name="description" content="第二类斯特林数定义第二类斯特林数$S(n,m)$定义为把$n$个球放入$m$个盒子中，所有盒子均不为空的方案数，其中球不带标号，而盒子是带标号的。 递推求法根据定义，就能得到第二类斯特林数的递推求法，只需要枚举最后一个球放在哪个集合里即可。 S(n,m)=S(n-1,m-1)+m*S(n-1,m)">
+<meta name="keywords" content="数学,斯特林数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Luogu 3175] [HAOI2015]按位或">
-<meta property="og:url" content="http://yoursite.com/2019/01/07/Luogu-3175-HAOI2015-按位或/index.html">
+<meta property="og:title" content="第二类斯特林数学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/03/07/第二类斯特林数学习笔记/index.html">
 <meta property="og:site_name" content="LNRBHAW">
-<meta property="og:description" content="题目链接Luogu 3175 [HAOI 2015] 按位或">
+<meta property="og:description" content="第二类斯特林数定义第二类斯特林数$S(n,m)$定义为把$n$个球放入$m$个盒子中，所有盒子均不为空的方案数，其中球不带标号，而盒子是带标号的。 递推求法根据定义，就能得到第二类斯特林数的递推求法，只需要枚举最后一个球放在哪个集合里即可。 S(n,m)=S(n-1,m-1)+m*S(n-1,m)">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-10T12:06:47.495Z">
+<meta property="og:updated_time" content="2019-03-07T11:33:04.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[Luogu 3175] [HAOI2015]按位或">
-<meta name="twitter:description" content="题目链接Luogu 3175 [HAOI 2015] 按位或">
+<meta name="twitter:title" content="第二类斯特林数学习笔记">
+<meta name="twitter:description" content="第二类斯特林数定义第二类斯特林数$S(n,m)$定义为把$n$个球放入$m$个盒子中，所有盒子均不为空的方案数，其中球不带标号，而盒子是带标号的。 递推求法根据定义，就能得到第二类斯特林数的递推求法，只需要枚举最后一个球放在哪个集合里即可。 S(n,m)=S(n-1,m-1)+m*S(n-1,m)">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/07/Luogu-3175-HAOI2015-按位或/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/07/第二类斯特林数学习笔记/">
 
 
 
@@ -136,7 +136,7 @@
   };
 </script>
 
-  <title>[Luogu 3175] [HAOI2015]按位或 | LNRBHAW</title>
+  <title>第二类斯特林数学习笔记 | LNRBHAW</title>
   
 
 
@@ -395,7 +395,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/Luogu-3175-HAOI2015-按位或/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/07/第二类斯特林数学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LNRBHAW">
@@ -412,7 +412,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">[Luogu 3175] [HAOI2015]按位或
+          <h1 class="post-title" itemprop="name headline">第二类斯特林数学习笔记
               
             
           </h1>
@@ -420,6 +420,10 @@
 
         <div class="post-meta">
         
+            <i class="fa fa-thumb-tack"></i>
+            <font color="FF0000">置顶</font>
+            <span class="post-meta-divider">|</span>
+          
           <span class="post-time">
 
             
@@ -438,24 +442,12 @@
                 
               
 
-              <time title="Created: 2019-01-07 18:35:58" itemprop="dateCreated datePublished" datetime="2019-01-07T18:35:58+08:00">2019-01-07</time>
+              <time title="Created: 2019-03-07 17:56:23 / Modified: 19:33:04" itemprop="dateCreated datePublished" datetime="2019-03-07T17:56:23+08:00">2019-03-07</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-02-10 20:06:47" itemprop="dateModified" datetime="2019-02-10T20:06:47+08:00">2019-02-10</time>
               
             
           </span>
@@ -472,14 +464,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/" itemprop="url" rel="index"><span itemprop="name">题目分析</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/题目分析/Luogu/" itemprop="url" rel="index"><span itemprop="name">Luogu</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
 
                 
                 
@@ -520,10 +505,21 @@
       
 
       
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><p><a href="https://www.luogu.org/problemnew/show/P3175" target="_blank" rel="noopener">Luogu 3175 [HAOI 2015] 按位或</a><br><a id="more"></a></p>
-<h1 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h1><p>为了表述的方便，下面称集合S为状态S，因为集合S本质上是表示二进制上某些位为1，某些位为0的状态，<br>定义S中的权值为S这个状态的每一位1出现的期望时间。<br>直接套Min-Max容斥的结论，</p>
-<script type="math/tex; mode=display">E(Max(S))=\sum_{S'\subseteq S}(-1)^{|S'|-1}E(Min(S'))</script><p>$E(Max(2^{n}-1))$就是我们要求的答案。<br>对于$E(Min(S))$，考虑定义，它的值应该等于所有与S有交集的状态的概率和，再取倒数。<br>即<script type="math/tex">E(Min(S))=\frac{1}{\sum_{S'\cap S\ne \varnothing}p[S']}</script><br>有交集的状态不好求，那么考虑求与我没有交集的状态，显然这些状态就是我补集的子集，所以我们先FWT一下求出子集和，然后暴力套公式就好了。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N (25)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,lim,d;</span><br><span class="line"><span class="keyword">int</span> pc[<span class="number">1</span>&lt;&lt;<span class="number">20</span>];</span><br><span class="line"><span class="keyword">double</span> p[<span class="number">1</span>&lt;&lt;<span class="number">20</span>],ans; </span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp;t)</span> </span>&#123;</span><br><span class="line">    t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> fl=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">char</span> p=getchar();</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(p)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="string">'-'</span>) fl=<span class="literal">false</span>;</span><br><span class="line">        p=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        (t*=<span class="number">10</span>)+=p<span class="number">-48</span>;p=getchar();</span><br><span class="line">    &#125;<span class="keyword">while</span> (<span class="built_in">isdigit</span>(p));</span><br><span class="line">    <span class="keyword">if</span> (!fl) t=-t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">FWT</span><span class="params">(<span class="keyword">double</span> *f)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;lim;i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;lim;j+=(i&lt;&lt;<span class="number">1</span>))&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k=j;k&lt;i+j;k++)&#123;</span><br><span class="line">                f[i+k]+=f[k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    read(n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++) <span class="built_in">scanf</span>(<span class="string">"%lf"</span>,&amp;p[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++) pc[i]=pc[i&gt;&gt;<span class="number">1</span>]+(i&amp;<span class="number">1</span>);</span><br><span class="line">    lim=<span class="number">1</span>&lt;&lt;n;</span><br><span class="line">    FWT(p);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;(<span class="number">1</span>&lt;&lt;n);i++)&#123;</span><br><span class="line">        <span class="keyword">double</span> k=<span class="number">1</span>-p[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>-i];</span><br><span class="line">        <span class="keyword">if</span> (pc[i]&amp;<span class="number">1</span>) d=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> d=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span> (k==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"INF"</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ans=ans+(<span class="number">1</span>/k)*d;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%.10lf"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="第二类斯特林数"><a href="#第二类斯特林数" class="headerlink" title="第二类斯特林数"></a>第二类斯特林数</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>第二类斯特林数$S(n,m)$定义为把$n$个球放入$m$个盒子中，所有盒子均不为空的方案数，其中球不带标号，而盒子是带标号的。</p>
+<h2 id="递推求法"><a href="#递推求法" class="headerlink" title="递推求法"></a>递推求法</h2><p>根据定义，就能得到第二类斯特林数的递推求法，只需要枚举最后一个球放在哪个集合里即可。</p>
+<script type="math/tex; mode=display">S(n,m)=S(n-1,m-1)+m*S(n-1,m)</script><a id="more"></a>
+<h2 id="组合求法"><a href="#组合求法" class="headerlink" title="组合求法"></a>组合求法</h2><p>而第二类斯特林数还可以用组合意义来求得。<br>假设我们现在有$n$个无标号球，随意放在$m$个带标号的盒子中，显然方案数可以为$m^n$<br>而我们再枚举有几个非空盒子，用第二类斯特林数计算，可以得到</p>
+<script type="math/tex; mode=display">m^n=\sum_{i=0}^{m}\binom{m}{i}*S(n,i)*i!</script><p>这个式子是一个二项式反演的经典式子，我们二项式反演一下</p>
+<script type="math/tex; mode=display">S(n,m)*m!=\sum_{j=0}^{m}(-1)^{m-j}*j^n*\binom{m}{j}</script><h2 id="快速求-S-n-1-m"><a href="#快速求-S-n-1-m" class="headerlink" title="快速求$S(n,1..m)$"></a>快速求$S(n,1..m)$</h2><p>发现上面组合求法中，可以把第二类斯特林数写成卷积的形式。</p>
+<script type="math/tex; mode=display">S(n,m)*m!=\sum_{i=0}^{m}(-1)^{m-j}*j^n*\frac{m!}{j!*(m-j)!}</script><script type="math/tex; mode=display">S(n,m)=\sum_{i=0}^{m}(-1)^{m-j}*j^n*\frac{1}{j!*(m-j)!}</script><p>令$A(x)=\frac{(-1)^x}{x!},B(x)=\frac{x^n}{x!}$<br>$S(n,m)=A(m-j)<em>B(j)$<br>用$NTT/FFT$就可以在$O(n</em>logn)$的时间内求出。</p>
+<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h2><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=5093" target="_blank" rel="noopener">BZOJ 5093</a></p>
+<h2 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h2><p>显然每个点的贡献是独立的，考虑每个点的贡献，枚举有几条边与他相连，其他与他不相连的边随便。</p>
+<script type="math/tex; mode=display">ans=n*2^{\binom{n-1}{2}}\sum_{i=0}^{n-1}i^k*\binom{n-1}{i}</script><p>由于有$n$个点，所以乘个$n$就好了。<br>定义$f(n,m)$为$\sum\limits_{i=0}^{n}i^m*\binom{n}{i}$<br>我们只有求出$f(n-1,k)$上面的问题就能解决了。<br>根据我们前面的式子，上面的$i^m$可以用斯特林数展开。</p>
+<script type="math/tex; mode=display">f(n,m)=\sum_{i=0}^{n}\sum_{j=0}^{i}*\binom{i}{j}*S(m,j)*j!*\binom{n}{i}</script><p>改为先枚举$j$</p>
+<script type="math/tex; mode=display">f(n,m)=\sum_{j=0}^{i}S(m,j)*j!\sum_{i=0}^{n}\binom{n}{i}*\binom{i}{j}</script><p>观察一下后面这个$\sum\limits_{i=0}^{n}\binom{n}{i}*\binom{i}{j}$是什么<br>可以看成在$n$个物品中选出$j$个，剩下的随意，那么</p>
+<script type="math/tex; mode=display">\sum_{i=0}^{n}\binom{i}{j}*\binom{n}{i}=\binom{n}{j}*2^{n-j}</script><p>所以</p>
+<script type="math/tex; mode=display">f(n,m)=\sum_{j=0}^{i}S(m,j)*j!\binom{n}{j}*2^{n-j}</script><p>这样的话我们在用$NTT$算出第二类斯特林数，剩下的项都可以快速算出。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N (1000005)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P=<span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">int</span> n,k,lim,d,invL,tot,CC,mi,inv2;</span><br><span class="line"><span class="keyword">int</span> f[N&lt;&lt;<span class="number">1</span>],g[N&lt;&lt;<span class="number">1</span>],R[N&lt;&lt;<span class="number">1</span>],A[N],inv[N],jc[N];</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">(T&amp;t)</span> </span>&#123;</span><br><span class="line">    t=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">bool</span> fl=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">char</span> p=getchar();</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(p)) &#123;</span><br><span class="line">        <span class="keyword">if</span> (p==<span class="string">'-'</span>) fl=<span class="literal">false</span>;</span><br><span class="line">        p=getchar();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        (t*=<span class="number">10</span>)+=p<span class="number">-48</span>;p=getchar();</span><br><span class="line">    &#125;<span class="keyword">while</span> (<span class="built_in">isdigit</span>(p));</span><br><span class="line">    <span class="keyword">if</span> (!fl) t=-t;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Inc</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a+b&gt;=P)?(a+b-P):(a+b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ksm</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (;b;b&gt;&gt;=<span class="number">1</span>,a=<span class="number">1l</span>l*a*a%P) <span class="keyword">if</span> (b&amp;<span class="number">1</span>) ret=<span class="number">1l</span>l*ret*a%P;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> *f,<span class="keyword">int</span> G)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (i&gt;R[i]) swap(f[i],f[R[i]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;lim;i&lt;&lt;=<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> w0=ksm(G,(P<span class="number">-1</span>)/(i&lt;&lt;<span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;lim;j+=(i&lt;&lt;<span class="number">1</span>))&#123;</span><br><span class="line">            <span class="keyword">int</span> w=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k=j;k&lt;j+i;k++)&#123;</span><br><span class="line">                <span class="keyword">int</span> t=<span class="number">1l</span>l*f[k+i]*w%P;</span><br><span class="line">                f[k+i]=Inc(f[k],P-t);</span><br><span class="line">                f[k]=Inc(f[k],t);</span><br><span class="line">                w=<span class="number">1l</span>l*w*w0%P;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (G!=<span class="number">3</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) f[i]=<span class="number">1l</span>l*f[i]*invL%P;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1l</span>l*jc[a]*inv[a-b]%P*inv[b]%P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    read(n),read(k);</span><br><span class="line">    <span class="keyword">if</span> (k==<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld"</span>,<span class="number">1l</span>l*ksm(<span class="number">2</span>,n<span class="number">-1</span>)*n%P*ksm(<span class="number">2</span>,<span class="number">1l</span>l*(n<span class="number">-1</span>)*(n<span class="number">-2</span>)/<span class="number">2</span>%(P<span class="number">-1</span>))%P);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (lim=<span class="number">1</span>;lim&lt;<span class="number">2</span>*k+<span class="number">2</span>;lim&lt;&lt;=<span class="number">1</span>);</span><br><span class="line">    invL=ksm(lim,P<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) R[i]=(R[i&gt;&gt;<span class="number">1</span>]&gt;&gt;<span class="number">1</span>)|((i&amp;<span class="number">1</span>)*lim&gt;&gt;<span class="number">1</span>);</span><br><span class="line">    A[<span class="number">0</span>]=A[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=k;i++) A[i]=<span class="number">1l</span>l*(P-P/i)*A[P%i]%P;</span><br><span class="line">    inv[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++) inv[i]=<span class="number">1l</span>l*inv[i<span class="number">-1</span>]*A[i]%P;</span><br><span class="line">    jc[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++) jc[i]=<span class="number">1l</span>l*jc[i<span class="number">-1</span>]*i%P;</span><br><span class="line">    f[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">    g[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">    d=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=k;i++)&#123;</span><br><span class="line">        d=P-d;</span><br><span class="line">        f[i]=<span class="number">1l</span>l*d*inv[i]%P;</span><br><span class="line">        g[i]=<span class="number">1l</span>l*ksm(i,k)*inv[i]%P;</span><br><span class="line">    &#125;</span><br><span class="line">    NTT(f,<span class="number">3</span>),NTT(g,<span class="number">3</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;lim;i++) f[i]=<span class="number">1l</span>l*f[i]*g[i]%P;</span><br><span class="line">    NTT(f,ksm(<span class="number">3</span>,P<span class="number">-2</span>));</span><br><span class="line">    CC=<span class="number">1</span>;</span><br><span class="line">    mi=ksm(<span class="number">2</span>,n<span class="number">-1</span>);</span><br><span class="line">    inv2=ksm(<span class="number">2</span>,P<span class="number">-2</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=min(n<span class="number">-1</span>,k);j++)&#123;</span><br><span class="line">        tot=Inc(tot,<span class="number">1l</span>l*f[j]*CC%P*jc[j]%P*mi%P);</span><br><span class="line">        CC=<span class="number">1l</span>l*CC*A[j+<span class="number">1</span>]%P*(n-j<span class="number">-1</span>)%P;</span><br><span class="line">        mi=<span class="number">1l</span>l*mi*inv2%P;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,<span class="number">1l</span>l*tot*n%P*ksm(<span class="number">2</span>,<span class="number">1l</span>l*(n<span class="number">-1</span>)*(n<span class="number">-2</span>)/<span class="number">2</span>%(P<span class="number">-1</span>))%P);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -546,9 +542,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/FWT/" rel="tag"># FWT</a>
+            <a href="/tags/数学/" rel="tag"># 数学</a>
           
-            <a href="/tags/Min-Max容斥/" rel="tag"># Min-Max容斥</a>
+            <a href="/tags/斯特林数/" rel="tag"># 斯特林数</a>
           
         </div>
       
@@ -561,8 +557,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/06/BZOJ-2839-集合计数/" rel="next" title="[BZOJ 2839] 集合计数">
-                <i class="fa fa-chevron-left"></i> [BZOJ 2839] 集合计数
+              <a href="/2019/03/02/BZOJ-1085-SCOI2005-骑士精神/" rel="next" title="[BZOJ 1085] [SCOI2005]骑士精神">
+                <i class="fa fa-chevron-left"></i> [BZOJ 1085] [SCOI2005]骑士精神
               </a>
             
           </div>
@@ -570,10 +566,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/09/LOJ-2542-「PKUWC2018」随机游走/" rel="prev" title="[LOJ 2542]「PKUWC2018」随机游走">
-                [LOJ 2542]「PKUWC2018」随机游走 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -817,7 +809,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目链接"><span class="nav-number">1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#做法"><span class="nav-number">2.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二类斯特林数"><span class="nav-number">1.</span> <span class="nav-text">第二类斯特林数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递推求法"><span class="nav-number">1.2.</span> <span class="nav-text">递推求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合求法"><span class="nav-number">1.3.</span> <span class="nav-text">组合求法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快速求-S-n-1-m"><span class="nav-number">1.4.</span> <span class="nav-text">快速求$S(n,1..m)$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例题"><span class="nav-number">2.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目链接"><span class="nav-number">2.1.</span> <span class="nav-text">题目链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做法"><span class="nav-number">2.2.</span> <span class="nav-text">做法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></div>
             
 
           </div>
