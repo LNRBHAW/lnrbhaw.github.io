@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[Atcoder agc027 B] Garbage Collector]]></title>
+    <url>%2F2019%2F03%2F13%2FAtcoder-agc027-B-Garbage-Collector%2F</url>
+    <content type="text"><![CDATA[题目链接Atcoder agc027 B 题目大意现在有一条数轴，数轴上有$n$个点存在垃圾，有个捡垃圾的机器人从$0$号点出发，现在需要将所有垃圾运回$0$号点。捡起一个垃圾需要消耗$X$能量，当身上有$k$个垃圾时，走一步需要消耗$(k+1)^2$能量。回到起点倒一次垃圾也需要消耗$X$能量，注意这里倒垃圾时不管身上运载着多少垃圾，消耗能量均为$X$。$n \le 2*10^5$ 做法感觉上很像$dp+$斜率优化。但是这题有个非常关键的地方，每次出发所捡的垃圾并不一定相邻。手动模拟一下，假设一次出发经过了$t_q,t_{q-1},t_{q-2}…t_1$点的话。所需要的能量就是$X(q+1)+5t_1+5t_2+7t_3+9t_4…$假设我们一共出发$A$次的话，那么最远的$2A$个点会有$5$的贡献，再近一点的$A$个点有$7$的贡献，再近一点的$A$个点有$9$的贡献，以此类推。最后再加上倒$A$次垃圾，捡$n$次垃圾的贡献$(A+n)*X$即可。发现算这个贡献的复杂度其实是调和级数的，我们先预处理一下前缀和，暴力枚举$A$，暴力计算就好了。 代码123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (200005)using namespace std;int n,tt;LL a[N],sum[N];LL ans=9e18,x,now; template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int main()&#123; read(n),read(x); for (int i=1;i&lt;=n;i++) read(a[i]),sum[i]=sum[i-1]+a[i]; for (int i=1;i&lt;=n;i++)&#123; now=x*(i+n); tt=3; for (int j=n;j&gt;=1;j-=i)&#123; if (tt==3) now+=(sum[j]-sum[max(0,j-i)])*5; else now+=(sum[j]-sum[max(0,j-i)])*tt; tt+=2; if (now&gt;=ans) break; &#125; ans=min(ans,now); &#125; printf("%lld",ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题目分析</category>
+        <category>Atcoder</category>
+      </categories>
+      <tags>
+        <tag>贪心</tag>
+        <tag>调和级数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[第二类斯特林数学习笔记]]></title>
     <url>%2F2019%2F03%2F07%2F%E7%AC%AC%E4%BA%8C%E7%B1%BB%E6%96%AF%E7%89%B9%E6%9E%97%E6%95%B0%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[第二类斯特林数定义第二类斯特林数$S(n,m)$定义为把$n$个球放入$m$个盒子中，所有盒子均不为空的方案数，其中球不带标号，而盒子是带标号的。 递推求法根据定义，就能得到第二类斯特林数的递推求法，只需要枚举最后一个球放在哪个集合里即可。 S(n,m)=S(n-1,m-1)+m*S(n-1,m) 组合求法而第二类斯特林数还可以用组合意义来求得。假设我们现在有$n$个无标号球，随意放在$m$个带标号的盒子中，显然方案数可以为$m^n$而我们再枚举有几个非空盒子，用第二类斯特林数计算，可以得到 m^n=\sum_{i=0}^{m}\binom{m}{i}*S(n,i)*i!这个式子是一个二项式反演的经典式子，我们二项式反演一下 S(n,m)*m!=\sum_{j=0}^{m}(-1)^{m-j}*j^n*\binom{m}{j}快速求$S(n,1..m)$发现上面组合求法中，可以把第二类斯特林数写成卷积的形式。 S(n,m)*m!=\sum_{i=0}^{m}(-1)^{m-j}*j^n*\frac{m!}{j!*(m-j)!}S(n,m)=\sum_{i=0}^{m}(-1)^{m-j}*j^n*\frac{1}{j!*(m-j)!}令$A(x)=\frac{(-1)^x}{x!},B(x)=\frac{x^n}{x!}$$S(n,m)=A(m-j)*B(j)$用$NTT/FFT$就可以在$O(n*logn)$的时间内求出。 例题题目链接BZOJ 5093 做法显然每个点的贡献是独立的，考虑每个点的贡献，枚举有几条边与他相连，其他与他不相连的边随便。 ans=n*2^{\binom{n-1}{2}}\sum_{i=0}^{n-1}i^k*\binom{n-1}{i}由于有$n$个点，所以乘个$n$就好了。定义$f(n,m)$为$\sum\limits_{i=0}^{n}i^m*\binom{n}{i}$我们只有求出$f(n-1,k)$上面的问题就能解决了。根据我们前面的式子，上面的$i^m$可以用斯特林数展开。 f(n,m)=\sum_{i=0}^{n}\sum_{j=0}^{i}*\binom{i}{j}*S(m,j)*j!*\binom{n}{i}改为先枚举$j$ f(n,m)=\sum_{j=0}^{i}S(m,j)*j!\sum_{i=0}^{n}\binom{n}{i}*\binom{i}{j}观察一下后面这个$\sum\limits_{i=0}^{n}\binom{n}{i}*\binom{i}{j}$是什么可以看成在$n$个物品中选出$j$个，剩下的随意，那么 \sum_{i=0}^{n}\binom{i}{j}*\binom{n}{i}=\binom{n}{j}*2^{n-j}所以 f(n,m)=\sum_{j=0}^{i}S(m,j)*j!\binom{n}{j}*2^{n-j}这样的话我们在用$NTT$算出第二类斯特林数，剩下的项都可以快速算出。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (1000005)using namespace std;const int P=998244353;int n,k,lim,d,invL,tot,CC,mi,inv2;int f[N&lt;&lt;1],g[N&lt;&lt;1],R[N&lt;&lt;1],A[N],inv[N],jc[N];template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline int Inc(int a,int b)&#123; return (a+b&gt;=P)?(a+b-P):(a+b);&#125;int ksm(int a,int b)&#123; int ret=1; for (;b;b&gt;&gt;=1,a=1ll*a*a%P) if (b&amp;1) ret=1ll*ret*a%P; return ret;&#125;inline void NTT(int *f,int G)&#123; for (int i=0;i&lt;lim;i++)&#123; if (i&gt;R[i]) swap(f[i],f[R[i]]); &#125; for (int i=1;i&lt;lim;i&lt;&lt;=1)&#123; int w0=ksm(G,(P-1)/(i&lt;&lt;1)); for (int j=0;j&lt;lim;j+=(i&lt;&lt;1))&#123; int w=1; for (int k=j;k&lt;j+i;k++)&#123; int t=1ll*f[k+i]*w%P; f[k+i]=Inc(f[k],P-t); f[k]=Inc(f[k],t); w=1ll*w*w0%P; &#125; &#125; &#125; if (G!=3)&#123; for (int i=0;i&lt;lim;i++) f[i]=1ll*f[i]*invL%P; &#125;&#125;int C(int a,int b)&#123; return 1ll*jc[a]*inv[a-b]%P*inv[b]%P;&#125;int main()&#123; read(n),read(k); if (k==0)&#123; printf("%lld",1ll*ksm(2,n-1)*n%P*ksm(2,1ll*(n-1)*(n-2)/2%(P-1))%P); return 0; &#125; for (lim=1;lim&lt;2*k+2;lim&lt;&lt;=1); invL=ksm(lim,P-2); for (int i=0;i&lt;lim;i++) R[i]=(R[i&gt;&gt;1]&gt;&gt;1)|((i&amp;1)*lim&gt;&gt;1); A[0]=A[1]=1; for (int i=2;i&lt;=k;i++) A[i]=1ll*(P-P/i)*A[P%i]%P; inv[0]=1; for (int i=1;i&lt;=k;i++) inv[i]=1ll*inv[i-1]*A[i]%P; jc[0]=1; for (int i=1;i&lt;=k;i++) jc[i]=1ll*jc[i-1]*i%P; f[0]=1; g[0]=0; d=1; for (int i=1;i&lt;=k;i++)&#123; d=P-d; f[i]=1ll*d*inv[i]%P; g[i]=1ll*ksm(i,k)*inv[i]%P; &#125; NTT(f,3),NTT(g,3); for (int i=0;i&lt;lim;i++) f[i]=1ll*f[i]*g[i]%P; NTT(f,ksm(3,P-2)); CC=1; mi=ksm(2,n-1); inv2=ksm(2,P-2); for (int j=0;j&lt;=min(n-1,k);j++)&#123; tot=Inc(tot,1ll*f[j]*CC%P*jc[j]%P*mi%P); CC=1ll*CC*A[j+1]%P*(n-j-1)%P; mi=1ll*mi*inv2%P; &#125; printf("%lld",1ll*tot*n%P*ksm(2,1ll*(n-1)*(n-2)/2%(P-1))%P); return 0;&#125;]]></content>
@@ -47,8 +60,8 @@
         <category>CF</category>
       </categories>
       <tags>
-        <tag>dp</tag>
         <tag>分块</tag>
+        <tag>dp</tag>
       </tags>
   </entry>
   <entry>
