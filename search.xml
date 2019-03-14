@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[[BZOJ 3170] [TJOI2013]松鼠聚会]]></title>
+    <url>%2F2019%2F03%2F14%2FBZOJ-3170-TJOI2013-%E6%9D%BE%E9%BC%A0%E8%81%9A%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[题目链接BZOJ 3170 做法我们发现从点$i$走到点$j$所需要的最小步数为$Max(abs(x_i-x_j),abs(y_i-y_j))$我们定义这个最小步数为点$i$与点$j$的切比雪夫距离。我们常见的还有一个两点间的距离为曼哈顿距离，也就是$abs(x_i-x_j)+abs(y_i-y_j)$我们发现当我们把原来一个点$(x,y)$改为$(x+y,x-y)$后，原坐标下的曼哈顿距离就变成了新坐标下的切比雪夫距离。而如果把原来一个点$(x,y)$改为$(\frac{x+y}{2},\frac{x-y}{2})$,原坐标下的切比雪夫距离就变成了新坐标下的曼哈顿距离。按照定义展开后不难证明。那么原问题就变成了平面上$n$个点，找到其中一个点使得这个点到其他点的曼哈顿距离最小。把所有点按照$x$坐标排序，在求出$y$坐标的排名，按照排名对$y$求个前缀和，就可以很方便的算出了。 代码123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (100005)using namespace std;int n,x,y,t;int id[N];LL allx,ally,pre,now,ans=1e18;LL sum[N];struct node&#123; int x,y;&#125;a[N];struct sor&#123; int x,id;&#125;q[N];template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;inline bool cmp(node a,node b)&#123; return a.x&lt;b.x;&#125;inline bool cmp1(sor a,sor b)&#123; return a.x&lt;b.x;&#125;int main()&#123; read(n); for (int i=1;i&lt;=n;i++)&#123; read(x),read(y); a[i].x=x+y; allx+=a[i].x; a[i].y=x-y; ally+=a[i].y; &#125; sort(a+1,a+n+1,cmp); for (int i=1;i&lt;=n;i++)&#123; q[i]=(sor)&#123;a[i].y,i&#125;; &#125; sort(q+1,q+n+1,cmp1); for (int i=1;i&lt;=n;i++)&#123; id[q[i].id]=i; &#125; for (int i=1;i&lt;=n;i++) sum[id[i]]=a[i].y; for (int i=1;i&lt;=n;i++) sum[i]+=sum[i-1]; for (int i=1;i&lt;=n;i++)&#123; pre+=a[i].x; now=allx-pre-1ll*(n-i)*a[i].x+1ll*i*a[i].x-pre; now+=1ll*(id[i]-1)*a[i].y-sum[id[i]-1]+ally-sum[id[i]-1]-1ll*(n-id[i]+1)*a[i].y; ans=min(ans,now); &#125; printf("%lld",ans/2); return 0;&#125;]]></content>
+      <categories>
+        <category>题目分析</category>
+        <category>BZOJ</category>
+      </categories>
+      <tags>
+        <tag>切比雪夫距离</tag>
+        <tag>曼哈顿距离</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[[Atcoder agc027 B] Garbage Collector]]></title>
     <url>%2F2019%2F03%2F13%2FAtcoder-agc027-B-Garbage-Collector%2F</url>
     <content type="text"><![CDATA[题目链接Atcoder agc027 B 题目大意现在有一条数轴，数轴上有$n$个点存在垃圾，有个捡垃圾的机器人从$0$号点出发，现在需要将所有垃圾运回$0$号点。捡起一个垃圾需要消耗$X$能量，当身上有$k$个垃圾时，走一步需要消耗$(k+1)^2$能量。回到起点倒一次垃圾也需要消耗$X$能量，注意这里倒垃圾时不管身上运载着多少垃圾，消耗能量均为$X$。$n \le 2*10^5$ 做法感觉上很像$dp+$斜率优化。但是这题有个非常关键的地方，每次出发所捡的垃圾并不一定相邻。手动模拟一下，假设一次出发经过了$t_q,t_{q-1},t_{q-2}…t_1$点的话。所需要的能量就是$X(q+1)+5t_1+5t_2+7t_3+9t_4…$假设我们一共出发$A$次的话，那么最远的$2A$个点会有$5$的贡献，再近一点的$A$个点有$7$的贡献，再近一点的$A$个点有$9$的贡献，以此类推。最后再加上倒$A$次垃圾，捡$n$次垃圾的贡献$(A+n)*X$即可。发现算这个贡献的复杂度其实是调和级数的，我们先预处理一下前缀和，暴力枚举$A$，暴力计算就好了。 代码123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;cstdio&gt;#include&lt;algorithm&gt;#include&lt;cctype&gt;#include&lt;cstring&gt;#include&lt;iostream&gt;#include&lt;cmath&gt;#define LL long long#define N (200005)using namespace std;int n,tt;LL a[N],sum[N];LL ans=9e18,x,now; template &lt;typename T&gt; void read(T&amp;t) &#123; t=0; bool fl=true; char p=getchar(); while (!isdigit(p)) &#123; if (p=='-') fl=false; p=getchar(); &#125; do &#123; (t*=10)+=p-48;p=getchar(); &#125;while (isdigit(p)); if (!fl) t=-t;&#125;int main()&#123; read(n),read(x); for (int i=1;i&lt;=n;i++) read(a[i]),sum[i]=sum[i-1]+a[i]; for (int i=1;i&lt;=n;i++)&#123; now=x*(i+n); tt=3; for (int j=n;j&gt;=1;j-=i)&#123; if (tt==3) now+=(sum[j]-sum[max(0,j-i)])*5; else now+=(sum[j]-sum[max(0,j-i)])*tt; tt+=2; if (now&gt;=ans) break; &#125; ans=min(ans,now); &#125; printf("%lld",ans); return 0;&#125;]]></content>
@@ -60,8 +73,8 @@
         <category>CF</category>
       </categories>
       <tags>
-        <tag>分块</tag>
         <tag>dp</tag>
+        <tag>分块</tag>
       </tags>
   </entry>
   <entry>
