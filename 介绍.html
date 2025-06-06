@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水浒传人物共现分析</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chart-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .chart-container iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>水浒传人物共现分析</h1>
+        <p>本页面展示了《水浒传》中人物的共现分析结果。通过分析文本中的人物出现次数和共现关系，我们生成了以下图表。</p>
+
+        <h2>分析过程</h2>
+        <ol>
+            <li><strong>数据准备：</strong>从文本文件中读取《水浒传》的内容。</li>
+            <li><strong>分词与过滤：</strong>使用jieba进行分词，并过滤掉非人名的词汇（如“寻思”、“安抚”、“招安”等）。</li>
+            <li><strong>统计人物出现次数：</strong>统计每个出现的人物及其出现次数。</li>
+            <li><strong>统计共现关系：</strong>统计同一段落中人物的共现次数。</li>
+            <li><strong>生成图表：</strong>使用pyecharts生成人物关系图。</li>
+        </ol>
+
+        <h2>人物关系图</h2>
+        <div class="chart-container">
+            <iframe src="/Users/liyichuan/Desktop/学习/课件/大四下/人工智能与计算思维/作业2/output/关系图-水浒传人物.html"></iframe>
+        </div>
+
+        <h2>节点文件</h2>
+        <p>节点文件包含人物名称及其出现次数。文件路径：<a href="/Users/liyichuan/Desktop/学习/课件/大四下/人工智能与计算思维/作业2/output/水浒传-人物节点.csv">水浒传-人物节点.csv</a></p>
+
+        <h2>连接文件</h2>
+        <p>连接文件包含人物之间的共现关系及其权重。文件路径：<a href="/Users/liyichuan/Desktop/学习/课件/大四下/人工智能与计算思维/作业2/output/水浒传-人物连接.csv">水浒传-人物连接.csv</a></p>
+    </div>
+</body>
+</html>
