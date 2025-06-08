@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度搜索</title>
+    <style>
+        /* 页面整体样式 */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 50px;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 确保内容在页面垂直居中 */
+            box-sizing: border-box;
+        }
+
+        /* 容器样式 */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* 标题样式 */
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+
+        /* 段落文字样式 */
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        /* 表单样式 */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 输入框样式 */
+        input[type="text"] {
+            width: 80%; /* 相对宽度 */
+            max-width: 500px; /* 最大宽度 */
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.1em;
+            box-sizing: border-box; /* 包含内边距和边框在宽度内 */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+            outline: none; /* 移除默认焦点轮廓 */
+        }
+
+        /* 按钮样式 */
+        button {
+            padding: 12px 30px;
+            background-color: #007bff; /* 蓝色按钮 */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* 鼠标悬停时颜色变深 */
+            transform: translateY(-2px); /* 鼠标悬停时轻微上浮 */
+        }
+
+        button:active {
+            background-color: #004085; /* 鼠标点击时颜色更深 */
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>欢迎使用百度搜索</h1>
+        <p>这是一个简单的网页，您可以在下面的搜索框中输入关键词，然后点击按钮，即可跳转到百度搜索结果页面。</p>
+
+        <form action="https://www.baidu.com/s" method="get" target="_blank">
+            <input type="text" name="wd" placeholder="请输入您要搜索的关键词...">
+            <button type="submit">百度一下</button>
+        </form>
+    </div>
+</body>
+</html>
