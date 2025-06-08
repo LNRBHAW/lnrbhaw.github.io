@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA球员数据分析报告</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 960px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NBA球员数据分析报告 (2024赛季)</h1>
+        <p style="text-align: center; font-size: 1.1em; color: #666;">
+            数据不会骗人，从数据中我们看出很多有意思的结论。
+        </p>
+
+        <div class="section">
+            <h2>1. 每个位置的得分分布图</h2>
+            <img src="figure/points_distribution_by_position_boxplot.png" alt="每个位置的得分分布图">
+            <p class="image-caption">图1: 2024赛季各位置球员场均得分分布</p>
+            <p>从这张图中，我们可以清楚地看到“SF”（小前锋，Small Forward）位置球员的得分相对偏低。随着上一代明星小前锋如勒布朗·詹姆斯、凯文·杜兰特、科怀·伦纳德等球员的逐渐步入生涯后期，在球场上能够大量得分的纯得分型小前锋球员不再占据主流。取而代之的是具有更强功能性的“3D”球员，即专注于三分球投射以拉开球场空间（Three-point shooting），以及defense防守的球员。这种趋势与现代篮球的观感高度符合，即团队配合和空间拉扯变得越来越重要，而并非单纯依赖某一个位置的个人得分能力。</p>
+        </div>
+
+        <div class="section">
+            <h2>2. 得分与助攻图</h2>
+            <img src="figure/points_vs_assists_scatter.png" alt="得分与助攻图">
+            <p class="image-caption">图2: 2024赛季球员场均得分与助攻散点图</p>
+            <p>这张散点图清晰地展示了联盟中最炙手可热的明星球员的特点：他们不仅自己能够高效得分，同时还能够通过精准的助攻串联队友，盘活全队进攻。图中得分和助攻都靠前的球员，大部分以Point Guard（组织后卫）为主。这也与篮球比赛中组织后卫的核心职责相匹配，他们是球队的进攻发起者和组织核心，需要承担大量的传球和得分功能，是球队的节拍器。</p>
+        </div>
+
+        <div class="section">
+            <h2>3. 球员进攻效率分布图</h2>
+            <img src="figure/offensive_efficiency_distribution.png" alt="球员进攻效率分布图">
+            <p class="image-caption">图3: 2024赛季球员进攻效率分布直方图</p>
+            <p>本图统计了联盟中总共735名运动员的进攻效率（通过得分和助攻加权计算）。其分布呈现出**右偏态分布（或正偏态分布）**的特征。简单来说，就是大多数球员的进攻效率分数不高，而少数顶级球员凭借其超群的个人能力，拉高了整体的最高效率值，使得整个分布的“尾巴”向右侧拖拽。这种分布形态在体育数据中是非常常见的，因为总会有少数精英运动员表现远超平均水平，而其余的大部分运动员则是遵从大数据下的统计规律，集中在平均水平附近。</p>
+        </div>
+
+        <div class="section">
+            <h2>4. 篮板与盖帽图</h2>
+            <img src="figure/rebounds_vs_blocks_scatter.png" alt="篮板与盖帽图">
+            <p class="image-caption">图4: 2024赛季球员场均篮板与盖帽散点图</p>
+            <p>从篮板与盖帽的散点图来看，这果然还是“长人”的游戏。几乎在图表右上方（即篮板和盖帽数据都非常高）的所有运动员都是中锋（Center）。这充分说明，哪怕是在现在强调空间和投射的现代篮球中，大个子的中锋仍然能够凭借着出色的身高臂展和身体对抗能力，在内线防守端发挥不可替代的作用，成为球队的禁区守护者。</p>
+        </div>
+
+    </div>
+</body>
+</html>
